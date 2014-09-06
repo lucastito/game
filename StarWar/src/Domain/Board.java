@@ -1,5 +1,6 @@
 package Domain;
 
-public class Board {
+public class Board 
+{
 
 }
