@@ -1,0 +1,27 @@
+package Domain;
+
+import javax.swing.JLabel;
+
+public class Planet 
+{
+	private short id;
+	private String name;
+	private JLabel boundingBox;
+	
+	public Planet(short id, String name, JLabel boundingBox)
+	{
+		this
+	}
+	
+	public short getId() {
+		return Id;
+	}
+	
+	public String getName() {
+		return Name;
+	}
+	
+	public JLabel getBoundingBox() {
+		return boundingBox;
+	}
+}

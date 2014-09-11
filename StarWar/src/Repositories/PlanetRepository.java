@@ -1,5 +1,7 @@
 package Repositories;
 
+import javax.swing.JLabel;
+
 import Domain.Planet;
 
 public class PlanetRepository 
@@ -41,141 +43,73 @@ public class PlanetRepository
 	
 	public PlanetRepository()
 	{
-		_trandosha = new Planet();
-		_trandosha.Id = 1;
-		_trandosha.Name = "Trandosha";
+		_trandosha = new Planet((short) 1, "Trandosha", new JLabel());
 		
-		_naboo = new Planet();
-		_naboo.Id = 2;
-		_naboo.Name = "Naboo";
+		_naboo = new Planet((short) 2, "Naboo", new JLabel());
 		
-		_bakura = new Planet();
-		_bakura.Id = 3;
-		_bakura.Name = "Bakura";
+		_bakura = new Planet((short) 3, "Bakura", new JLabel());
 		
-		_calamari = new Planet();
-		_calamari.Id = 4;
-		_calamari.Name = "Calamari";
+		_calamari = new Planet((short) 4, "Calamari", new JLabel());
 		
-		_muunilist = new Planet();
-		_muunilist.Id = 5;
-		_muunilist.Name = "Muunilist";
+		_muunilist = new Planet((short) 5, "Muunilist", new JLabel());
 		
-		_dantooine = new Planet();
-		_dantooine.Id = 6;
-		_dantooine.Name = "Dantooine";
+		_dantooine = new Planet((short) 6, "Dantooine", new JLabel());
 		
-		_ilum = new Planet();
-		_ilum.Id = 7;
-		_ilum.Name = "Ilum";	
+		_ilum = new Planet((short) 7, "Ilum", new JLabel());
 		
-		_sarapin = new Planet();
-		_sarapin.Id = 8;
-		_sarapin.Name = "Sarapin";
+		_sarapin = new Planet((short) 8, "Sarapin", new JLabel());
 		
-		_eredennPrime = new Planet();
-		_eredennPrime.Id = 9;
-		_eredennPrime.Name = "Eredeen Prime";
+		_eredennPrime = new Planet((short) 9, "Eredeen Prime", new JLabel());
 		
-		_coruscant = new Planet();
-		_coruscant.Id = 10;
-		_coruscant.Name = "Coruscant";
+		_coruscant = new Planet((short) 10, "Coruscant", new JLabel());
 		
-		_yavinIV = new Planet();
-		_yavinIV.Id = 11;
-		_yavinIV.Name = "Yavin IV";
+		_yavinIV = new Planet((short) 11, "Yavin IV", new JLabel());
 		
-		_kamino = new Planet();
-		_kamino.Id = 12;
-		_kamino.Name = "Kamino";
+		_kamino = new Planet((short) 12, "Kamino", new JLabel());
 		
-		_corellia = new Planet();
-		_corellia.Id = 13;
-		_corellia.Name = "Corellia";
+		_corellia = new Planet((short) 13, "Corellia", new JLabel());
 		
-		_nelvaan = new Planet();
-		_nelvaan.Id = 14;
-		_nelvaan.Name = "Nelvaan";
+		_nelvaan = new Planet((short) 14, "Nelvaan", new JLabel());
 		
-		_rhenVar = new Planet();
-		_rhenVar.Id = 15;
-		_rhenVar.Name = "Rhen Var";
+		_rhenVar = new Planet((short) 15, "Rhen Var", new JLabel());
 		
-		_ando = new Planet();
-		_ando.Id = 16;
-		_ando.Name = "Ando";
+		_ando = new Planet((short) 16, "Ando", new JLabel());
 		
-		_tynna = new Planet();
-		_tynna.Id = 17;
-		_tynna.Name = "Tynna";
+		_tynna = new Planet((short) 17, "Tynna", new JLabel());
 		
-		_syMyrth = new Planet();
-		_syMyrth.Id = 18;
-		_syMyrth.Name = "Sy Myrth";
+		_syMyrth = new Planet((short) 18, "Sy Myrth", new JLabel());
 		
-		_geonosis = new Planet();
-		_geonosis.Id = 19;
-		_geonosis.Name = "Geonosis";
+		_geonosis = new Planet((short) 19, "Geonosis", new JLabel());
 		
-		_mustafar = new Planet();
-		_mustafar.Id = 20;
-		_mustafar.Name = "Mustafar";
+		_mustafar = new Planet((short) 20, "Mustafar", new JLabel());
 		
-		_yagDhul = new Planet();
-		_yagDhul.Id = 21;
-		_yagDhul.Name = "Yag'Dhul";
+		_yagDhul = new Planet((short) 21, "Yag'Dhul", new JLabel());
 		
-		_hypori = new Planet();
-		_hypori.Id = 22;
-		_hypori.Name = "Hypori";
+		_hypori = new Planet((short) 22, "Hypori", new JLabel());
 		
-		_nivek = new Planet();
-		_nivek.Id = 23;
-		_nivek.Name = "Nivek";
+		_nivek = new Planet((short) 23, "Nivek", new JLabel());
 		
-		_tatooine = new Planet();
-		_tatooine.Id = 24;
-		_tatooine.Name = "Tatooine";
+		_tatooine = new Planet((short) 24, "Tatooine", new JLabel());
 		
-		_pengalanIV = new Planet();
-		_pengalanIV.Id = 25;
-		_pengalanIV.Name = "Pengalan IV";
+		_pengalanIV = new Planet((short) 25, "Pengalan IV", new JLabel());
 		
-		_thule = new Planet();
-		_thule.Id = 26;
-		_thule.Name = "Thule";
+		_thule = new Planet((short) 26, "Thule", new JLabel());
 		
-		_queita = new Planet();
-		_queita.Id = 27;
-		_queita.Name = "Queita";
+		_queita = new Planet((short) 27, "Queita", new JLabel());
 		
-		_raxus = new Planet();
-		_raxus.Id = 28;
-		_raxus.Name = "Raxus";
+		_raxus = new Planet((short) 28, "Raxus", new JLabel());
 		
-		_elrood = new Planet();
-		_elrood.Id = 29;
-		_elrood.Name = "Elrood";
+		_elrood = new Planet((short) 29, "Elrood", new JLabel());
 		
-		_danjar = new Planet();
-		_danjar.Id = 30;
-		_danjar.Name = "Danjar";
+		_danjar = new Planet((short) 30, "Danjar", new JLabel());
 		
-		_tantra = new Planet();
-		_tantra.Id = 31;
-		_tantra.Name = "Tantra";
+		_tantra = new Planet((short) 31, "Tantra", new JLabel());
 		
-		_sluis = new Planet();
-		_sluis.Id = 32;
-		_sluis.Name = "Sluis";
+		_sluis = new Planet((short) 32, "Sluis", new JLabel());
 		
-		_kashyyyk = new Planet();
-		_kashyyyk.Id = 33;
-		_kashyyyk.Name = "Kashyyyk";
+		_kashyyyk = new Planet((short) 33, "Kashyyyk", new JLabel());
 		
-		_alarisPrime = new Planet();
-		_alarisPrime.Id = 34;
-		_alarisPrime.Name = "Alaris Prime";
+		_alarisPrime = new Planet((short) 34, "Alaris Prime", new JLabel());
 	}
 	
 	public Planet Trandosha()
