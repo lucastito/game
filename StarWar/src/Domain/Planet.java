@@ -1,5 +1,6 @@
 package Domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JLabel;
@@ -12,13 +13,17 @@ public class Planet
 	private Player owner;
 	private List pieces;
 	
+	public Planet(){
+		
+	}
+	
 	public Planet(short id, String name, JLabel boundingBox)
 	{
 		this.id = id;
 		this.name = name;
 		this.boundingBox = boundingBox;
 		this.owner = null;
-		this.pieces = null;
+		this.pieces = new ArrayList<Piece>();
 	}
 	
 	public short getId() {
@@ -38,11 +43,17 @@ public class Planet
 	}
 
 	public void setOwner(Player owner) {
+		owner.addTerritory(this);
 		this.owner = owner;
+		
 	}
 	
 	public List getPieces(){
 		return this.pieces;
+	}
+	
+	public void setPieces(List pieces){
+		this.pieces = pieces;
 	}
 	
 	public void addPiece(Piece piece){
