@@ -23,8 +23,6 @@ public class Planet
 		this.x = x;
 		this.y = y;
 		this.image = image;
-		this.owner = null;
-		this.pieces = new ArrayList<Piece>();
 	}
 	
 	public short getId() {

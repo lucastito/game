@@ -3,8 +3,7 @@ package Repositories;
 import Domain.Planet;
 import Domain.PlanetSystem;
 
-public class PlanetSystemRepository 
-{
+public class PlanetSystemRepository {
 	private PlanetSystem _imperialRemnant;
 	private PlanetSystem _vastEmpireSpace;
 	private PlanetSystem _koornachtCluster;
@@ -14,11 +13,10 @@ public class PlanetSystemRepository
 	private PlanetSystem _pengalanIVSector;
 	private PlanetSystem _wildSpace;
 	private PlanetSystem _centrality;
-		
+
 	private PlanetRepository _planetRepository = new PlanetRepository();
-	
-	public PlanetSystemRepository()
-	{
+
+	public PlanetSystemRepository() {
 		InitializeImperialRemnant();
 		InitializeVastEmpireSpace();
 		InitializeKoornachtCluster();
@@ -27,139 +25,130 @@ public class PlanetSystemRepository
 		InitializeMawCluster();
 		InitializePengalanIVSector();
 		InitializeWildSpace();
-		InitializeCentrality();		
-	}	
-	
-	public PlanetSystem ImperialRemnant()
-	{
+		InitializeCentrality();
+	}
+
+	public PlanetSystem ImperialRemnant() {
 		return _imperialRemnant;
 	}
-	
-	public PlanetSystem VastEmpireSpace()
-	{
+
+	public PlanetSystem VastEmpireSpace() {
 		return _vastEmpireSpace;
 	}
-	
-	public PlanetSystem KoornachtCluster()
-	{
+
+	public PlanetSystem KoornachtCluster() {
 		return _koornachtCluster;
 	}
-	
-	public PlanetSystem TynnaSector()
-	{
+
+	public PlanetSystem TynnaSector() {
 		return _tynnaSector;
 	}
-	
-	public PlanetSystem SyMyrthSector()
-	{
+
+	public PlanetSystem SyMyrthSector() {
 		return _syMyrthSector;
 	}
-	
-	public PlanetSystem MawCluster()
-	{
+
+	public PlanetSystem MawCluster() {
 		return _mawCluster;
 	}
-	
-	public PlanetSystem PengalanIVSector()
-	{
+
+	public PlanetSystem PengalanIVSector() {
 		return _pengalanIVSector;
 	}
-	
-	public PlanetSystem WildSpace()
-	{
+
+	public PlanetSystem WildSpace() {
 		return _wildSpace;
 	}
-	
-	public PlanetSystem Centrality()
-	{
+
+	public PlanetSystem Centrality() {
 		return _centrality;
 	}
-	
-	private void InitializeImperialRemnant() 
-	{
+
+	private void InitializeImperialRemnant() {
 		_imperialRemnant = new PlanetSystem();
-		_imperialRemnant.Planets = new Planet[6];
-		_imperialRemnant.Planets[0] = _planetRepository.Trandosha();
-		_imperialRemnant.Planets[1] = _planetRepository.Naboo();
-		_imperialRemnant.Planets[2] = _planetRepository.Bakura();
-		_imperialRemnant.Planets[3] = _planetRepository.Calamari();
-		_imperialRemnant.Planets[4] = _planetRepository.Muunilist();
-		_imperialRemnant.Planets[5] = _planetRepository.Dantooine();		
+		Planet[] planets = new Planet[6];
+		planets[0] = _planetRepository.Trandosha();
+		planets[1] = _planetRepository.Naboo();
+		planets[2] = _planetRepository.Bakura();
+		planets[3] = _planetRepository.Calamari();
+		planets[4] = _planetRepository.Muunilist();
+		planets[5] = _planetRepository.Dantooine();
+		_imperialRemnant.setPlanets(planets);
 	}
-	
-	private void InitializeVastEmpireSpace() 
-	{
+
+	private void InitializeVastEmpireSpace() {
 		_vastEmpireSpace = new PlanetSystem();
-		_vastEmpireSpace.Planets = new Planet[4];
-		_vastEmpireSpace.Planets[0] = _planetRepository.Ilum();
-		_vastEmpireSpace.Planets[1] = _planetRepository.Sarapin();
-		_vastEmpireSpace.Planets[2] = _planetRepository.EredennPrime();
-		_vastEmpireSpace.Planets[3] = _planetRepository.Coruscant();
+		Planet[] planets = new Planet[4];
+		planets[0] = _planetRepository.Ilum();
+		planets[1] = _planetRepository.Sarapin();
+		planets[2] = _planetRepository.EredennPrime();
+		planets[3] = _planetRepository.Coruscant();
+		_vastEmpireSpace.setPlanets(planets);
 	}
-	
-	private void InitializeKoornachtCluster()
-	{
+
+	private void InitializeKoornachtCluster() {
 		_koornachtCluster = new PlanetSystem();
-		_koornachtCluster.Planets = new Planet[6];
-		_koornachtCluster.Planets[0] = _planetRepository.YavinIV();
-		_koornachtCluster.Planets[1] = _planetRepository.Kamino();
-		_koornachtCluster.Planets[2] = _planetRepository.Corellia();
-		_koornachtCluster.Planets[3] = _planetRepository.Nelvaan();
-		_koornachtCluster.Planets[4] = _planetRepository.RhenVar();
-		_koornachtCluster.Planets[5] = _planetRepository.Ando();		
+		Planet[] planets = new Planet[6];
+		planets[0] = _planetRepository.YavinIV();
+		planets[1] = _planetRepository.Kamino();
+		planets[2] = _planetRepository.Corellia();
+		planets[3] = _planetRepository.Nelvaan();
+		planets[4] = _planetRepository.RhenVar();
+		planets[5] = _planetRepository.Ando();
+		_koornachtCluster.setPlanets(planets);
 	}
-	
-	private void InitializeTynnaSector()
-	{
+
+	private void InitializeTynnaSector() {
 		_tynnaSector = new PlanetSystem();
-		_tynnaSector.Planets = new Planet[1];
-		_tynnaSector.Planets[0] = _planetRepository.Tynna();
+		Planet[] planets = new Planet[1];
+		planets[0] = _planetRepository.Tynna();
+		_tynnaSector.setPlanets(planets);
 	}
-	
-	private void InitializeSyMyrthSector()
-	{
+
+	private void InitializeSyMyrthSector() {
 		_syMyrthSector = new PlanetSystem();
-		_syMyrthSector.Planets = new Planet[1];
-		_syMyrthSector.Planets[0] = _planetRepository.SyMyrth();
+		Planet[] planets = new Planet[1];
+		planets[0] = _planetRepository.SyMyrth();
+		_syMyrthSector.setPlanets(planets);
 	}
-	
-	private void InitializeMawCluster()
-	{
+
+	private void InitializeMawCluster() {
 		_mawCluster = new PlanetSystem();
-		_mawCluster.Planets = new Planet[6];
-		_mawCluster.Planets[0] = _planetRepository.Geonosis();
-		_mawCluster.Planets[1] = _planetRepository.Mustafar();
-		_mawCluster.Planets[2] = _planetRepository.YagDhul();
-		_mawCluster.Planets[3] = _planetRepository.Hypori();
-		_mawCluster.Planets[4] = _planetRepository.Nivek();
-		_mawCluster.Planets[5] = _planetRepository.Tatooine();
+		Planet[] planets = new Planet[6];
+		planets[0] = _planetRepository.Geonosis();
+		planets[1] = _planetRepository.Mustafar();
+		planets[2] = _planetRepository.YagDhul();
+		planets[3] = _planetRepository.Hypori();
+		planets[4] = _planetRepository.Nivek();
+		planets[5] = _planetRepository.Tatooine();
+		_mawCluster.setPlanets(planets);
 	}
-	
-	private void InitializePengalanIVSector()
-	{
+
+	private void InitializePengalanIVSector() {
 		_pengalanIVSector = new PlanetSystem();
-		_pengalanIVSector.Planets = new Planet[1];
-		_pengalanIVSector.Planets[0] = _planetRepository.PengalanIV();
+		Planet[] planets = new Planet[1];
+		planets[0] = _planetRepository.PengalanIV();
+		_pengalanIVSector.setPlanets(planets);
 	}
-	
-	private void InitializeWildSpace()
-	{
+
+	private void InitializeWildSpace() {
 		_wildSpace = new PlanetSystem();
-		_wildSpace.Planets = new Planet[3];
-		_wildSpace.Planets[0] = _planetRepository.Thule();
-		_wildSpace.Planets[1] = _planetRepository.Queita();
-		_wildSpace.Planets[2] = _planetRepository.Raxus();
+		Planet[] planets = new Planet[3];
+		planets[0] = _planetRepository.Thule();
+		planets[1] = _planetRepository.Queita();
+		planets[2] = _planetRepository.Raxus();
+		_wildSpace.setPlanets(planets);
 	}
-	
-	private void InitializeCentrality()
-	{
+
+	private void InitializeCentrality() {
 		_centrality = new PlanetSystem();
-		_centrality.Planets = new Planet[6];
-		_centrality.Planets[0] = _planetRepository.Elrood();
-		_centrality.Planets[1] = _planetRepository.Danjar();
-		_centrality.Planets[2] = _planetRepository.Tantra();
-		_centrality.Planets[3] = _planetRepository.Sluis();
-		_centrality.Planets[4] = _planetRepository.Kashyyyk();
-		_centrality.Planets[5] = _planetRepository.AlarisPrime();
+		Planet[] planets = new Planet[6];
+		planets[0] = _planetRepository.Elrood();
+		planets[1] = _planetRepository.Danjar();
+		planets[2] = _planetRepository.Tantra();
+		planets[3] = _planetRepository.Sluis();
+		planets[4] = _planetRepository.Kashyyyk();
+		planets[5] = _planetRepository.AlarisPrime();
+		_centrality.setPlanets(planets);
 	}
 }

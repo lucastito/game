@@ -1,28 +1,71 @@
 package com.es2.starwar;
 
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Graphics;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Domain.Planet;
+import Repositories.PlanetRepository;
 
 @SuppressWarnings("serial")
 public class GameScreen extends JPanel implements MouseListener{
 
 	JLabel teste;
+	PlanetRepository repository;
 	
-	public GameScreen()
-	{		
-		teste = new JLabel("Teste");
-		teste.addMouseListener(this);
-		add(teste);
-		teste.setLocation(100, 100);
+	private BufferedImage fundo;
+
+	public GameScreen(String imagem) {
+		try {
+			this.fundo = ImageIO.read(new File(imagem));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setSize(fundo.getWidth(), fundo.getHeight());
+		repository = new PlanetRepository();
+	}
 	
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(fundo, 0, 0, null);
+		for(Planet p : repository.getPlanets().values()){
+			g.drawImage(p.getImage(), p.getX(), p.getY(), null);
+		}
+	}
+
+	
+	
+	public static void main(String[] args) {
+    	EventQueue.invokeLater(new Runnable(){
+	    	public void run(){ 
+		    	JFrame frame = new JFrame();
+		        frame.setLayout(null);
+		        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		        frame.setTitle("StarWar");
+		        frame.setSize(1366, 768);
+		        
+		        GameScreen panel = new GameScreen("image/img.png");
+		
+		        frame.add(panel);
+		        frame.repaint();
+		        frame.validate();
+		        frame.setLocationRelativeTo(null);
+		        frame.setVisible(true);
+		    }
+    	});
 	}
 	
 //	public void paintComponent(Graphics g)
@@ -32,10 +75,7 @@ public class GameScreen extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == teste)
-		{
-			System.out.println("Teste");
-		}		
+			
 	}
 
 	@Override

@@ -4,14 +4,12 @@ import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JLabel;
-
 public class Planet 
 {
 	private short id;
 	private String name;
 	private Player owner;
-	private List pieces;
+	private List<Picece> pieces;
 	private short x;
 	private short y;
 	private Image image;
@@ -20,11 +18,11 @@ public class Planet
 	{
 		this.id = id;
 		this.name = name;
+		this.owner = null;
+		this.pieces = new ArrayList<Piece>();
 		this.x = x;
 		this.y = y;
 		this.image = image;
-		this.owner = null;
-		this.pieces = new ArrayList<Piece>();
 	}
 	
 	public short getId() {
@@ -54,15 +52,15 @@ public Image getImage() {
 	public void setOwner(Player owner) {
 		owner.addTerritory(this);
 		this.owner = owner;
-		
-	}
-	
-	public List getPieces(){
-		return this.pieces;
 	}
 	
 	public void setPieces(List pieces){
 		this.pieces = pieces;
+	}
+	
+	
+	public List getPieces(){
+		return this.pieces;
 	}
 	
 	public void addPiece(Piece piece){
