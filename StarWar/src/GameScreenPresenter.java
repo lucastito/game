@@ -22,7 +22,7 @@ public class GameScreenPresenter
 		        frame.setTitle("StarWar");
 		        frame.setSize(1366, 768);
 		        
-		        GameScreen panel = new GameScreen("img.png", gameState);
+		        GameScreen panel = new GameScreen("image/img.png", gameState);
 		
 		        frame.add(panel);
 		        frame.repaint();

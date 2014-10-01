@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>StarWar</name>
+	<name>Main</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>image</name>
+			<type>2</type>
+			<location>C:/Users/Leonardo/git/Projeto/StarWar/src/image</location>
+		</link>
+	</linkedResources>
 </projectDescription>

@@ -23,7 +23,9 @@ public class GameScreen extends JPanel implements MouseListener{
 	public GameScreen(String imagem, GameStateInputPort gameState) 
 	{
 		try {
-			this.fundo = ImageIO.read(new File(imagem));
+			String path = getClass().getResource(imagem).getPath().toString(); 
+
+			this.fundo = ImageIO.read(new File(path));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -36,7 +38,8 @@ public class GameScreen extends JPanel implements MouseListener{
 		g.drawImage(fundo, 0, 0, null);
 		for(Territory planet : planetarySystemController.getAllPlanets()){
 			try {
-				g.drawImage(ImageIO.read(new File(planet.getImagePath())), planet.getxAxisCoordinate(), planet.getyAxisCoordinate(), null);
+				String path = getClass().getResource(planet.getImagePath()).getPath().toString(); 
+				g.drawImage(ImageIO.read(new File(path)), planet.getxAxisCoordinate(), planet.getyAxisCoordinate(), null);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
