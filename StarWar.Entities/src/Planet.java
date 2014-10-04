@@ -10,6 +10,9 @@ public class Planet
 	private short xAxisCoordinate;
 	private short yAxisCoordinate;
 	private String imagePath;
+	private List<Border> internalBorders;	
+	private List<Border> externalBorders;	
+	private List<Border> allBorders;	
 
 	public Planet(short id, String name, short xAxisCoordinate, short yAxisCoordinate, String imagePath)
 	{
@@ -64,4 +67,20 @@ public class Planet
 		this.pieces.add(piece);
 	}
 	
+	public void addInternalBorder(Border border)
+	{
+		internalBorders.add(border);
+		allBorders.add(border);
+	}
+	
+	public void addExternalBorder(Border border)
+	{
+		externalBorders.add(border);
+		allBorders.add(border);
+	}
+	
+	public List<Border> getBorders()
+	{
+		return allBorders;
+	}
 }
