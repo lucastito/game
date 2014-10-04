@@ -5,15 +5,21 @@ public class PlanetSystem
 	private String name;
 	private List<Planet> planets;
 	private List<Border> internalBorders;	
+	private List<Border> externalBorders;	
 	
 	public void addPlanet(Planet planet) 
 	{
 		planets.add(planet);
 	}
 	
-	public void addBorder(Border border)
+	public void addInternalBorder(Border border)
 	{
 		internalBorders.add(border);
+	}
+	
+	public void addExternalBorder(Border border)
+	{
+		externalBorders.add(border);
 	}
 
 	public String getName() {
