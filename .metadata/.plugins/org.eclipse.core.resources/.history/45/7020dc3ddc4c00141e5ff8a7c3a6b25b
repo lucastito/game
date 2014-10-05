@@ -1,0 +1,12 @@
+
+public class BoardRepository implements IBoardRepository
+{
+	IPlanetSystemRepository planetSystemRepository;
+	IPlayerRepository playerRepository;
+	
+	public BoardRepository(IPlanetSystemRepository planetSystemRepository)
+	{		
+		this.planetSystemRepository = planetSystemRepository;
+	}
+	
+}

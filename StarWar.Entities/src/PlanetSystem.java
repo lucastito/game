@@ -1,9 +1,15 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlanetSystem 
 {
 	private String name;
-	private List<Planet> planets;	
+	private List<Planet> planets;
+	
+	public PlanetSystem()
+	{
+		planets = new ArrayList<Planet>();
+	}
 	
 	public void addPlanet(Planet planet) 
 	{

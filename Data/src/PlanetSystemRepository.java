@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Map;
 
 public class PlanetSystemRepository 
 {
@@ -7,14 +8,18 @@ public class PlanetSystemRepository
 	
 	public PlanetSystemRepository(IPlanetRepository planetRepository) 
 	{
-		_planetRepository = planetRepository;		
+		_planetRepository = planetRepository;	
+		planetSystems = new HashMap<String, PlanetSystem>();
 		initializePlanetSystems();
-	}
-	
+	}	
 
 	public void addPlanetSystem(PlanetSystem planetSystem)
 	{
 		planetSystems.put(planetSystem.getName(), planetSystem);
+	}
+	
+	public Map<String, PlanetSystem> getPlanetSystems() {
+		return planetSystems;
 	}
 	
 	public PlanetSystem getPlanetSystemByName(String name) {
