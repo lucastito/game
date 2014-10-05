@@ -1,0 +1,35 @@
+import junit.framework.TestCase;
+
+import java.util.List;
+
+import org.junit.Test;
+
+public class PlanetRepositoryTests extends TestCase
+{
+	PlanetRepository planetRepository;
+		
+	@Test
+	public void getNeighborPlanets_GetsAllNeighbors()
+	{
+		org.junit.Assert.assertTrue( true );
+	}
+	
+	@Test
+	public void When_PlanetNameIsEmpty_ReturnsNull()
+	{
+		List<Planet> result = planetRepository.getNeighborPlanets("");		
+		assertEquals(result, null);
+	}
+	
+	public void When_PlanetNameIsNull_ReturnsNull()
+	{
+		List<Planet> result = planetRepository.getNeighborPlanets(null);	
+		assertEquals(result, null);		
+	}
+	
+	public void When_PlanetNameIsWrong_ReturnsNull()
+	{
+		List<Planet> result = planetRepository.getNeighborPlanets("Marte");		
+		assertEquals(result, null);
+	}
+}

@@ -23,6 +23,10 @@ public class Planet
 		this.imagePath = imagePath;
 		this.owner = null;
 		this.pieces = new ArrayList<Piece>();
+		
+		internalBorders = new ArrayList<Border>();
+		externalBorders = new ArrayList<Border>();
+		allBorders = new ArrayList<Border>();
 	}
 	
 	public short getId() {
@@ -51,8 +55,7 @@ public class Planet
 
 	public void setOwner(Player owner) {
 		owner.addTerritory(this);
-		this.owner = owner;
-		
+		this.owner = owner;		
 	}
 	
 	public List<Piece> getPieces(){

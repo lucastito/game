@@ -1,0 +1,23 @@
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class DataPlanetRepositoryTests 
+{
+
+	PlanetRepository planetRepository;
+	
+	@Before
+	public void SetUp()
+	{
+		planetRepository = new PlanetRepository();
+	}
+	
+	@Test
+	public void test()
+	{
+		planetRepository.
+		assertEquals(0, 0);
+	}
+}

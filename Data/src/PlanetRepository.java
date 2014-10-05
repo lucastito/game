@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PlanetRepository implements IPlanetRepository
@@ -10,7 +12,7 @@ public class PlanetRepository implements IPlanetRepository
 		initializePlanets();
 	}	
 	
-	public  void addPlanet(Planet planet){
+	public void addPlanet(Planet planet){
 		planets.put(planet.getName(), planet);
 	}
 	
@@ -19,7 +21,28 @@ public class PlanetRepository implements IPlanetRepository
 	}
 	
 	public Planet getPlanetByName(String name) {
+		if (name == null || name.isEmpty())
+			return null;
 		return planets.get(name);
+	}
+	
+	public List<Planet> getNeighborPlanets(String planetName)
+	{
+		if (planetName == null || planetName.isEmpty())
+			return null;
+		
+		Planet planet = getPlanetByName(planetName);
+		
+		if (planet == null)
+			return null;
+		
+		List<Border> borders = planet.getBorders();
+		List<Planet> neighborPlanets = new ArrayList<Planet>();
+		for (Border b : borders)
+		{
+			neighborPlanets.add(getPlanetByName(b.getNeighborPlanetName()));
+		}
+		return neighborPlanets;
 	}
 
 	private void initializePlanets() {

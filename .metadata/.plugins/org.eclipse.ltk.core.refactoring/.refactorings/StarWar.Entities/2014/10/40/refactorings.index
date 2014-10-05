@@ -1,0 +1,4 @@
+1412444214318	Encapsulate field 'name'
+1412444416837	Encapsulate field 'planetName'
+1412444421008	Encapsulate field 'neighborPlanetName'
+1412447971513	Rename method 'addBorder'

@@ -1,10 +1,11 @@
 
 
 import java.awt.EventQueue;
+import java.util.List;
 
 import javax.swing.JFrame;
 
-public class GameScreenPresenter 
+public class GameScreenPresenter implements TroopsRedeployOutputPort
 {
 	private GameStateInputPort gameState;
 	
@@ -31,5 +32,10 @@ public class GameScreenPresenter
 		        frame.setVisible(true);
 		    }
     	});
+	}
+
+	public void showPossibleTerritoriesToRedeploy(List<TerritoryDTO> territories) 
+	{
+		
 	}
 }

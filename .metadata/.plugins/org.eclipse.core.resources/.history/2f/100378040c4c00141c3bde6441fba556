@@ -1,0 +1,65 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class TroopsRedeploy implements TroopsRedeployInputPort
+{
+	private TroopsRedeployOutputPort troopsRedeployOutputPort;
+	private IPlanetRepository planetRepository;
+	
+	public TroopsRedeploy(TroopsRedeployOutputPort troopsRedeployOutputPort, IPlanetRepository planetRepository)
+	{
+		this.troopsRedeployOutputPort = troopsRedeployOutputPort;
+		this.planetRepository = planetRepository;
+	}
+	public void possibleTerritoriesToRedeploy(TerritoryDTO sourceTerritory) 
+	{
+		Planet planet = planetRepository.getPlanetByName(sourceTerritory.getName());
+		
+		List<Border> borders = planet.getBorders();
+		List<Planet> neighborPlanets = new ArrayList<Planet>();
+		for (Border b : borders)
+		{
+			neighborPlanets.add(planetRepository.getPlanetByName(b.getNeighborPlanetName()));
+		}
+		//mapear
+		
+		//troopsRedeployOutputPort.showPossibleTerritoriesToRedeploy(territories);		
+	}
+
+	public void numberOfUnitsAllowedToRedeploy(TerritoryDTO sourceTerritory, TerritoryDTO targetTerritory) 
+	{
+		throw new UnsupportedOperationException();
+	}
+
+	public BoardDTO redeployUnits(TerritoryDTO sourceTerritory,	TerritoryDTO targetTerritory, int numberOfUnits) 
+	{
+		Planet sourcePlanet = planetRepository.getPlanetByName(sourceTerritory.getName());
+		Planet targetPlanet = planetRepository.getPlanetByName(targetTerritory.getName());
+		if (!isValidTerritory(sourcePlanet, targetPlanet))
+		{
+			BoardDTO board = new BoardDTO();
+			board.setReason("Invalid Territory");
+			return board;
+		}
+		
+		if (!isValidNumberOfTroopsToRedeploy(sourcePlanet, numberOfUnits))
+		{
+			BoardDTO board = new BoardDTO();
+			board.setReason("Invalid Number Of Troops To Redeploy");
+			return board;
+		}
+		
+		throw new UnsupportedOperationException();
+	}
+	
+	private boolean isValidTerritory(Planet sourcePlanet, Planet targetPlanet)
+	{
+		throw new UnsupportedOperationException();
+	}
+	
+	private boolean isValidNumberOfTroopsToRedeploy(Planet sourcePlanet, int numberOfUnits)
+	{
+		throw new UnsupportedOperationException();
+	}
+
+}

@@ -1,22 +1,37 @@
+import java.util.ArrayList;
 import java.util.List;
 
-
-public class TroopsRedeploy implements TroopsRedeployBoundary
+public class TroopsRedeploy implements TroopsRedeployInputPort
 {
-	public List<TerritoryDTO> possibleTerritoriesToRedeploy(TerritoryDTO sourceTerritory) 
+	private TroopsRedeployOutputPort troopsRedeployOutputPort;
+	private IPlanetRepository planetRepository;
+	
+	public TroopsRedeploy(TroopsRedeployOutputPort troopsRedeployOutputPort, IPlanetRepository planetRepository)
 	{
-		throw new UnsupportedOperationException();
+		this.troopsRedeployOutputPort = troopsRedeployOutputPort;
+		this.planetRepository = planetRepository;
+	}
+	public void possibleTerritoriesToRedeploy(TerritoryDTO sourceTerritory) 
+	{
+		Planet planet = planetRepository.getPlanetByName(sourceTerritory.getName());
+		
+		List<Border> borders = planet.getBorders();
+		//List<Planet> neighborPlanets = planetRepository.;
+		
+		//mapear
+		
+		//troopsRedeployOutputPort.showPossibleTerritoriesToRedeploy(territories);		
 	}
 
-	public int numberOfUnitsAllowedToRedeploy(TerritoryDTO sourceTerritory, TerritoryDTO targetTerritory) 
+	public void numberOfUnitsAllowedToRedeploy(TerritoryDTO sourceTerritory, TerritoryDTO targetTerritory) 
 	{
 		throw new UnsupportedOperationException();
 	}
 
 	public BoardDTO redeployUnits(TerritoryDTO sourceTerritory,	TerritoryDTO targetTerritory, int numberOfUnits) 
 	{
-		Planet sourcePlanet = TerritoryMapper.mapPlanet(sourceTerritory);
-		Planet targetPlanet = TerritoryMapper.mapPlanet(targetTerritory);
+		Planet sourcePlanet = planetRepository.getPlanetByName(sourceTerritory.getName());
+		Planet targetPlanet = planetRepository.getPlanetByName(targetTerritory.getName());
 		if (!isValidTerritory(sourcePlanet, targetPlanet))
 		{
 			BoardDTO board = new BoardDTO();
