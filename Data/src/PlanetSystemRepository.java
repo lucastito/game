@@ -7,8 +7,7 @@ public class PlanetSystemRepository
 	
 	public PlanetSystemRepository(IPlanetRepository planetRepository) 
 	{
-		_planetRepository = planetRepository;
-		
+		_planetRepository = planetRepository;		
 		initializePlanetSystems();
 	}
 	
@@ -16,6 +15,12 @@ public class PlanetSystemRepository
 	public void addPlanetSystem(PlanetSystem planetSystem)
 	{
 		planetSystems.put(planetSystem.getName(), planetSystem);
+	}
+	
+	public PlanetSystem getPlanetSystemByName(String name) {
+		if (name == null || name.isEmpty())
+			return null;
+		return planetSystems.get(name);
 	}
 	
 	private void initializePlanetSystems() 

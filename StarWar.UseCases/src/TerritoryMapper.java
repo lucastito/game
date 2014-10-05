@@ -5,4 +5,10 @@ public class TerritoryMapper
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public static TerritoryDTO mapTerritoryDTO(Planet planet) 
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

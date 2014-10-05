@@ -13,50 +13,55 @@ public class TroopsRedeploy implements TroopsRedeployInputPort
 	}
 	public void possibleTerritoriesToRedeploy(TerritoryDTO sourceTerritory) 
 	{
-		Planet planet = planetRepository.getPlanetByName(sourceTerritory.getName());
+		List<Planet> neighborPlanets = 	planetRepository.getNeighborPlanets(sourceTerritory.getName());
 		
-		List<Border> borders = planet.getBorders();
-		//List<Planet> neighborPlanets = planetRepository.;
-		
-		//mapear
-		
-		//troopsRedeployOutputPort.showPossibleTerritoriesToRedeploy(territories);		
+		List<TerritoryDTO> territories = new ArrayList<TerritoryDTO>();
+		for(Planet neighborPlanet : neighborPlanets)
+		{
+			territories.add(TerritoryMapper.mapTerritoryDTO(neighborPlanet));
+		}
+				
+		troopsRedeployOutputPort.showPossibleTerritoriesToRedeploy(territories);		
 	}
 
 	public void numberOfUnitsAllowedToRedeploy(TerritoryDTO sourceTerritory, TerritoryDTO targetTerritory) 
 	{
-		throw new UnsupportedOperationException();
+		troopsRedeployOutputPort.showNumberOfUnitsToRedeploy(1);
 	}
 
-	public BoardDTO redeployUnits(TerritoryDTO sourceTerritory,	TerritoryDTO targetTerritory, int numberOfUnits) 
+	public void redeployUnits(TerritoryDTO sourceTerritory,	TerritoryDTO targetTerritory, int numberOfUnits) 
 	{
 		Planet sourcePlanet = planetRepository.getPlanetByName(sourceTerritory.getName());
 		Planet targetPlanet = planetRepository.getPlanetByName(targetTerritory.getName());
-		if (!isValidTerritory(sourcePlanet, targetPlanet))
+		if (!isValidTerritoryToRedeploy(sourcePlanet.getName(), targetPlanet.getName(), targetPlanet.getOwner().getName()))
 		{
-			BoardDTO board = new BoardDTO();
-			board.setReason("Invalid Territory");
-			return board;
+			troopsRedeployOutputPort.showReason("Invalid territory to redeploy");
 		}
 		
 		if (!isValidNumberOfTroopsToRedeploy(sourcePlanet, numberOfUnits))
 		{
-			BoardDTO board = new BoardDTO();
-			board.setReason("Invalid Number Of Troops To Redeploy");
-			return board;
+			troopsRedeployOutputPort.showReason("Invalid number of troops to redeploy");
 		}
 		
-		throw new UnsupportedOperationException();
+		
+		
+		troopsRedeployOutputPort.showRedeployedUnits();
 	}
 	
-	private boolean isValidTerritory(Planet sourcePlanet, Planet targetPlanet)
+	public boolean isValidTerritoryToRedeploy(String sourcePlanetName, String targetPlanetName, String targetOwnerName)
 	{
-		throw new UnsupportedOperationException();
+		List<Planet> neighborPlanets = 	planetRepository.getNeighborPlanets(sourcePlanetName);
+		for(Planet neighborPlanet : neighborPlanets)
+		{			
+			if(neighborPlanet.getName().equals(targetPlanetName) && !neighborPlanet.getOwner().getName().equals(targetOwnerName))
+				return true;
+		}
+		return false;
 	}
 	
 	private boolean isValidNumberOfTroopsToRedeploy(Planet sourcePlanet, int numberOfUnits)
 	{
-		throw new UnsupportedOperationException();
+		return true;
 	}
 
 }

@@ -38,4 +38,22 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 	{
 		
 	}
+
+	public void showReason(String reason) {
+
+	}
+
+	@Override
+	public void showRedeployedUnits() 
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void showNumberOfUnitsToRedeploy(int numberOfUnits) 
+	{
+		// TODO Auto-generated method stub
+		
+	}
 }
