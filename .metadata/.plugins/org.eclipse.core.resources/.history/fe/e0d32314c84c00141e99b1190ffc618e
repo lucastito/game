@@ -1,0 +1,34 @@
+import java.util.List;
+
+public class War {
+
+	private static War instance;
+	
+	//private GameScreenPresenter presenter;
+	private Board board; 
+	private List<Player> players;
+	private List<Integer> playingIdsOrder;
+
+	private War() {
+		
+//		presenter = new GameScreenPresenter(new GameState(new PlanetRepository()));
+//		
+//		presenter.show();
+	}
+
+	public static War getInstance() {
+		if (instance == null)
+			instance = new War();
+		return instance;
+	}
+	
+	public Board getBoard(){
+		return this.board;
+	}
+	
+	public List<Player> getPlayers() 
+	{
+		return players;
+	}
+
+}

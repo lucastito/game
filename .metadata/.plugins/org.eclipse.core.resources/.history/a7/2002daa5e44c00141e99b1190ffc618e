@@ -1,0 +1,26 @@
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+
+@SuppressWarnings("serial")
+public class MenuScreen extends JPanel {
+	JLabel nextPlayerArrow = null;
+    
+	public MenuScreen()
+	{
+		try {
+			nextPlayerArrow = new JLabel(new ImageIcon(ImageIO.read(new File(getClass().getResource("image/arrow.png").getPath().toString()))));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    nextPlayerArrow.setBounds(1270, 670, nextPlayerArrow.getIcon().getIconWidth(), nextPlayerArrow.getIcon().getIconHeight());
+	    add(nextPlayerArrow);
+	}  
+}

@@ -6,6 +6,7 @@ import model.Territory;
 public class PlanetarySystemController 
 {
 	private GameStateInputPort gameState;
+	
 	public PlanetarySystemController(GameStateInputPort gameState)
 	{
 		this.gameState = gameState;

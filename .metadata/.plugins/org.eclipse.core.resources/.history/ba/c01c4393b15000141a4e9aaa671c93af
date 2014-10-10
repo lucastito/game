@@ -1,0 +1,38 @@
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+public class War {
+
+	private static War instance;
+	
+	//private GameScreenPresenter presenter;
+	private Board board; 
+	private Map<Integer, Player> players;
+	private List<Integer> playingIdsOrder;
+
+	private War() 
+	{
+		playingIdsOrder = new LinkedList<Integer>();
+		
+//		decidir a ordem dos jogadores pelo dado
+//		adicionar ao playingIdsOrder
+		
+		
+	}
+
+	public static War getInstance() {
+		if (instance == null)
+			instance = new War();
+		return instance;
+	}
+	
+	public String getPlayerNameById(int id)
+	{
+		return players.get(id).getName();
+	}
+	
+	public Board getBoard(){
+		return this.board;
+	}
+}

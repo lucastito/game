@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;image&apos; in &apos;GameScreen.GameScreen(...)&apos; to &apos;backgroundImage&apos;&#x0D;&#x0A;- Original project: &apos;StarWar&apos;&#x0D;&#x0A;- Original element: &apos;GameScreen.GameScreen(String, GameStateInputPort).image&apos;&#x0D;&#x0A;- Renamed element: &apos;image&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;image&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;{GameScreen.java[GameScreen~GameScreen~QString;~QGameStateInputPort;@image!494!505!501!505!QString;!0!true" name="backgroundImage" references="true" stamp="1412968609383" version="1.0"/>
+</session>

@@ -68,7 +68,7 @@ public class PlanetRepositoryTests
 	}
 	
 	@Test
-	public void GetPlanetByName_GetsPanet()
+	public void GetPlanetByName_GetsPlanet()
 	{
 		Planet result = planetRepository.getPlanetByName("Coruscant");
 		

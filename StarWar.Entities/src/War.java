@@ -1,10 +1,14 @@
+import java.util.Map;
+
 public class War {
 
 	private static War instance;
 	
 	private Board board; 
-
-	private War() {
+	private Map<Integer, Player> players;
+	
+	private War() 
+	{		
 
 	}
 
@@ -14,8 +18,12 @@ public class War {
 		return instance;
 	}
 	
+	public String getPlayerNameById(int id)
+	{
+		return players.get(id).getName();
+	}
+	
 	public Board getBoard(){
 		return this.board;
 	}
-
 }

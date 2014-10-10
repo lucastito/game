@@ -1,0 +1,9 @@
+import java.util.List;
+
+
+public interface GameStateInputPort 
+{
+	WarDTO getWar();
+	BoardDTO getBoard();
+	List<TerritoryDTO> getAllPlanets();
+}

@@ -21,9 +21,9 @@ public class Planet
 		this.xAxisCoordinate = xAxisCoordinate;
 		this.yAxisCoordinate = yAxisCoordinate;
 		this.imagePath = imagePath;
-		this.owner = null;
-		this.pieces = new ArrayList<Piece>();
 		
+		owner = null;
+		pieces = new ArrayList<Piece>();
 		internalBorders = new ArrayList<Border>();
 		externalBorders = new ArrayList<Border>();
 		allBorders = new ArrayList<Border>();

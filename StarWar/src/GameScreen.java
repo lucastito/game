@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Territory;
@@ -15,27 +14,28 @@ import model.Territory;
 @SuppressWarnings("serial")
 public class GameScreen extends JPanel implements MouseListener{
 
-	JLabel teste;
 	PlanetarySystemController planetarySystemController;
 	
-	private BufferedImage fundo;
+	private BufferedImage background;
 	
-	public GameScreen(String imagem, GameStateInputPort gameState) 
+	public GameScreen(String backgroundImage, GameStateInputPort gameState) 
 	{
 		try {
-			String path = getClass().getResource(imagem).getPath().toString(); 
+			String path = getClass().getResource(backgroundImage).getPath().toString(); 
 
-			this.fundo = ImageIO.read(new File(path));
+			this.background = ImageIO.read(new File(path));
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		this.setSize(fundo.getWidth(), fundo.getHeight());
+		
+		this.setSize(background.getWidth(), background.getHeight());
 		planetarySystemController = new PlanetarySystemController(gameState);
 	}
 	
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(fundo, 0, 0, null);
+		g.drawImage(background, 0, 0, null);
 		for(Territory planet : planetarySystemController.getAllPlanets()){
 			try {
 				String path = getClass().getResource(planet.getImagePath()).getPath().toString(); 
@@ -49,7 +49,7 @@ public class GameScreen extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-			
+		
 	}
 
 	@Override
