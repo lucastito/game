@@ -35,8 +35,9 @@ public class MenuScreen extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == nextPlayerArrow)
 		{
-			gameState.nextPlayer();
+			gameState.nextPlayerStep();
 			System.out.println(gameState.currentPlayerId());
+			System.out.println(gameState.currentPlayerStep());
 		}
 	}
 

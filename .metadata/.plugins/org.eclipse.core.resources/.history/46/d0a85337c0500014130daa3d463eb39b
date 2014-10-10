@@ -1,0 +1,10 @@
+
+public class PlayerSteps {
+	
+	// receber exércitos
+	// atacar inimigos
+	// remanejar exército
+	// receber carta
+	
+	public static final int RECEIVE_ARMY = 0;
+}

@@ -5,6 +5,7 @@ public interface GameStateInputPort
 {
 	BoardDTO getBoard();
 	List<TerritoryDTO> getAllPlanets();
-	void nextPlayer();
+	void nextPlayerStep();
 	int currentPlayerId();
+	int currentPlayerStep();
 }

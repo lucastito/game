@@ -6,12 +6,14 @@ public class GameState implements GameStateInputPort
 {
 	IPlanetRepository planetRepository;
 	private List<Integer> playingIdsOrder;
+	private PlayerStep playerStep;
 	
 	public GameState(IPlanetRepository planetRepository)
 	{
 		this.planetRepository = planetRepository;
 		
 		playingIdsOrder = new LinkedList<Integer>();
+		playerStep = new PlayerStep();
 		
 //		decidir a ordem dos jogadores pelo dado
 //		adicionar ao playingIdsOrder
@@ -43,13 +45,29 @@ public class GameState implements GameStateInputPort
 		return territories;
 	}
 	
-	public void nextPlayer()
+	public void nextPlayerStep()
 	{
-		playingIdsOrder.add(playingIdsOrder.remove(0));
+		if (playerStep.getCurrentPhase() == PlayerStep.END_OF_TURN)
+		{
+			//troca o jogador
+			playingIdsOrder.add(playingIdsOrder.remove(0));
+			playerStep = new PlayerStep();
+		}
+		else
+		{
+			//troca de fase
+			playerStep.nextStep();
+		}
+			
 	}
 	
 	public int currentPlayerId()
 	{
 		return playingIdsOrder.get(0);
+	}
+	
+	public int currentPlayerStep()
+	{
+		return playerStep.getCurrentPhase();
 	}
 }

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;GameStateInputPort.nextPlayer()&apos; to &apos;nextPlayerStep&apos;&#x0D;&#x0A;- Original project: &apos;StarWar.Boundaries&apos;&#x0D;&#x0A;- Original element: &apos;GameStateInputPort.nextPlayer()&apos;&#x0D;&#x0A;- Renamed element: &apos;GameStateInputPort.nextPlayerStep()&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;nextPlayer&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;{GameStateInputPort.java[GameStateInputPort~nextPlayer" name="nextPlayerStep" references="true" stamp="1412975665083" version="1.0"/>
+</session>
