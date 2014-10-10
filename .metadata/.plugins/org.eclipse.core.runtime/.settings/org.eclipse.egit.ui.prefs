@@ -1,3 +1,3 @@
-commit_dialog_history_messages=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<messages>\r\n<message>L\u00F3gica de fronteiras dentro de planetas</message>\r\n<message>Adding External Borders.</message>\r\n<message>Internal Borders Initialization</message>\r\n</messages>
+commit_dialog_history_messages=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<messages>\r\n<message>L\u00F3gica de preenchimento do tabuleiro inicial.</message>\r\n<message>Testes PlanetRepository</message>\r\n<message>L\u00F3gica de fronteiras dentro de planetas</message>\r\n<message>Adding External Borders.</message>\r\n<message>Internal Borders Initialization</message>\r\n</messages>
 eclipse.preferences.version=1
 show_initial_config_dialog=false

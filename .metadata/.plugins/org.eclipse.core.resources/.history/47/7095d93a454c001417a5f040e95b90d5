@@ -1,0 +1,5 @@
+
+public interface IPlanetSystemRepository 
+{
+	PlanetSystem getPlanetSystemByName(String name);
+}
