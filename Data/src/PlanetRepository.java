@@ -52,7 +52,7 @@ public class PlanetRepository implements IPlanetRepository
 		planet = new Planet((short) 1, "Trandosha", (short)20, (short)20, "image/imgicon.png");
 		planet.addInternalBorder(new Border("Trandosha", "Naboo"));
 		planet.addInternalBorder(new Border("Trandosha", "Calamari"));
-		planet.addInternalBorder(new Border("Trandosha", "Muunilist"));		
+		planet.addInternalBorder(new Border("Trandosha", "Muunilinst"));		
 		addPlanet(planet);
 		
 		planet = new Planet((short) 2, "Naboo", (short)90, (short)15, "image/imgicon.png");
@@ -61,30 +61,30 @@ public class PlanetRepository implements IPlanetRepository
 		planet.addExternalBorder(new Border("Naboo", "Nivek"));
 		addPlanet(planet);
 		
-		planet = new Planet((short) 3, "Bakura", (short)160, (short)30, "image/imgicon.png");
+		planet = new Planet((short) 3, "Bakura", (short)160, (short)30, "image/bakura.png");
 		planet.addInternalBorder(new Border("Bakura", "Naboo"));
 		planet.addExternalBorder(new Border("Bakura", "Sarapin"));
 		addPlanet(planet);
 		
-		planet = new Planet((short) 4, "Calamari", (short)18, (short)90, "image/imgicon.png");
+		planet = new Planet((short) 4, "Calamari", (short)18, (short)90, "image/calamari.png");
 		planet.addInternalBorder(new Border("Calamari", "Trandosha"));
 		planet.addInternalBorder(new Border("Calamari", "Datooine"));
 		planet.addExternalBorder(new Border("Calamari", "Rhen Var"));
 		addPlanet(planet);
 		
-		planet = new Planet((short) 5, "Muunilist", (short)100, (short)100, "image/imgicon.png");
-		planet.addInternalBorder(new Border("Muunilist", "Trandosha"));
-		planet.addInternalBorder(new Border("Muunilist", "Datooine"));
-		planet.addExternalBorder(new Border("Muunilist", "Coruscant"));
+		planet = new Planet((short) 5, "Muunilinst", (short)100, (short)100, "image/imgicon.png");
+		planet.addInternalBorder(new Border("Muunilinst", "Trandosha"));
+		planet.addInternalBorder(new Border("Muunilinst", "Datooine"));
+		planet.addExternalBorder(new Border("Muunilinst", "Coruscant"));
 		addPlanet(planet);
 		
 		planet = new Planet((short) 6, "Dantooine", (short)60, (short)170, "image/imgicon.png");
-		planet.addInternalBorder(new Border("Dantooine", "Muunilist"));
+		planet.addInternalBorder(new Border("Dantooine", "Muunilinst"));
 		planet.addInternalBorder(new Border("Dantooine", "Calamari"));
 		planet.addExternalBorder(new Border("Dantooine", "Tynna"));
 		addPlanet(planet);		
 		
-		planet = new Planet((short) 7, "Ilum", (short)650, (short)25, "image/imgicon.png");
+		planet = new Planet((short) 7, "Ilum", (short)650, (short)25, "image/ilum.png");
 		planet.addInternalBorder(new Border("Ilum", "Sarapin"));
 		planet.addInternalBorder(new Border("Ilum", "Eredeen Prime"));
 		addPlanet(planet);
@@ -103,11 +103,11 @@ public class PlanetRepository implements IPlanetRepository
 		planet.addExternalBorder(new Border("Eredeen Prime", "Nelvaan"));
 		addPlanet(planet);
 		
-		planet = new Planet((short) 10, "Coruscant", (short)650, (short)290, "image/imgicon.png");
+		planet = new Planet((short) 10, "Coruscant", (short)650, (short)290, "image/coruscant.png");
 		planet.addInternalBorder(new Border("Coruscant", "Eredeen Prime"));
 		planet.addExternalBorder(new Border("Coruscant", "Yag'Dhul"));
 		planet.addExternalBorder(new Border("Coruscant", "Pengalan IV"));
-		planet.addExternalBorder(new Border("Coruscant", "Muunilist"));
+		planet.addExternalBorder(new Border("Coruscant", "Muunilinst"));
 		planet.addExternalBorder(new Border("Coruscant", "Ando"));
 		planet.addExternalBorder(new Border("Coruscant", "Elrood"));
 		addPlanet(planet);

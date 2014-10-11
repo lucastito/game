@@ -36,7 +36,7 @@ public class PlanetSystemRepository
 		planetSystem.addPlanet(_planetRepository.getPlanetByName("Naboo"));	
 		planetSystem.addPlanet(_planetRepository.getPlanetByName("Bakura"));	
 		planetSystem.addPlanet(_planetRepository.getPlanetByName("Calamari"));	
-		planetSystem.addPlanet(_planetRepository.getPlanetByName("Muunilist"));	
+		planetSystem.addPlanet(_planetRepository.getPlanetByName("Muunilinst"));	
 		planetSystem.addPlanet(_planetRepository.getPlanetByName("Dantooine"));
 				
 		addPlanetSystem(planetSystem);

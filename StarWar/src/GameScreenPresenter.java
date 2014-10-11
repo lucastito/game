@@ -34,7 +34,7 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 		        
 		        JPanel panel = new JPanel();
 		        panel.setLayout(new BorderLayout());
-		        GameScreen gameScreenPanel = new GameScreen("image/img.png", gameState);
+		        GameScreen gameScreenPanel = new GameScreen("image/outerspace.jpg", gameState);
 		        MenuScreen menuScreenPanel = new MenuScreen(gameState);
 		        menuScreenPanel.setLayout(new BoxLayout(menuScreenPanel, BoxLayout.Y_AXIS));
 		        
