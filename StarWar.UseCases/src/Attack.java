@@ -2,19 +2,26 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class Attack implements AttackBoundary
+public class Attack implements AttackInputPort
 {
-	public List<TerritoryDTO> possibilitiesOfTerritoriesToAttack(PlayerDTO player)
+	public void possibilitiesOfTerritoriesToAttack(PlayerDTO player)
 	{
-		throw new UnsupportedOperationException();
+		if (!isAttackTurn())
+			return;
+		return;
 	}
 	
+	private boolean isAttackTurn() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	//4 sistema verifica quantas unidades de ataque existem
 	//5 se houver somente uma unidade de ataque, 
 	//sistema exibe aviso de ataque inválido por insuficiência de unidades de batalha
 	public boolean isPlayerAllowedToAttackTerritory(PlayerDTO player, TerritoryDTO territory)
 	{
-		throw new UnsupportedOperationException();
+		return true;
 	} 
 	
 	//se (quantidade de unidades - 1) > 3, sistema gera 3 números aleatórios, 

@@ -1,8 +1,8 @@
 import java.util.List;
 
-public interface AttackBoundary 
+public interface AttackInputPort 
 {
-	List<TerritoryDTO> possibilitiesOfTerritoriesToAttack(PlayerDTO player);
+	void possibilitiesOfTerritoriesToAttack(PlayerDTO player);
 	boolean isPlayerAllowedToAttackTerritory(PlayerDTO player, TerritoryDTO territory);
 	List<Integer> generateAttackingUnits(PlayerDTO player, TerritoryDTO territory);
 	List<Integer> generateDefendingUnits(PlayerDTO player, TerritoryDTO territory);

@@ -8,7 +8,13 @@ public class TerritoryMapper
 	
 	public static TerritoryDTO mapTerritoryDTO(Planet planet) 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		TerritoryDTO territory = new TerritoryDTO();
+		territory.setId(planet.getId());
+		territory.setImagePath(planet.getImagePath());
+		territory.setName(planet.getName());
+		territory.setxAxisCoordinate(planet.getXAxisCoordinate());
+		territory.setyAxisCoordinate(planet.getYAxisCoordinate());
+		
+		return territory;
 	}
 }

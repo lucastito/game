@@ -68,13 +68,13 @@ public class PlanetRepository implements IPlanetRepository
 		
 		planet = new Planet((short) 4, "Calamari", (short)18, (short)90, "image/calamari.png");
 		planet.addInternalBorder(new Border("Calamari", "Trandosha"));
-		planet.addInternalBorder(new Border("Calamari", "Datooine"));
+		planet.addInternalBorder(new Border("Calamari", "Dantooine"));
 		planet.addExternalBorder(new Border("Calamari", "Rhen Var"));
 		addPlanet(planet);
 		
 		planet = new Planet((short) 5, "Muunilinst", (short)100, (short)100, "image/imgicon.png");
 		planet.addInternalBorder(new Border("Muunilinst", "Trandosha"));
-		planet.addInternalBorder(new Border("Muunilinst", "Datooine"));
+		planet.addInternalBorder(new Border("Muunilinst", "Dantooine"));
 		planet.addExternalBorder(new Border("Muunilinst", "Coruscant"));
 		addPlanet(planet);
 		
