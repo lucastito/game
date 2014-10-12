@@ -53,36 +53,36 @@ public class PlanetRepository implements IPlanetRepository
 		planets = new HashMap<String, Planet>();
 		Planet planet;
 
-		planet = new Planet((short) 1, "Trandosha", (short)20, (short)20, "image/imgicon.png");
+		planet = new Planet((short) 1, "Trandosha", (short)10, (short)10, "image/trandosha.png");
 		planet.addInternalBorder(new Border("Trandosha", "Naboo"));
 		planet.addInternalBorder(new Border("Trandosha", "Calamari"));
 		planet.addInternalBorder(new Border("Trandosha", "Muunilinst"));		
 		addPlanet(planet);
 		
-		planet = new Planet((short) 2, "Naboo", (short)90, (short)15, "image/imgicon.png");
+		planet = new Planet((short) 2, "Naboo", (short)110, (short)10, "image/naboo.png");
 		planet.addInternalBorder(new Border("Naboo", "Trandosha"));
 		planet.addInternalBorder(new Border("Naboo", "Bakura"));
 		planet.addExternalBorder(new Border("Naboo", "Nivek"));
 		addPlanet(planet);
 		
-		planet = new Planet((short) 3, "Bakura", (short)160, (short)30, "image/bakura.png");
+		planet = new Planet((short) 3, "Bakura", (short)215, (short)30, "image/bakura.png");
 		planet.addInternalBorder(new Border("Bakura", "Naboo"));
 		planet.addExternalBorder(new Border("Bakura", "Sarapin"));
 		addPlanet(planet);
 		
-		planet = new Planet((short) 4, "Calamari", (short)18, (short)90, "image/calamari.png");
+		planet = new Planet((short) 4, "Calamari", (short)18, (short)110, "image/calamari.png");
 		planet.addInternalBorder(new Border("Calamari", "Trandosha"));
 		planet.addInternalBorder(new Border("Calamari", "Dantooine"));
 		planet.addExternalBorder(new Border("Calamari", "Rhen Var"));
 		addPlanet(planet);
 		
-		planet = new Planet((short) 5, "Muunilinst", (short)100, (short)100, "image/imgicon.png");
+		planet = new Planet((short) 5, "Muunilinst", (short)135, (short)105, "image/muunilinst.png");
 		planet.addInternalBorder(new Border("Muunilinst", "Trandosha"));
 		planet.addInternalBorder(new Border("Muunilinst", "Dantooine"));
 		planet.addExternalBorder(new Border("Muunilinst", "Coruscant"));
 		addPlanet(planet);
 		
-		planet = new Planet((short) 6, "Dantooine", (short)60, (short)170, "image/imgicon.png");
+		planet = new Planet((short) 6, "Dantooine", (short)70, (short)193, "image/dantooine.png");
 		planet.addInternalBorder(new Border("Dantooine", "Muunilinst"));
 		planet.addInternalBorder(new Border("Dantooine", "Calamari"));
 		planet.addExternalBorder(new Border("Dantooine", "Tynna"));
@@ -116,12 +116,12 @@ public class PlanetRepository implements IPlanetRepository
 		planet.addExternalBorder(new Border("Coruscant", "Elrood"));
 		addPlanet(planet);
 		
-		planet = new Planet((short) 11, "Yavin IV", (short)1115, (short)10, "image/imgicon.png");
+		planet = new Planet((short) 11, "Yavin IV", (short)1115, (short)10, "image/yaviniv.png");
 		planet.addInternalBorder(new Border("Yavin IV", "Corellia"));
 		planet.addInternalBorder(new Border("Yavin IV", "Nelvaan"));
 		addPlanet(planet);
 		
-		planet = new Planet((short) 12, "Kamino", (short)1270, (short)20, "image/imgicon.png");
+		planet = new Planet((short) 12, "Kamino", (short)1270, (short)20, "image/kamino.png");
 		planet.addInternalBorder(new Border("Kamino", "Corellia"));
 		planet.addInternalBorder(new Border("Kamino", "Ando"));
 		addPlanet(planet);
@@ -134,7 +134,7 @@ public class PlanetRepository implements IPlanetRepository
 		planet.addExternalBorder(new Border("Corellia", "Kashyyyk"));
 		addPlanet(planet);
 		
-		planet = new Planet((short) 14, "Nelvaan", (short)1125, (short)90, "image/imgicon.png");
+		planet = new Planet((short) 14, "Nelvaan", (short)1125, (short)90, "image/nelvaan.png");
 		planet.addInternalBorder(new Border("Nelvaan", "Yavin IV"));
 		planet.addInternalBorder(new Border("Nelvaan", "Corellia"));
 		planet.addInternalBorder(new Border("Nelvaan", "Ando"));
@@ -171,7 +171,7 @@ public class PlanetRepository implements IPlanetRepository
 		planet.addExternalBorder(new Border("Geonosis", "Tynna"));
 		addPlanet(planet);
 		
-		planet = new Planet((short) 20, "Mustafar", (short)5, (short)580, "image/imgicon.png");
+		planet = new Planet((short) 20, "Mustafar", (short)5, (short)580, "image/mustafar.png");
 		planet.addInternalBorder(new Border("Mustafar", "Nivek"));
 		planet.addInternalBorder(new Border("Mustafar", "Geonosis"));
 		planet.addExternalBorder(new Border("Mustafar", "Alaris Prime"));

@@ -70,7 +70,7 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort, GameStateO
 			try 
 			{
 				JLabel neighbor = new JLabel(new ImageIcon(ImageIO.read(new File(getClass().getResource("image/greenhighlight.png").getPath().toString()))));
-				neighbor.setBounds(planet.getxAxisCoordinate(), planet.getyAxisCoordinate(), neighbor.getIcon().getIconWidth(), neighbor.getIcon().getIconHeight());
+				neighbor.setBounds(planet.getxAxisCoordinate() - 10, planet.getyAxisCoordinate() - 10, neighbor.getIcon().getIconWidth(), neighbor.getIcon().getIconHeight());
 			    gameScreenPanel.add(neighbor);
 			    frame.repaint();
 			} catch (IOException e) {
