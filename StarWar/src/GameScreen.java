@@ -80,21 +80,34 @@ public class GameScreen extends JPanel implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) 
 	{
-		if (highlightedPiece != null && actualTerritory != null)
+		if (actualTerritory == null)
 		{
-			Territory clickedTerritory = findTerritoryOnClick(e.getX(), e.getY());
-			piecesController.redeployTroops(actualTerritory.getName(), clickedTerritory.getName());
-			return;
+			actualTerritory = findTerritoryOnClick(e.getX(), e.getY());
+			if (actualTerritory != null)
+			{
+				highlightTerritories();
+				if (arePlanetsHighlighted)
+					highlightedPiece = findPieceOnClick(e.getX(), e.getY());
+			}				
+		}			
+		else
+		{
+			if (highlightedPiece != null)
+			{
+				Territory nextTerritory = findTerritoryOnClick(e.getX(), e.getY());
+				piecesController.redeployTroops(actualTerritory.getName(), nextTerritory.getName());
+				actualTerritory = nextTerritory;
+				highlightTerritories();
+				if (arePlanetsHighlighted)
+					highlightedPiece = findPieceOnClick(e.getX(), e.getY());
+			}
+			else
+			{
+				highlightTerritories();
+				if (arePlanetsHighlighted)
+					highlightedPiece = findPieceOnClick(e.getX(), e.getY());
+			}
 		}
-			
-		actualTerritory = findTerritoryOnClick(e.getX(), e.getY());
-		
-		if (actualTerritory != null)
-		{
-			highlightTerritories();
-			if (arePlanetsHighlighted)
-				highlightedPiece = findPieceOnClick(e.getX(), e.getY());
-		}		
 	}
 
 	private void highlightTerritories() {
