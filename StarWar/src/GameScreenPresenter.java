@@ -13,29 +13,37 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import model.Territory;
+
 public class GameScreenPresenter implements TroopsRedeployOutputPort
 {
 	private GameStateInputPort gameState;
-	
-	public GameScreenPresenter(GameStateInputPort gameState)
+	private TroopsRedeployInputPort troopsRedeployInputPort;
+	private AttackInputPort attackInputPort;
+	JFrame frame;
+	static GameScreen gameScreenPanel;
+    MenuScreen menuScreenPanel;
+    JPanel panel;
+    
+	public GameScreenPresenter() 
 	{
-		this.gameState = gameState;
+		frame = new JFrame();
+		panel = new JPanel();
 	}
 	
 	public void show() {
+		
+		gameScreenPanel = new GameScreen("image/outerspace.jpg", this.gameState, attackInputPort, troopsRedeployInputPort);
+		menuScreenPanel = new MenuScreen(this.gameState);
+		
     	EventQueue.invokeLater(new Runnable(){
-	    	public void run(){ 
-		    	JFrame frame = new JFrame();
-//		        frame.setLayout(null);
+	    	public void run(){ 		    	
 		        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		        frame.setTitle("StarWar");
-//		        frame.setSize(800, 600);
 		        frame.setSize(1366, 768);
 		        
-		        JPanel panel = new JPanel();
 		        panel.setLayout(new BorderLayout());
-		        GameScreen gameScreenPanel = new GameScreen("image/outerspace.jpg", gameState);
-		        MenuScreen menuScreenPanel = new MenuScreen(gameState);
+		        
 		        menuScreenPanel.setLayout(new BoxLayout(menuScreenPanel, BoxLayout.Y_AXIS));
 		        
 		        panel.add(gameScreenPanel, BorderLayout.CENTER);
@@ -50,10 +58,29 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
     	});
 	}
 
+	public void clearGameScreen() 
+	{
+    	gameScreenPanel.removeAll();
+		gameScreenPanel.repaint();
+	}
+	
 	@Override
 	public void showPossibleTerritoriesToRedeploy(List<TerritoryDTO> territories) 
 	{
-		
+		for(TerritoryDTO planet : territories)
+		{
+			try 
+			{
+				System.out.println(planet.getName());
+				JLabel neighbor = new JLabel(new ImageIcon(ImageIO.read(new File(getClass().getResource("image/greenhighlight.png").getPath().toString()))));
+				neighbor.setBounds(planet.getxAxisCoordinate(), planet.getyAxisCoordinate(), neighbor.getIcon().getIconWidth(), neighbor.getIcon().getIconHeight());
+			    gameScreenPanel.add(neighbor);
+			    frame.repaint();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}		
 	}
 
 	@Override
@@ -72,4 +99,19 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 	{
 		
 	}
+	
+	public void setGameStateInputPort(GameStateInputPort gameState)
+	{
+		this.gameState = gameState;
+	}
+	
+	public void setTroopsRedeployInputPort(TroopsRedeployInputPort troopsRedeployInputPort)
+	{
+		this.troopsRedeployInputPort = troopsRedeployInputPort;
+	}
+	
+	public void setAttackInputPort(AttackInputPort attackInputPort)
+	{
+		this.attackInputPort = attackInputPort;
+	}	
 }

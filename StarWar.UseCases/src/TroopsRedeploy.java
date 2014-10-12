@@ -13,6 +13,8 @@ public class TroopsRedeploy implements TroopsRedeployInputPort
 	}
 	public void possibleTerritoriesToRedeploy(TerritoryDTO sourceTerritory) 
 	{
+		if (!isRedeployTurn())
+			return;
 		List<Planet> neighborPlanets = 	planetRepository.getNeighborPlanets(sourceTerritory.getName());
 		
 		List<TerritoryDTO> territories = new ArrayList<TerritoryDTO>();
@@ -24,6 +26,10 @@ public class TroopsRedeploy implements TroopsRedeployInputPort
 		troopsRedeployOutputPort.showPossibleTerritoriesToRedeploy(territories);		
 	}
 
+	private boolean isRedeployTurn() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 	public void numberOfUnitsAllowedToRedeploy(TerritoryDTO sourceTerritory, TerritoryDTO targetTerritory) 
 	{
 		troopsRedeployOutputPort.showNumberOfUnitsToRedeploy(1);

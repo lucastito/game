@@ -6,10 +6,16 @@ import model.Territory;
 public class PlanetarySystemController 
 {
 	private GameStateInputPort gameState;
+	private TroopsRedeployInputPort troopsRedeployInputPort;
+	private AttackInputPort attackInputPort;
+	private GameScreenPresenter gameScreenPresenter;
 	
-	public PlanetarySystemController(GameStateInputPort gameState)
+	public PlanetarySystemController(GameStateInputPort gameState, TroopsRedeployInputPort troopsRedeployInputPort, AttackInputPort attackInputPort)
 	{
+		this.troopsRedeployInputPort = troopsRedeployInputPort;
 		this.gameState = gameState;
+		this.attackInputPort = attackInputPort;
+		gameScreenPresenter = new GameScreenPresenter();
 	}
 	
 	public List<Territory> getAllPlanets()
@@ -26,5 +32,22 @@ public class PlanetarySystemController
 			territories.add(territory);
 		}
 		return territories;
+	}
+
+	public void getActivities(String planetName, int playerId) 
+	{
+		TerritoryDTO territory = new TerritoryDTO();
+		territory.setName(planetName);
+		troopsRedeployInputPort.possibleTerritoriesToRedeploy(territory);
+		
+		PlayerDTO player = new PlayerDTO();
+		player.setId(playerId);
+		
+		attackInputPort.possibilitiesOfTerritoriesToAttack(player);
+	}
+
+	public void clearHighlights() 
+	{
+		gameScreenPresenter.clearGameScreen();
 	}
 }
