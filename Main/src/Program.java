@@ -4,10 +4,15 @@ public class Program
 	public static void main(String[] args)
 	{
 		PlanetRepository planetRepository = new PlanetRepository();
-		GameState gameState = new GameState(planetRepository);
+		PlayerRepository playerRepository = new PlayerRepository();		
 		Attack attack = new Attack();
 		GameScreenPresenter presenter = new GameScreenPresenter();
 		TroopsRedeploy troopsRedeploy = new TroopsRedeploy(presenter, planetRepository);
+		
+		GameState gameState = new GameState();		
+		gameState.setGameStateOutputPort(presenter);
+		gameState.setPlanetRepository(planetRepository);
+		gameState.setPlayerRepository(playerRepository);
 		
 		presenter.setAttackInputPort(attack);
 		presenter.setGameStateInputPort(gameState);

@@ -20,6 +20,10 @@ public class PlanetRepository implements IPlanetRepository
 		return planets;
 	}
 	
+	public void setPlanetOwner(String planetName, String playerName) {
+		getPlanetByName(planetName).setOwnerName(playerName);
+	}
+	
 	public Planet getPlanetByName(String name) {
 		if (name == null || name.isEmpty())
 			return null;

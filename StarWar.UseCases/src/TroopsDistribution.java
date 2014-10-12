@@ -15,8 +15,8 @@ public class TroopsDistribution implements TroopsDistributionBoundary
 
 	public BoardDTO distributeTroops(int numberOfPieces, PlayerDTO playerDTO, TerritoryDTO territory) 
 	{
-		Player player = PlayerMapper.mapPlayer(playerDTO);
-		Planet planet = TerritoryMapper.mapPlanet(territory);
+		Player player = Mapper.mapPlayer(playerDTO);
+		Planet planet = Mapper.mapPlanet(territory);
 		
 		if (isFirstRound())
 			return firstRoundDistribution(numberOfPieces, player, planet);

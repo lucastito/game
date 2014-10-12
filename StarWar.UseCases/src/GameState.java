@@ -5,13 +5,13 @@ import java.util.List;
 public class GameState implements GameStateInputPort
 {
 	IPlanetRepository planetRepository;
+	IPlayerRepository playerRepository;
+	GameStateOutputPort gameStateOutputPort;
 	private List<Integer> playingIdsOrder;
 	private PlayerStep playerStep;
 	
-	public GameState(IPlanetRepository planetRepository)
+	public GameState()
 	{
-		this.planetRepository = planetRepository;
-		
 		playingIdsOrder = new LinkedList<Integer>();
 		playerStep = new PlayerStep();
 		
@@ -22,27 +22,27 @@ public class GameState implements GameStateInputPort
 		playingIdsOrder.add(0);
 		playingIdsOrder.add(1);
 	}
-	
-	public BoardDTO getBoard() 
-	{
-		return new BoardDTO();
-	}
 
-	@Override
 	public List<TerritoryDTO> getAllPlanets() 
 	{
 		List<TerritoryDTO> territories = new ArrayList<TerritoryDTO>();
 		for(Planet planet : planetRepository.getPlanets().values())
 		{
-			TerritoryDTO territory = new TerritoryDTO();
-			territory.setId(planet.getId());
-			territory.setName(planet.getName());
-			territory.setxAxisCoordinate(planet.getXAxisCoordinate());
-			territory.setyAxisCoordinate(planet.getYAxisCoordinate());
-			territory.setImagePath(planet.getImagePath());
+			TerritoryDTO territory = Mapper.mapTerritoryDTO(planet);
 			territories.add(territory);
 		}
 		return territories;
+	}
+	
+	public List<PieceDTO> getAllPieces() 
+	{
+		List<PieceDTO> pieces = new ArrayList<PieceDTO>();
+		for(Piece piece : playerRepository.getAllPieces())
+		{
+			PieceDTO pieceDTO = Mapper.mapPieceDTO(piece);
+			pieces.add(pieceDTO);
+		}
+		return pieces;
 	}
 	
 	public void nextPlayerStep()
@@ -69,5 +69,20 @@ public class GameState implements GameStateInputPort
 	public int currentPlayerStep()
 	{
 		return playerStep.getCurrentPhase();
+	}	
+	
+	public void setGameStateOutputPort(GameStateOutputPort gameStateOutputPort)
+	{
+		this.gameStateOutputPort = gameStateOutputPort;
+	}
+	
+	public void setPlanetRepository(IPlanetRepository planetRepository)
+	{
+		this.planetRepository = planetRepository;
+	}
+	
+	public void setPlayerRepository(IPlayerRepository playerRepository)
+	{
+		this.playerRepository = playerRepository;
 	}
 }

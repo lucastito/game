@@ -5,7 +5,7 @@ public class Planet
 {
 	private short id;
 	private String name;
-	private Player owner;
+	private String ownerName;
 	private List<Piece> pieces;
 	private short xAxisCoordinate;
 	private short yAxisCoordinate;
@@ -22,7 +22,7 @@ public class Planet
 		this.yAxisCoordinate = yAxisCoordinate;
 		this.imagePath = imagePath;
 		
-		owner = null;
+		ownerName = "";
 		pieces = new ArrayList<Piece>();
 		internalBorders = new ArrayList<Border>();
 		externalBorders = new ArrayList<Border>();
@@ -37,10 +37,6 @@ public class Planet
 		return name;
 	}
 
-	public Player getOwner() {
-		return owner;
-	}
-
 	public short getXAxisCoordinate() {
 		return xAxisCoordinate;
 	}
@@ -51,11 +47,6 @@ public class Planet
 
 	public String getImagePath() {
 		return imagePath;
-	}
-
-	public void setOwner(Player owner) {
-		owner.addTerritory(this);
-		this.owner = owner;		
 	}
 	
 	public List<Piece> getPieces(){
@@ -85,5 +76,13 @@ public class Planet
 	public List<Border> getBorders()
 	{
 		return allBorders;
+	}
+
+	public String getOwnerName() {
+		return ownerName;
+	}
+
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
 	}
 }

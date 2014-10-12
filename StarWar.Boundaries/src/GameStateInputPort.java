@@ -1,9 +1,8 @@
 import java.util.List;
 
-
 public interface GameStateInputPort 
 {
-	BoardDTO getBoard();
+	List<PieceDTO> getAllPieces();
 	List<TerritoryDTO> getAllPlanets();
 	void nextPlayerStep();
 	int currentPlayerId();

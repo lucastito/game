@@ -1,5 +1,3 @@
-
-
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.io.File;
@@ -13,9 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import model.Territory;
-
-public class GameScreenPresenter implements TroopsRedeployOutputPort
+public class GameScreenPresenter implements TroopsRedeployOutputPort, GameStateOutputPort
 {
 	private GameStateInputPort gameState;
 	private TroopsRedeployInputPort troopsRedeployInputPort;
@@ -64,6 +60,8 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 		gameScreenPanel.repaint();
 	}
 	
+	
+	
 	@Override
 	public void showPossibleTerritoriesToRedeploy(List<TerritoryDTO> territories) 
 	{
@@ -71,7 +69,6 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 		{
 			try 
 			{
-				System.out.println(planet.getName());
 				JLabel neighbor = new JLabel(new ImageIcon(ImageIO.read(new File(getClass().getResource("image/greenhighlight.png").getPath().toString()))));
 				neighbor.setBounds(planet.getxAxisCoordinate(), planet.getyAxisCoordinate(), neighbor.getIcon().getIconWidth(), neighbor.getIcon().getIconHeight());
 			    gameScreenPanel.add(neighbor);
@@ -91,7 +88,7 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 	@Override
 	public void showRedeployedUnits() 
 	{
-		
+		clearGameScreen();
 	}
 
 	@Override
@@ -113,5 +110,47 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 	public void setAttackInputPort(AttackInputPort attackInputPort)
 	{
 		this.attackInputPort = attackInputPort;
+	}
+
+	@Override
+	public void showAllTerritories(List<TerritoryDTO> planets) 
+	{
+		for(TerritoryDTO planet : planets)
+		{
+			try 
+			{
+				String path = getClass().getResource(planet.getImagePath()).getPath().toString(); 
+				JLabel planetLabel = new JLabel(new ImageIcon(ImageIO.read(new File(path))));
+				planetLabel.setBounds(planet.getxAxisCoordinate(), planet.getyAxisCoordinate(), planetLabel.getIcon().getIconWidth(), planetLabel.getIcon().getIconHeight());
+			    gameScreenPanel.add(planetLabel);
+			    frame.repaint();
+			} 
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	@Override
+	public void showAllPieces(List<PieceDTO> pieces) 
+	{
+		for(PieceDTO piece : pieces)
+		{
+			try 
+			{
+				String path = getClass().getResource(piece.getImagePath()).getPath().toString(); 
+				JLabel pieceLabel = new JLabel(new ImageIcon(ImageIO.read(new File(path))));
+				pieceLabel.setBounds(piece.getxAxisCoordinate(), piece.getxAxisCoordinate(), pieceLabel.getIcon().getIconWidth(), pieceLabel.getIcon().getIconHeight());
+			    gameScreenPanel.add(pieceLabel);
+			    frame.repaint();
+			} 
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+		
 	}	
 }

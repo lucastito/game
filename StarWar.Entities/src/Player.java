@@ -6,24 +6,13 @@ public class Player {
 	private int id;
 	private String name;
 	private List<Planet> territories;
+	private List<Piece> pieces;
 	
-	public Player(int id){
+	public Player(int id)
+	{
+		pieces = new ArrayList<Piece>();
 		territories = new ArrayList<Planet>();
 	}	
-	
-	public int moveArmy(Planet a, Planet b, List<Piece> pieces){ //Retorna 0 em caso de sucesso, e -1 em caso de falha
-		if(a.getPieces().containsAll(pieces) && a.getOwner() == this && b.getOwner() == this){
-			List<Piece> newPiecesB = b.getPieces();
-			newPiecesB.addAll(pieces);
-			b.setPieces(newPiecesB);
-			List<Piece> newPiecesA = a.getPieces();
-			newPiecesA.removeAll(pieces);
-			a.setPieces(newPiecesA);
-			return 0;
-		}else{
-			return -1;
-		}
-	}
 	
 	public List<Planet> getTerritories(){
 		return territories;
@@ -48,6 +37,14 @@ public class Player {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<Piece> getPieces() {
+		return pieces;
+	}
+
+	public void addPiece(Piece piece) {
+		this.pieces.add(piece);
 	}	
 
 }

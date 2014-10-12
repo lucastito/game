@@ -4,12 +4,8 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Piece;
@@ -21,15 +17,21 @@ public class GameScreen extends JPanel implements MouseListener{
 
 	PlanetarySystemController planetarySystemController;
 	PiecesController piecesController;
-	final int PLANETMAXSIZE = 70;
+	final int TERRITORYMAXSIZE = 70;
+	final int PIECEMAXSIZE = 15;
 	
 	private BufferedImage background;
 	private boolean arePlanetsHighlighted;
+	private Piece highlightedPiece;
+	private Territory actualTerritory;
 	
 	public GameScreen(String backgroundImage, GameStateInputPort gameState, AttackInputPort attackInputPort, TroopsRedeployInputPort troopsRedeployInputPort) 
 	{
 		this.addMouseListener(this);
 		arePlanetsHighlighted = false;
+		highlightedPiece = null;
+		actualTerritory = null;
+		
 		try {
 			String path = getClass().getResource(backgroundImage).getPath().toString(); 
 
@@ -41,14 +43,14 @@ public class GameScreen extends JPanel implements MouseListener{
 		
 		this.setSize(background.getWidth(), background.getHeight());
 		planetarySystemController = new PlanetarySystemController(gameState, troopsRedeployInputPort, attackInputPort);
-		piecesController = new PiecesController();
+		piecesController = new PiecesController(gameState, troopsRedeployInputPort);
 	}
 	
 	protected void paintComponent(Graphics g) 
 	{
 		super.paintComponent(g);
 		g.drawImage(background, 0, 0, null);
-		for(Territory planet : planetarySystemController.getAllPlanets())
+		for(Territory planet : planetarySystemController.getAllTerritories())
 		{
 			try 
 			{
@@ -78,12 +80,25 @@ public class GameScreen extends JPanel implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) 
 	{
-		String planetName = findPlanetOnClick(e.getX(), e.getY());
-		highlightPlanets(planetName);
+		if (highlightedPiece != null && actualTerritory != null)
+		{
+			Territory clickedTerritory = findTerritoryOnClick(e.getX(), e.getY());
+			piecesController.redeployTroops(actualTerritory.getName(), clickedTerritory.getName());
+			return;
+		}
+			
+		actualTerritory = findTerritoryOnClick(e.getX(), e.getY());
+		
+		if (actualTerritory != null)
+		{
+			highlightTerritories();
+			if (arePlanetsHighlighted)
+				highlightedPiece = findPieceOnClick(e.getX(), e.getY());
+		}		
 	}
 
-	private void highlightPlanets(String planetName) {
-		if (planetName == null)
+	private void highlightTerritories() {
+		if (actualTerritory == null)
 		{
 			this.planetarySystemController.clearHighlights();
 			arePlanetsHighlighted = false;
@@ -97,16 +112,27 @@ public class GameScreen extends JPanel implements MouseListener{
 		
 		arePlanetsHighlighted = true;			
 		int playerId = 0;
-		planetarySystemController.getActivities(planetName, playerId);
+		planetarySystemController.getPlanetsToRedeploy(actualTerritory.getName(), playerId);
 	}
 
-	private String findPlanetOnClick(int x, int y) 
+	private Territory findTerritoryOnClick(int x, int y) 
 	{
-		for(Territory planet : planetarySystemController.getAllPlanets())
+		for(Territory territory : planetarySystemController.getAllTerritories())
 		{
-			if(x < planet.getxAxisCoordinate() + PLANETMAXSIZE && x > planet.getxAxisCoordinate() 
-					&& y < planet.getyAxisCoordinate() + PLANETMAXSIZE && y > planet.getyAxisCoordinate())
-				return planet.getName();
+			if(x < territory.getxAxisCoordinate() + TERRITORYMAXSIZE && x > territory.getxAxisCoordinate() 
+					&& y < territory.getyAxisCoordinate() + TERRITORYMAXSIZE && y > territory.getyAxisCoordinate())
+				return territory;
+		}		
+		return null;
+	}
+	
+	private Piece findPieceOnClick(int x, int y) 
+	{
+		for(Piece piece : piecesController.getAllPieces())
+		{
+			if(x < piece.getxAxisCoordinate() + PIECEMAXSIZE && x > piece.getxAxisCoordinate() 
+					&& y < piece.getyAxisCoordinate() + PIECEMAXSIZE && y > piece.getyAxisCoordinate())
+				return piece;
 		}		
 		return null;
 	}

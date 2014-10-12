@@ -18,7 +18,7 @@ public class PlanetarySystemController
 		gameScreenPresenter = new GameScreenPresenter();
 	}
 	
-	public List<Territory> getAllPlanets()
+	public List<Territory> getAllTerritories()
 	{
 		List<Territory> territories = new ArrayList<Territory>();
 		for(TerritoryDTO territoryDTO : gameState.getAllPlanets())
@@ -34,11 +34,9 @@ public class PlanetarySystemController
 		return territories;
 	}
 
-	public void getActivities(String planetName, int playerId) 
+	public void getPlanetsToRedeploy(String planetName, int playerId) 
 	{
-		TerritoryDTO territory = new TerritoryDTO();
-		territory.setName(planetName);
-		troopsRedeployInputPort.possibleTerritoriesToRedeploy(territory);
+		troopsRedeployInputPort.possibleTerritoriesToRedeploy(planetName);
 		
 		PlayerDTO player = new PlayerDTO();
 		player.setId(playerId);

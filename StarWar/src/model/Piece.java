@@ -8,43 +8,53 @@ public class Piece
 	private short yAxisCoordinate;
 	private String imagePath;
 	
-	public short getId() {
+	public short getId() 
+	{
 		return id;
 	}
 	
-	public void setId(short id) {
+	public void setId(short id) 
+	{
 		this.id = id;
 	}
 	
-	public String getName() {
+	public String getName() 
+	{
 		return name;
 	}
 	
-	public void setName(String name) {
+	public void setName(String name) 
+	{
 		this.name = name;
 	}
 	
-	public short getxAxisCoordinate() {
+	public short getxAxisCoordinate() 
+	{
 		return xAxisCoordinate;
 	}
 	
-	public void setxAxisCoordinate(short xAxisCoordinate) {
+	public void setxAxisCoordinate(short xAxisCoordinate) 
+	{
 		this.xAxisCoordinate = xAxisCoordinate;
 	}
 	
-	public short getyAxisCoordinate() {
+	public short getyAxisCoordinate() 
+	{
 		return yAxisCoordinate;
 	}
 	
-	public void setyAxisCoordinate(short yAxisCoordinate) {
+	public void setyAxisCoordinate(short yAxisCoordinate) 
+	{
 		this.yAxisCoordinate = yAxisCoordinate;
 	}
 	
-	public String getImagePath() {
+	public String getImagePath() 
+	{
 		return imagePath;
 	}
 	
-	public void setImagePath(String imagePath) {
+	public void setImagePath(String imagePath) 
+	{
 		this.imagePath = imagePath;
 	}
 }

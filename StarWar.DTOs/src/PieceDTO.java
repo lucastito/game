@@ -1,5 +1,7 @@
-public abstract class Piece 
+
+public class PieceDTO 
 {
+
 	private short id;
 	private String name;
 	private short xAxisCoordinate;
@@ -26,22 +28,22 @@ public abstract class Piece
 		this.name = name;
 	}
 	
-	public short getXAxisCoordinate() 
+	public short getxAxisCoordinate() 
 	{
 		return xAxisCoordinate;
 	}
 	
-	public void setXAxisCoordinate(short xAxisCoordinate) 
+	public void setxAxisCoordinate(short xAxisCoordinate) 
 	{
 		this.xAxisCoordinate = xAxisCoordinate;
 	}
 	
-	public short getYAxisCoordinate() 
+	public short getyAxisCoordinate() 
 	{
 		return yAxisCoordinate;
 	}
 	
-	public void setYAxisCoordinate(short yAxisCoordinate) 
+	public void setyAxisCoordinate(short yAxisCoordinate) 
 	{
 		this.yAxisCoordinate = yAxisCoordinate;
 	}
