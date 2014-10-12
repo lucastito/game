@@ -4,9 +4,14 @@ public class Program
 	public static void main(String[] args)
 	{
 		PlanetRepository planetRepository = new PlanetRepository();
-		PlayerRepository playerRepository = new PlayerRepository();		
+		
+		PlayerRepository playerRepository = new PlayerRepository(planetRepository);
+		//playerRepository.setPlanetRepository(planetRepository);
+		
 		Attack attack = new Attack();
+		
 		GameScreenPresenter presenter = new GameScreenPresenter();
+		
 		TroopsRedeploy troopsRedeploy = new TroopsRedeploy(presenter, planetRepository);
 		
 		GameState gameState = new GameState();		

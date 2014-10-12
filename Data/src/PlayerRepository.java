@@ -6,9 +6,11 @@ import java.util.List;
 public class PlayerRepository implements IPlayerRepository
 {
 	private HashMap<String, Player> players;
+	private IPlanetRepository planetRepository;
 	
-	public PlayerRepository()
+	public PlayerRepository(IPlanetRepository planetRepository)
 	{
+		setPlanetRepository(planetRepository);
 		players = new HashMap<String, Player>();
 		initializePlayers();
 	}
@@ -39,6 +41,7 @@ public class PlayerRepository implements IPlayerRepository
 	{
 		Player player = getPlayerByName(playerName);
 		player.addPiece(piece);
+		planetRepository.getPlanetByName(planetName).addPiece(piece);
 	}
 
 	private void initializePlayers() 
@@ -51,6 +54,11 @@ public class PlayerRepository implements IPlayerRepository
 		Player player = new Player(1);
 		player.setName("Leo");
 		addPlayer(player);
-		addPlayerPiece("Leo", "Naboo", piece);		
-	}		
+		addPlayerPiece("Leo", "Trandosha", piece);		
+	}	
+	
+	public void setPlanetRepository(IPlanetRepository planetRepository)
+	{
+		this.planetRepository = planetRepository;
+	}
 }
