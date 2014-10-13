@@ -48,13 +48,21 @@ public class PlayerRepository implements IPlayerRepository
 	private void initializePlayers() 
 	{
 		// Método meramente ilustrativo
-		Piece piece = new Sith();
-		piece.setImagePath("image/sithtrooper.png");
-		piece.setXAxisCoordinate((short)20);
-		piece.setYAxisCoordinate((short)20);
 		Player player = new Player(1);
 		player.setName("Leo");
 		addPlayer(player);
+		
+		Piece piece = new Padawan();
+		piece.setImagePath("image/padawan.png");
+		piece.setXAxisCoordinate((short)40);
+		piece.setYAxisCoordinate((short)40);
+		addPlayerPiece("Leo", "Trandosha", piece);
+		
+		piece = new Sith();
+		piece.setImagePath("image/sithtrooper.png");
+		piece.setXAxisCoordinate((short)20);
+		piece.setYAxisCoordinate((short)20);
+		
 		addPlayerPiece("Leo", "Trandosha", piece);		
 	}	
 	

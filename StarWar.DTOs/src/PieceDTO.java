@@ -1,13 +1,12 @@
-
 public class PieceDTO 
 {
-
 	private short id;
 	private String name;
 	private short xAxisCoordinate;
 	private short yAxisCoordinate;
 	private String imagePath;
 	private String territoryName;
+	private String pieceType;
 	
 	public short getId() 
 	{
@@ -67,5 +66,13 @@ public class PieceDTO
 	public String getTerritoryName() 
 	{
 		return territoryName;
+	}
+
+	public String getPieceType() {
+		return pieceType;
+	}
+
+	public void setPieceType(String pieceType) {
+		this.pieceType = pieceType;
 	}
 }

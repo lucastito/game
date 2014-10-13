@@ -9,15 +9,11 @@ public class PlanetarySystemController
 {
 	private GameStateInputPort gameState;
 	private TroopsRedeployInputPort troopsRedeployInputPort;
-	private AttackInputPort attackInputPort;
-	private GameScreenPresenter gameScreenPresenter;
 	
 	public PlanetarySystemController(GameStateInputPort gameState, TroopsRedeployInputPort troopsRedeployInputPort, AttackInputPort attackInputPort)
 	{
 		this.troopsRedeployInputPort = troopsRedeployInputPort;
 		this.gameState = gameState;
-		this.attackInputPort = attackInputPort;
-		gameScreenPresenter = new GameScreenPresenter();
 	}
 	
 	public List<Territory> getAllTerritories()
@@ -36,18 +32,26 @@ public class PlanetarySystemController
 		return territories;
 	}
 
-	public void getPlanetsToRedeploy(String planetName, int playerId) 
+	public List<Territory> getTerritoriesToRedeploy(String territoryName, int playerId) 
 	{
-		troopsRedeployInputPort.possibleTerritoriesToRedeploy(planetName);
+		troopsRedeployInputPort.possibleTerritoriesToRedeploy(territoryName);
 		
 		PlayerDTO player = new PlayerDTO();
 		player.setId(playerId);
 		
-		attackInputPort.possibilitiesOfTerritoriesToAttack(player);
-	}
-
-	public void clearHighlights() 
-	{
-		gameScreenPresenter.clearGameScreen();
+		List<TerritoryDTO> territoriesDTO = troopsRedeployInputPort.possibleTerritoriesToRedeploy(territoryName);
+		
+		List<Territory> territories = new ArrayList<Territory>();
+		for(TerritoryDTO territoryDTO : territoriesDTO)
+		{
+			Territory territory = new Territory(new ImageIcon(getClass().getResource(territoryDTO.getImagePath()).getPath().toString()));
+			territory.setId(territoryDTO.getId());
+			territory.setName(territoryDTO.getName());
+			territory.setxAxisCoordinate(territoryDTO.getxAxisCoordinate());
+			territory.setyAxisCoordinate(territoryDTO.getyAxisCoordinate());
+			territory.setImagePath(territoryDTO.getImagePath());
+			territories.add(territory);
+		}
+		return territories;
 	}
 }

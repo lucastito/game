@@ -11,10 +11,10 @@ public class TroopsRedeploy implements TroopsRedeployInputPort
 		this.troopsRedeployOutputPort = troopsRedeployOutputPort;
 		this.planetRepository = planetRepository;
 	}
-	public void possibleTerritoriesToRedeploy(String sourceTerritory) 
+	public List<TerritoryDTO> possibleTerritoriesToRedeploy(String sourceTerritory) 
 	{
 		if (!isRedeployTurn())
-			return;
+			return null;
 		List<Planet> neighborPlanets = 	planetRepository.getNeighborPlanets(sourceTerritory);
 		
 		List<TerritoryDTO> territories = new ArrayList<TerritoryDTO>();
@@ -23,7 +23,7 @@ public class TroopsRedeploy implements TroopsRedeployInputPort
 			territories.add(Mapper.mapTerritoryDTO(neighborPlanet));
 		}
 				
-		troopsRedeployOutputPort.showPossibleTerritoriesToRedeploy(territories);		
+		return territories;		
 	}
 
 	private boolean isRedeployTurn() {
@@ -35,7 +35,7 @@ public class TroopsRedeploy implements TroopsRedeployInputPort
 		troopsRedeployOutputPort.showNumberOfUnitsToRedeploy(1);
 	}
 
-	public void redeployUnits(String sourceTerritory, String targetTerritory, int numberOfUnits) 
+	public void redeployUnits(String sourceTerritory, String targetTerritory, String pieceType) 
 	{
 		if (!isRedeployTurn())
 			return;
@@ -43,6 +43,7 @@ public class TroopsRedeploy implements TroopsRedeployInputPort
 		if (!isValidTerritoryToRedeploy(sourceTerritory, targetPlanet.getName(), targetPlanet.getOwnerName()))
 		{
 			troopsRedeployOutputPort.showReason("Invalid territory to redeploy");
+			return;
 		}
 		
 		Piece p = planetRepository.getPlanetByName(sourceTerritory).getPieces().get(0);

@@ -26,14 +26,10 @@ public class PiecesController
 			piece.setxAxisCoordinate(pieceDTO.getxAxisCoordinate());
 			piece.setyAxisCoordinate(pieceDTO.getyAxisCoordinate());
 			piece.setImagePath(pieceDTO.getImagePath());
-			piece.setTerritoryName(pieceDTO.getTerritoryName());;
+			piece.setTerritoryName(pieceDTO.getTerritoryName());
+			piece.setPieceType(pieceDTO.getPieceType());;
 			pieces.add(piece);
 		}
 		return pieces;
-	}
-
-	public void redeployTroops(String sourceTerritoryName, String targetTerritoryName) 
-	{
-		troopsRedeployInputPort.redeployUnits(sourceTerritoryName, targetTerritoryName, 1);		
 	}
 }

@@ -11,6 +11,7 @@ public class Piece extends JLabel
 	private short yAxisCoordinate;
 	private String imagePath;
 	private String territoryName;
+	private String pieceType;
 	
 	public Piece(ImageIcon pieceIcon) {
 		super(pieceIcon);
@@ -72,5 +73,13 @@ public class Piece extends JLabel
 
 	public void setTerritoryName(String territoryName) {
 		this.territoryName = territoryName;
+	}
+
+	public String getPieceType() {
+		return pieceType;
+	}
+
+	public void setPieceType(String pieceType) {
+		this.pieceType = pieceType;
 	}
 }

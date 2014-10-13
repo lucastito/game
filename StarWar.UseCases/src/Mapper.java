@@ -33,6 +33,7 @@ public class Mapper
 		pieceDTO.setxAxisCoordinate(piece.getXAxisCoordinate());
 		pieceDTO.setyAxisCoordinate(piece.getYAxisCoordinate());
 		pieceDTO.setTerritoryName(piece.getTerritoryName());
+		pieceDTO.setPieceType(piece.getClass().getName());
 		return pieceDTO;
 	}
 }

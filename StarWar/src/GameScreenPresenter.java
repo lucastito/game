@@ -5,16 +5,12 @@ import java.awt.MouseInfo;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Piece;
@@ -34,7 +30,6 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 	private PlanetarySystemController planetarySystemController;
 	List<Piece> pieceLabels;
 	List<Territory> territoryLabels;
-
     
 	public GameScreenPresenter() 
 	{
@@ -44,7 +39,8 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 		territoryLabels = new ArrayList<Territory>();
 	}
 	
-	public void show() {
+	public void show() 
+	{
 		planetarySystemController = new PlanetarySystemController(gameState, troopsRedeployInputPort, attackInputPort);
 		piecesController = new PiecesController(gameState, troopsRedeployInputPort);
 		gameScreenPanel = new GameScreen("image/outerspace.jpg", this.gameState, attackInputPort, troopsRedeployInputPort);
@@ -119,30 +115,6 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 		frame.repaint();
 	}	
 
-	public void clearGameScreen() 
-	{
-    	gameScreenPanel.removeAll();
-		gameScreenPanel.repaint();
-	}
-
-	@Override
-	public void showPossibleTerritoriesToRedeploy(List<TerritoryDTO> territories) 
-	{
-		for(TerritoryDTO planet : territories)
-		{
-			try 
-			{
-				JLabel neighbor = new JLabel(new ImageIcon(ImageIO.read(new File(getClass().getResource("image/greenhighlight.png").getPath().toString()))));
-				neighbor.setBounds(planet.getxAxisCoordinate() - 10, planet.getyAxisCoordinate() - 10, neighbor.getIcon().getIconWidth(), neighbor.getIcon().getIconHeight());
-			    gameScreenPanel.add(neighbor);
-			    frame.repaint();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}		
-	}
-
 	@Override
 	public void showReason(String reason) {
 
@@ -213,9 +185,20 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
         @Override
     	public void mouseEntered(MouseEvent e) 
         {
-        	if (selectedPiece != null)
-        		frame.setCursor(new Cursor(12));
+        	if (selectedPiece == null)
+        		return;
+        	Territory targetTerritory = findTerritoryOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y); 
+        	List<Territory> neighbors = planetarySystemController.getTerritoriesToRedeploy(selectedPiece.getTerritoryName(), 0);
+        	for (Territory territory : neighbors)
+        	{
+        		if(territory.getName().equals(targetTerritory.getName()))
+        		{
+        			frame.setCursor(new Cursor(12));
+        			return;
+        		}
+        	}        	
     	}
+        
         @Override
     	public void mouseExited(MouseEvent e) 
         {
@@ -232,7 +215,7 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 				
 				if (targetTerritory != null)
 				{
-					troopsRedeployInputPort.redeployUnits(selectedPiece.getTerritoryName(), targetTerritory.getName(), 1);
+					troopsRedeployInputPort.redeployUnits(selectedPiece.getTerritoryName(), targetTerritory.getName(), selectedPiece.getPieceType());
 					selectedPiece = null;
 				}
 			}        		   	
@@ -244,7 +227,6 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
     			if(x <= territory.getxAxisCoordinate() + 100 && x >= territory.getxAxisCoordinate()
     					&& y <= territory.getyAxisCoordinate() + 100 && y >= territory.getyAxisCoordinate())
     			{
-    				
     				return territory;
     			}
     			System.out.println(territory.getName()+" " + territory.getxAxisCoordinate() + " " + x + " " + territory.getyAxisCoordinate() + " " + y );	
