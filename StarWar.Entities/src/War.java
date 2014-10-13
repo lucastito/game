@@ -26,4 +26,13 @@ public class War {
 	public Board getBoard(){
 		return this.board;
 	}
+	
+	public int[] rollDice(int amountOfDice){
+		int[] diceResults = new int[amountOfDice];
+		for(int i = 0; i< amountOfDice; i++){
+			diceResults[i] = (int)(1+ 6*Math.random());
+		}
+		return diceResults;
+	}
 }
+

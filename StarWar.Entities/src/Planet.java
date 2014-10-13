@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Planet 
 {
 	private short id;
@@ -12,7 +13,9 @@ public class Planet
 	private String imagePath;
 	private List<Border> internalBorders;	
 	private List<Border> externalBorders;	
-	private List<Border> allBorders;	
+	private List<Border> allBorders;
+	
+	
 
 	public Planet(short id, String name, short xAxisCoordinate, short yAxisCoordinate, String imagePath)
 	{
@@ -27,6 +30,17 @@ public class Planet
 		internalBorders = new ArrayList<Border>();
 		externalBorders = new ArrayList<Border>();
 		allBorders = new ArrayList<Border>();
+	}
+	
+	public boolean hasBorderWith(Planet b){
+		
+		int bBordersCount = b.getBorders().size();
+		for(int i = 0; i < bBordersCount; i++){
+			if(this.getBorders().contains(b.getBorders().get(i))){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public short getId() {
@@ -61,6 +75,9 @@ public class Planet
 		this.pieces.add(piece);
 	}
 	
+	public void removePiece(Piece piece){
+		this.pieces.remove(piece);
+	}
 	public void addInternalBorder(Border border)
 	{
 		internalBorders.add(border);
@@ -86,3 +103,4 @@ public class Planet
 		this.ownerName = ownerName;
 	}
 }
+
