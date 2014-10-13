@@ -44,12 +44,13 @@ public class TroopsRedeploy implements TroopsRedeployInputPort
 		{
 			troopsRedeployOutputPort.showReason("Invalid territory to redeploy");
 		}
+		
 		Piece p = planetRepository.getPlanetByName(sourceTerritory).getPieces().get(0);
 		p.setXAxisCoordinate(targetPlanet.getXAxisCoordinate());
 		p.setYAxisCoordinate(targetPlanet.getYAxisCoordinate());
 		planetRepository.getPlanetByName(targetTerritory).addPiece(p);
 		planetRepository.getPlanetByName(sourceTerritory).getPieces().remove(0);
-			
+		p.setTerritoryName(targetTerritory);
 		troopsRedeployOutputPort.showRedeployedUnits();
 	}
 	

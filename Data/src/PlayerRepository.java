@@ -39,6 +39,7 @@ public class PlayerRepository implements IPlayerRepository
 	
 	public void addPlayerPiece(String playerName, String planetName, Piece piece)
 	{
+		piece.setTerritoryName(planetName);
 		Player player = getPlayerByName(playerName);
 		player.addPiece(piece);
 		planetRepository.getPlanetByName(planetName).addPiece(piece);

@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+
 import model.Piece;
 
 public class PiecesController 
@@ -18,12 +20,13 @@ public class PiecesController
 		List<Piece> pieces = new ArrayList<Piece>();
 		for(PieceDTO pieceDTO : gameState.getAllPieces())
 		{
-			Piece piece = new Piece();
+			Piece piece = new Piece(new ImageIcon(getClass().getResource(pieceDTO.getImagePath()).getPath().toString()));
 			piece.setId(pieceDTO.getId());
 			piece.setName(pieceDTO.getName());
 			piece.setxAxisCoordinate(pieceDTO.getxAxisCoordinate());
 			piece.setyAxisCoordinate(pieceDTO.getyAxisCoordinate());
 			piece.setImagePath(pieceDTO.getImagePath());
+			piece.setTerritoryName(pieceDTO.getTerritoryName());;
 			pieces.add(piece);
 		}
 		return pieces;

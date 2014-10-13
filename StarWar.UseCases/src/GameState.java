@@ -6,7 +6,6 @@ public class GameState implements GameStateInputPort
 {
 	IPlanetRepository planetRepository;
 	IPlayerRepository playerRepository;
-	GameStateOutputPort gameStateOutputPort;
 	private List<Integer> playingIdsOrder;
 	private PlayerStep playerStep;
 	
@@ -70,11 +69,6 @@ public class GameState implements GameStateInputPort
 	{
 		return playerStep.getCurrentPhase();
 	}	
-	
-	public void setGameStateOutputPort(GameStateOutputPort gameStateOutputPort)
-	{
-		this.gameStateOutputPort = gameStateOutputPort;
-	}
 	
 	public void setPlanetRepository(IPlanetRepository planetRepository)
 	{

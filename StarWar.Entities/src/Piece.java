@@ -5,6 +5,7 @@ public abstract class Piece
 	private short xAxisCoordinate;
 	private short yAxisCoordinate;
 	private String imagePath;
+	private String territoryName;
 	
 	public short getId() 
 	{
@@ -54,5 +55,13 @@ public abstract class Piece
 	public void setImagePath(String imagePath) 
 	{
 		this.imagePath = imagePath;
+	}
+
+	public String getTerritoryName() {
+		return territoryName;
+	}
+
+	public void setTerritoryName(String territoryName) {
+		this.territoryName = territoryName;
 	}
 }

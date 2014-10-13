@@ -7,6 +7,7 @@ public class PieceDTO
 	private short xAxisCoordinate;
 	private short yAxisCoordinate;
 	private String imagePath;
+	private String territoryName;
 	
 	public short getId() 
 	{
@@ -56,5 +57,15 @@ public class PieceDTO
 	public void setImagePath(String imagePath) 
 	{
 		this.imagePath = imagePath;
+	}
+
+	public String setTerritoryName(String territoryName) 
+	{
+		return this.territoryName = territoryName;
+	}
+	
+	public String getTerritoryName() 
+	{
+		return territoryName;
 	}
 }

@@ -6,7 +6,6 @@ public class Program
 		PlanetRepository planetRepository = new PlanetRepository();
 		
 		PlayerRepository playerRepository = new PlayerRepository(planetRepository);
-		//playerRepository.setPlanetRepository(planetRepository);
 		
 		Attack attack = new Attack();
 		
@@ -15,7 +14,6 @@ public class Program
 		TroopsRedeploy troopsRedeploy = new TroopsRedeploy(presenter, planetRepository);
 		
 		GameState gameState = new GameState();		
-		gameState.setGameStateOutputPort(presenter);
 		gameState.setPlanetRepository(planetRepository);
 		gameState.setPlayerRepository(playerRepository);
 		

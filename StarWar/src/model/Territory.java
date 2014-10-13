@@ -1,7 +1,14 @@
 package model;
 
-public class Territory 
+import javax.swing.Icon;
+import javax.swing.JLabel;
+
+public class Territory extends JLabel
 {
+	public Territory(Icon icon)
+	{
+		super(icon);
+	}
 	private short id;
 	private String name;
 	private short xAxisCoordinate;

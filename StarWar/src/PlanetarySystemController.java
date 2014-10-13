@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+
 import model.Territory;
 
 public class PlanetarySystemController 
@@ -23,7 +25,7 @@ public class PlanetarySystemController
 		List<Territory> territories = new ArrayList<Territory>();
 		for(TerritoryDTO territoryDTO : gameState.getAllPlanets())
 		{
-			Territory territory = new Territory();
+			Territory territory = new Territory(new ImageIcon(getClass().getResource(territoryDTO.getImagePath()).getPath().toString()));
 			territory.setId(territoryDTO.getId());
 			territory.setName(territoryDTO.getName());
 			territory.setxAxisCoordinate(territoryDTO.getxAxisCoordinate());

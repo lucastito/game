@@ -1,13 +1,21 @@
 package model;
 
-public class Piece 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
+public class Piece extends JLabel
 {
 	private short id;
 	private String name;
 	private short xAxisCoordinate;
 	private short yAxisCoordinate;
 	private String imagePath;
+	private String territoryName;
 	
+	public Piece(ImageIcon pieceIcon) {
+		super(pieceIcon);
+	}
+
 	public short getId() 
 	{
 		return id;
@@ -56,5 +64,13 @@ public class Piece
 	public void setImagePath(String imagePath) 
 	{
 		this.imagePath = imagePath;
+	}
+
+	public String getTerritoryName() {
+		return territoryName;
+	}
+
+	public void setTerritoryName(String territoryName) {
+		this.territoryName = territoryName;
 	}
 }
