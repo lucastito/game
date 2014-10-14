@@ -2,11 +2,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
+	
+	public static final int PADAWAN = 0;
+	public static final int SITH = 1;
+	public static final int CLONE = 2;
+	public static final int DROIDE = 3;
+	public static final int WOOKIEE = 4;
+	public static final int TRANDOSHAN = 5;
+
 
 	private int id;
 	private String name;
 	private List<Planet> territories;
 	private List<Piece> pieces;
+	private int character;
 	
 	public Player(int id)
 	{
@@ -154,7 +163,15 @@ public class Player {
 
 	public void addPiece(Piece piece) {
 		this.pieces.add(piece);
-	}	
+	}
+
+	public int getCharacter() {
+		return character;
+	}
+
+	public void setCharacter(int character) {
+		this.character = character;
+	}
 
 
 }
