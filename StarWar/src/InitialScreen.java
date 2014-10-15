@@ -1,5 +1,6 @@
 import java.awt.EventQueue;
 
+import javax.security.auth.callback.ConfirmationCallback;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -8,9 +9,12 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.JPanel;
+
 import java.awt.Font;
 import java.awt.Color;
+
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
@@ -77,9 +81,9 @@ public class InitialScreen {
 		
 		JButton btnNewButton = new JButton("Novo Jogo");
 		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setBackground(new Color(95, 158, 160));
+		btnNewButton.setBackground(new Color(100, 149, 237));
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 37));
-		btnNewButton.setBounds(576, 194, 210, 83);
+		btnNewButton.setBounds(576, 162, 210, 83);
 		mainPanel.add(btnNewButton);
 		
 		final JPanel aboutPanel = new JPanel()
@@ -92,6 +96,26 @@ public class InitialScreen {
 		};
 		frmStarwar.getContentPane().add(aboutPanel, "name_27958852908665");
 		aboutPanel.setLayout(null);
+		
+		final JPanel helpPanel = new JPanel() {
+			public void paintComponent(Graphics g) {
+				Image img = Toolkit.getDefaultToolkit().getImage(  
+                        InitialScreen.class.getResource("image/outerspace.jpg"));  
+              g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
+			}
+		};
+		helpPanel.setLayout(null);
+		frmStarwar.getContentPane().add(helpPanel, "name_11996292856650");
+		
+		final JPanel configurationPanel = new JPanel() {
+			public void paintComponent(Graphics g) {
+				Image img = Toolkit.getDefaultToolkit().getImage(  
+                        InitialScreen.class.getResource("image/outerspace.jpg"));  
+              g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+			}
+		};
+		configurationPanel.setLayout(null);
+		frmStarwar.getContentPane().add(configurationPanel, "name_11912079648588");
 		
 		JLabel lblNewLabel = new JLabel("SOBRE");
 		lblNewLabel.setBounds(533, 5, 283, 113);
@@ -110,6 +134,8 @@ public class InitialScreen {
 			public void actionPerformed(ActionEvent e) {
 				aboutPanel.setVisible(false);
 				mainPanel.setVisible(true);
+				helpPanel.setVisible(false);
+				configurationPanel.setVisible(false);
 			}
 		});
 		btnVoltar.setFont(new Font("Tahoma", Font.PLAIN, 48));
@@ -123,26 +149,100 @@ public class InitialScreen {
 			public void actionPerformed(ActionEvent e) {
 				aboutPanel.setVisible(true);
 				mainPanel.setVisible(false);
+				helpPanel.setVisible(false);
+				configurationPanel.setVisible(false);
+				
 				
 			}
 		});
 		btnSobre.setForeground(Color.WHITE);
 		btnSobre.setBackground(new Color(210, 105, 30));
 		btnSobre.setFont(new Font("Tahoma", Font.PLAIN, 37));
-		btnSobre.setBounds(576, 374, 210, 83);
+		btnSobre.setBounds(576, 565, 210, 83);
 		mainPanel.add(btnSobre);
 		
-		JButton btnSair = new JButton("Sair");
-		btnSair.addActionListener(new ActionListener() {
+		JButton btnConfiguracoes = new JButton("Configura\u00E7\u00F5es");
+		btnConfiguracoes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				aboutPanel.setVisible(false);
+				mainPanel.setVisible(false);
+				helpPanel.setVisible(false);
+				configurationPanel.setVisible(true);
 			}
 		});
-		btnSair.setForeground(Color.WHITE);
-		btnSair.setBackground(new Color(189, 183, 107));
-		btnSair.setFont(new Font("Tahoma", Font.PLAIN, 37));
-		btnSair.setBounds(576, 556, 210, 83);
-		mainPanel.add(btnSair);
+		btnConfiguracoes.setForeground(Color.WHITE);
+		btnConfiguracoes.setBackground(new Color(189, 183, 107));
+		btnConfiguracoes.setFont(new Font("Tahoma", Font.PLAIN, 37));
+		btnConfiguracoes.setBounds(541, 366, 275, 83);
+		mainPanel.add(btnConfiguracoes);
+		
+		JButton button = new JButton("Abrir Jogo");
+		button.setForeground(Color.WHITE);
+		button.setFont(new Font("Tahoma", Font.PLAIN, 37));
+		button.setBackground(new Color(95, 158, 160));
+		button.setBounds(576, 263, 210, 83);
+		mainPanel.add(button);
+		
+		JButton btnAjuda = new JButton("Ajuda");
+		btnAjuda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				aboutPanel.setVisible(false);
+				mainPanel.setVisible(false);
+				helpPanel.setVisible(true);
+				configurationPanel.setVisible(false);
+			}
+		});
+		btnAjuda.setForeground(Color.WHITE);
+		btnAjuda.setFont(new Font("Tahoma", Font.PLAIN, 37));
+		btnAjuda.setBackground(new Color(165, 42, 42));
+		btnAjuda.setBounds(576, 471, 210, 83);
+		mainPanel.add(btnAjuda);
+		
+		
+		
+		JLabel lblConfiguracoes = new JLabel("CONFIGURA\u00C7\u00D5ES");
+		lblConfiguracoes.setForeground(Color.YELLOW);
+		lblConfiguracoes.setFont(new Font("Tahoma", Font.PLAIN, 93));
+		lblConfiguracoes.setBounds(323, 11, 741, 113);
+		configurationPanel.add(lblConfiguracoes);
+		
+		JButton btnVoltar2 = new JButton("Voltar");
+		btnVoltar2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				aboutPanel.setVisible(false);
+				mainPanel.setVisible(true);
+				helpPanel.setVisible(false);
+				configurationPanel.setVisible(false);
+			}
+		});
+		btnVoltar2.setForeground(Color.WHITE);
+		btnVoltar2.setFont(new Font("Tahoma", Font.PLAIN, 48));
+		btnVoltar2.setBackground(new Color(165, 42, 42));
+		btnVoltar2.setBounds(53, 630, 166, 52);
+		configurationPanel.add(btnVoltar2);
+		
+		
+		
+		JLabel lblAjuda = new JLabel("AJUDA");
+		lblAjuda.setForeground(Color.YELLOW);
+		lblAjuda.setFont(new Font("Tahoma", Font.PLAIN, 93));
+		lblAjuda.setBounds(521, 11, 291, 113);
+		helpPanel.add(lblAjuda);
+		
+		JButton btnVoltar3 = new JButton("Voltar");
+		btnVoltar3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				aboutPanel.setVisible(false);
+				mainPanel.setVisible(true);
+				helpPanel.setVisible(false);
+				configurationPanel.setVisible(false);
+			}
+		});
+		btnVoltar3.setForeground(Color.WHITE);
+		btnVoltar3.setFont(new Font("Tahoma", Font.PLAIN, 48));
+		btnVoltar3.setBackground(new Color(165, 42, 42));
+		btnVoltar3.setBounds(53, 630, 166, 52);
+		helpPanel.add(btnVoltar3);
 		
 		
 
