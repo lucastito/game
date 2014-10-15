@@ -1,6 +1,0 @@
-
-public interface IPlanetSystemRepository 
-{
-	void addPlanetSystem(PlanetSystem planetSystem);
-	PlanetSystem getPlanetSystemByName(String name);
-}

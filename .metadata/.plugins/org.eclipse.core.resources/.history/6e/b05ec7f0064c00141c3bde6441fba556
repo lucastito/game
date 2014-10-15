@@ -1,5 +1,0 @@
-
-public interface TroopsRedeployOutputPort 
-{
-	void showPossibleTerritoriesToRedeploy(TerritoriesDTO territories);
-}

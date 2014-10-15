@@ -1,9 +1,0 @@
-import java.util.List;
-import java.util.Map;
-
-
-public interface IPlanetRepository 
-{
-	Planet getPlanetByName(String name);
-	List<Planet> getNeighborPlanets(String planetName);
-}
