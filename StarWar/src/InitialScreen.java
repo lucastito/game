@@ -18,6 +18,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
+import java.io.File;
+import java.io.IOException;
 
 
 /**
@@ -56,11 +58,28 @@ public class InitialScreen {
 	 */
 	private void initialize() {
 		
+		
+	try {
+			
+		
+		File mp3File;
+		mp3File = new File("src/sound/theme.mp3").getCanonicalFile();
+		MP3 backgroundMusic = new MP3(mp3File);
+		Thread mp3Thread = new Thread(backgroundMusic);
+		mp3Thread.start();
+	} catch (IOException e1) {
+	
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+	}
+	    
+		
 		frmStarwar = new JFrame();
 		frmStarwar.setTitle("StarWar");
 		frmStarwar.setBounds(100, 100, 1366, 768);
 		frmStarwar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmStarwar.getContentPane().setLayout(new CardLayout(0, 0));
+		
 		
 		final JPanel mainPanel = new JPanel(){
 			public void paintComponent(Graphics g) {  
