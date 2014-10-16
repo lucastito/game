@@ -48,7 +48,7 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 		
     	EventQueue.invokeLater(new Runnable(){
 	    	public void run(){ 		    	
-		        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		        frame.setTitle("StarWar");
 		        frame.setSize(1366, 768);
 		        

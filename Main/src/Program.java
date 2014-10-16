@@ -21,6 +21,8 @@ public class Program
 		presenter.setGameStateInputPort(gameState);
 		presenter.setTroopsRedeployInputPort(troopsRedeploy);
 		
-		presenter.show();
+		InitialScreen is = new InitialScreen(presenter);
+		is.getfrmStarwar().setVisible(true);
+		//presenter.show();
 	}
 }

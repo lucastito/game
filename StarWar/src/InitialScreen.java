@@ -33,45 +33,44 @@ public class InitialScreen {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InitialScreen window = new InitialScreen();
-					window.frmStarwar.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	
+	public JFrame getfrmStarwar(){
+		return frmStarwar;
 	}
+	
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					InitialScreen window = new InitialScreen(null);
+//					window.frmStarwar.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
-	public InitialScreen() {
-		initialize();
+	public InitialScreen(GameScreenPresenter presenter) {
+		initialize(presenter);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(final GameScreenPresenter presenter) {
 		
 		
-	try {
-			
+	
 		
-		File mp3File;
-		mp3File = new File("src/sound/theme.mp3").getCanonicalFile();
+		File mp3File = new File(InitialScreen.class.getResource("sound/theme.mp3").getPath());
 		MP3 backgroundMusic = new MP3(mp3File);
 		Thread mp3Thread = new Thread(backgroundMusic);
 		mp3Thread.start();
-	} catch (IOException e1) {
-	
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-	}
+
 	    
 		
 		frmStarwar = new JFrame();
@@ -99,6 +98,12 @@ public class InitialScreen {
 		mainPanel.add(lblStarWar);
 		
 		JButton btnNewButton = new JButton("Novo Jogo");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmStarwar.dispose();
+				presenter.show();
+			}
+		});
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setBackground(new Color(100, 149, 237));
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 37));
