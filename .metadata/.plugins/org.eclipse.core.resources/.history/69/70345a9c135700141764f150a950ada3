@@ -1,0 +1,32 @@
+
+public class ObjectiveCardRepository {
+private Card padawansObjectiveCard;
+private Card sithsObjectiveCard;
+private Card clonesObjectiveCard;
+private Card droidesObjectiveCard;
+private Card trandoshansObjectiveCard;
+private Card wookieesObjectiveCard;
+
+public ObjectiveCardRepository(){
+	padawansObjectiveCard = new ObjectiveCard();
+	sithsObjectiveCard = new ObjectiveCard();
+	clonesObjectiveCard = new ObjectiveCard();
+	droidesObjectiveCard = new ObjectiveCard();
+	trandoshansObjectiveCard = new ObjectiveCard();
+	wookieesObjectiveCard = new ObjectiveCard();
+}
+
+public Card getObjectiveCard(Piece owner){
+		short id = owner.getId();
+		switch (id){
+		case 1: return padawansObjectiveCard;
+		case 2: return sithsObjectiveCard;
+		case 3: return clonesObjectiveCard;
+		case 4: return droidesObjectiveCard;
+		case 5: return trandoshansObjectiveCard;
+		case 6: return wookieesObjectiveCard;
+		}
+return null;
+}
+
+}

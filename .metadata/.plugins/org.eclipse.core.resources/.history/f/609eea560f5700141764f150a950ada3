@@ -1,0 +1,13 @@
+import java.util.List;
+
+public class ObjectiveCard extends Card {
+	List planetsToAttack;
+	List planetsToDefend;
+	
+
+public ObjectiveCard(List planetsToAttack, List planetsToDefend, Piece owner){
+	this.planetsToAttack = planetsToAttack;
+	this.planetsToDefend = planetsToDefend;
+	this.owner = owner;
+}
+}

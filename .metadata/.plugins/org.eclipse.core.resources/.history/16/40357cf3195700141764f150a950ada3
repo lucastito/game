@@ -1,0 +1,9 @@
+public class ObjectiveCard extends Card {
+	Planet[] planetsToConquer;
+	short planetsToChoose;
+
+	public ObjectiveCard(Planet[] planetsToConquer) {
+		this.planetsToConquer = planetsToConquer;
+		this.planetsToChoose = planetsToChoose;
+	}
+}
