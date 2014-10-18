@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Mapper 
 {
 	public static Planet mapPlanet(TerritoryDTO territory) 
@@ -35,5 +37,10 @@ public class Mapper
 		pieceDTO.setTerritoryName(piece.getTerritoryName());
 		pieceDTO.setPieceType(piece.getClass().getName());
 		return pieceDTO;
+	}
+
+	public static List<Piece> mapPiece(List<PieceDTO> piecesDTO) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -17,35 +17,35 @@ public class ObjectiveCard extends Card {
 	public static final String WOOKIEE_OBJECTIVE_DESCRIPTION = "Conquistar Trandosha e mais 21 planetas a escolha do jogador. Proteger Kashyyyk e Alaris Prime";
 	public static final String TRANDOSHAN_OBJECTIVE_DESCRIPTION = "Conquistar Kashyyyk, Alaris Prime e mais 20 planetas a escolha do jogador. Proteger Trandosha";
 	
-	private int characterObjective;//Referente ao tipo de personagem, de acordo com as constantes do tipo personagem em Player acima
+	private PlayerRace characterObjective;//Referente ao tipo de personagem, de acordo com as constantes do tipo personagem em Player acima
 	private String name;
 	private String description;
 	
 	
-	public ObjectiveCard(int characterObjective){//Construtor com os objetivos fixos de cada personagem
+	public ObjectiveCard(PlayerRace characterObjective){//Construtor com os objetivos fixos de cada personagem
 		setCharacterObjective(characterObjective);
 		switch(characterObjective){
-		case Player.PADAWAN:
+		case PADAWAN: 
 			setName("OBJETIVO PADAWAN");
 			setDescription(PADAWAN_OBJECTIVE_DESCRIPTION);
 			break;
-		case Player.SITH:
+		case SITH:
 			setName("OBJETIVO SITH");
 			setDescription(SITH_OBJECTIVE_DESCRIPTION);
 			break;
-		case Player.CLONE:
+		case CLONE:
 			setName("OBJETIVO CLONE");
 			setDescription(CLONE_OBJECTIVE_DESCRIPTION);
 			break;
-		case Player.DROIDE:
+		case DROIDE:
 			setName("OBJETIVO DROIDE");
 			setDescription(DROIDE_OBJECTIVE_DESCRIPTION);
 			break;
-		case Player.WOOKIEE:
+		case WOOKIEE:
 			setName("OBJETIVO WOOKIEE");
 			setDescription(WOOKIEE_OBJECTIVE_DESCRIPTION);
 			break;
-		case Player.TRANDOSHAN:
+		case TRANDOSHAN:
 			setName("OBJETIVO TRANDOSHAN");
 			setDescription(TRANDOSHAN_OBJECTIVE_DESCRIPTION);
 			break;
@@ -57,17 +57,17 @@ public class ObjectiveCard extends Card {
 		
 	}
 	
-	public ObjectiveCard(int characterObjective, String name, String description){//Construtor com Nome e Descricao customizada
+	public ObjectiveCard(PlayerRace characterObjective, String name, String description){//Construtor com Nome e Descricao customizada
 		setCharacterObjective(characterObjective);
 		setName(name);
 		setDescription(description);
 	}
 
-	public int getCharacterObjective() {
+	public PlayerRace getCharacterObjective() {
 		return characterObjective;
 	}
 
-	public void setCharacterObjective(int characterObjective) {
+	public void setCharacterObjective(PlayerRace characterObjective) {
 		this.characterObjective = characterObjective;
 	}
 

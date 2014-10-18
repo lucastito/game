@@ -49,6 +49,24 @@ public class PlanetRepository implements IPlanetRepository
 		return neighborPlanets;
 	}
 
+	public boolean areNeighbors(String sourceTerritoryName, String targetTerritoryName)
+	{
+		if (sourceTerritoryName == null || sourceTerritoryName.isEmpty() || 
+				targetTerritoryName == null || targetTerritoryName.isEmpty())
+			return false;
+		
+		Planet sourceTerritory = getPlanetByName(sourceTerritoryName);		
+		if (sourceTerritory == null)
+			return false;
+		
+		List<Border> borders = sourceTerritory.getBorders();		
+		for (Border b : borders)
+		{
+			if (b.getNeighborPlanetName().equals(targetTerritoryName))
+				return true;
+		}
+		return false;
+	}
 	private void initializePlanets() {
 		planets = new HashMap<String, Planet>();
 		Planet planet;

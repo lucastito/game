@@ -10,6 +10,7 @@ import org.junit.Test;
 public class PlanetRepositoryTests 
 {
 	PlanetRepository planetRepository;
+	
 	@Before
 	public void setUp() throws Exception 
 	{
@@ -76,7 +77,7 @@ public class PlanetRepositoryTests
 		assertEquals("Coruscant", result.getName());
 		assertEquals(650, result.getXAxisCoordinate());
 		assertEquals(290, result.getYAxisCoordinate());
-		assertEquals("image/imgicon.png", result.getImagePath());
+		assertEquals("image/coruscant.png", result.getImagePath());
 	}
 	
 	@Test
@@ -98,6 +99,15 @@ public class PlanetRepositoryTests
 	{
 		Planet result = planetRepository.getPlanetByName("Earth");		
 		assertEquals(null, result);;
+	}
+	
+	@Test
+	public void SetPlanetOwner_SetsPlanetOwner()
+	{
+		planetRepository.setPlanetOwner("Trandosha", "Leo");
+		Planet result = planetRepository.getPlanetByName("Trandosha");
+		
+		assertEquals("Leo", result.getOwnerName());
 	}
 }
 

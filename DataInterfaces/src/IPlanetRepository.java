@@ -7,4 +7,5 @@ public interface IPlanetRepository
 	Map<String, Planet> getPlanets();
 	Planet getPlanetByName(String name);
 	List<Planet> getNeighborPlanets(String planetName);
+	boolean areNeighbors(String sourceTerritoryName, String targetTerritoryName);
 }

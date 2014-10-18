@@ -1,0 +1,12 @@
+public enum PieceType 
+{	
+	SITH,
+	SITHSHIP,
+	SITHLORD,
+	JEDI,
+	PADAWAN,
+	PADAWANSHIP,
+	CLONELEADER,
+	CLONE,
+	CLONESHIP	
+}

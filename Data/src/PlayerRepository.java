@@ -35,8 +35,7 @@ public class PlayerRepository implements IPlayerRepository
 			return null;
 		return players.get(name);
 	}
-	
-	
+		
 	public void addPlayerPiece(String playerName, String planetName, Piece piece)
 	{
 		piece.setTerritoryName(planetName);
@@ -44,12 +43,24 @@ public class PlayerRepository implements IPlayerRepository
 		player.addPiece(piece);
 		planetRepository.getPlanetByName(planetName).addPiece(piece);
 	}
+	
+	public void removePlayerPiece(String playerName, PieceType type)
+	{
+		Player player = getPlayerByName(playerName);
+		
+		for (Piece piece : player.getPieces())
+		{
+			if (piece.getPieceType().equals(type))
+			{
+				player.getPieces().remove(piece);
+			}
+		}
+	}
 
 	private void initializePlayers() 
 	{
 		// Método meramente ilustrativo
-		Player player = new Player(1);
-		player.setName("Leo");
+		Player player = new Player("Leo");
 		addPlayer(player);
 		
 		Piece piece = new Padawan();

@@ -1,6 +1,3 @@
-import java.awt.EventQueue;
-
-import javax.security.auth.callback.ConfirmationCallback;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -19,68 +16,34 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
 import java.io.File;
-import java.io.IOException;
 
-
-/**
- * @author Daniel
- *
- */
 public class InitialScreen {
 
 	private JFrame frmStarwar;
-
-	/**
-	 * Launch the application.
-	 */
 	
 	public JFrame getfrmStarwar(){
 		return frmStarwar;
 	}
 	
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					InitialScreen window = new InitialScreen(null);
-//					window.frmStarwar.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the application.
-	 */
 	public InitialScreen(GameScreenPresenter presenter) {
 		initialize(presenter);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize(final GameScreenPresenter presenter) {
-		
-		
-	
-		
+	private void initialize(final GameScreenPresenter presenter) 
+	{
 		File mp3File = new File(InitialScreen.class.getResource("sound/theme.mp3").getPath());
-		MP3 backgroundMusic = new MP3(mp3File);
+		MP3Runner backgroundMusic = new MP3Runner(mp3File);
 		Thread mp3Thread = new Thread(backgroundMusic);
 		mp3Thread.start();
 
-	    
-		
 		frmStarwar = new JFrame();
 		frmStarwar.setTitle("StarWar");
 		frmStarwar.setBounds(100, 100, 1366, 768);
 		frmStarwar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmStarwar.getContentPane().setLayout(new CardLayout(0, 0));
-		
-		
-		final JPanel mainPanel = new JPanel(){
+				
+		final JPanel mainPanel = new JPanel()
+		{
 			public void paintComponent(Graphics g) {  
 				                      Image img = Toolkit.getDefaultToolkit().getImage(  
 				                                InitialScreen.class.getResource("image/outerspace.jpg"));  
@@ -222,8 +185,6 @@ public class InitialScreen {
 		btnAjuda.setBounds(576, 471, 210, 83);
 		mainPanel.add(btnAjuda);
 		
-		
-		
 		JLabel lblConfiguracoes = new JLabel("CONFIGURA\u00C7\u00D5ES");
 		lblConfiguracoes.setForeground(Color.YELLOW);
 		lblConfiguracoes.setFont(new Font("Tahoma", Font.PLAIN, 93));
@@ -267,10 +228,5 @@ public class InitialScreen {
 		btnVoltar3.setBackground(new Color(165, 42, 42));
 		btnVoltar3.setBounds(53, 630, 166, 52);
 		helpPanel.add(btnVoltar3);
-		
-		
-
-		
-
 	}
 }
