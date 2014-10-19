@@ -4,49 +4,36 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class ObjectiveCard {
-	private short id;
+public class TerritoryCard {
 	private String name;
-	private Planet[] planetsToConquer;
-	private short planetsToChoose;
+	private short id;
 	private BufferedImage frontImage;
 	private BufferedImage backImage;
 
-	public ObjectiveCard(short id, String name, Planet[] planetsToConquer,
-			short planetsToChoose, String pathOfTheBackgroundImage,
-			String versePathOfImage) {
+	public TerritoryCard(short id, String name,
+			String pathOfTheBackgroundImage, String versePathOfImage) {
 		this.id = id;
 		this.name = name;
-		this.planetsToConquer = planetsToConquer;
-		this.planetsToChoose = planetsToChoose;
 		try {
 			this.frontImage = ImageIO
 					.read(new File(getClass()
 							.getResource(pathOfTheBackgroundImage).getPath()
 							.toString()));
-
 			this.backImage = ImageIO.read(new File(getClass()
 					.getResource(versePathOfImage).getPath().toString()));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
 
-	public short getId() {
-		return id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public Planet[] getPlanetsToConquer() {
-		return planetsToConquer;
-	}
-
-	public short getPlanetsToChoose() {
-		return planetsToChoose;
+	public short getId() {
+		return id;
 	}
 
 	public BufferedImage getFrontImage() {

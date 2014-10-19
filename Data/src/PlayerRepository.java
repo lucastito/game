@@ -60,7 +60,7 @@ public class PlayerRepository implements IPlayerRepository
 	private void initializePlayers() 
 	{
 		// Método meramente ilustrativo
-		Player player = new Player("Leo");
+		Player player = new Player((short)1, "Leo");
 		addPlayer(player);
 		
 		Piece piece = new Padawan();
