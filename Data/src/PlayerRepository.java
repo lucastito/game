@@ -53,6 +53,7 @@ public class PlayerRepository implements IPlayerRepository
 			if (piece.getPieceType().equals(type))
 			{
 				player.getPieces().remove(piece);
+				break;
 			}
 		}
 	}
@@ -60,7 +61,7 @@ public class PlayerRepository implements IPlayerRepository
 	private void initializePlayers() 
 	{
 		// Método meramente ilustrativo
-		Player player = new Player((short)1, "Leo");
+		Player player = new Player(PlayerRace.SITH, "Leo");
 		addPlayer(player);
 		
 		Piece piece = new Padawan();

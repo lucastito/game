@@ -14,7 +14,7 @@ public class PlayerRepositoryTests {
 		planetRepository = new PlanetRepository();
 		playerRepository = new PlayerRepository(planetRepository);
 
-		Player player = new Player((short) 2, "Lucas");
+		Player player = new Player(PlayerRace.CLONE, "Lucas");
 		playerRepository.addPlayer(player);
 	}
 
@@ -22,10 +22,9 @@ public class PlayerRepositoryTests {
 	public void AddPlayer_AddsPlayer() {
 		Piece piece = new Clone();
 		Planet planet = planetRepository.getPlanetByName("Trandosha");
-		Player player = new Player((short) 3, "Leonardo");
+		Player player = new Player(PlayerRace.CLONE, "Leonardo");
 		player.addTerritory(planet);
 		player.addPiece(piece);
-		player.setRace(PlayerRace.CLONE);
 
 		playerRepository.addPlayer(player);
 
@@ -36,26 +35,75 @@ public class PlayerRepositoryTests {
 	}
 
 	@Test
-	public void GetPlayerByName_WhenPlayerExists_GetsPlayer() {
+	public void GetPlayerByName_WhenPlayerExists_GetsPlayer() 
+	{
 		Player player = playerRepository.getPlayerByName("Lucas");
 
 		assertEquals("Lucas", player.getName());
 	}
 
 	@Test
-	public void GetPlayerByName_WhenDoesNotExist_GetsPlayer() {
+	public void GetPlayerByName_WhenPLayerDoesNotExist_GetsPlayer() 
+	{
 		Player player = playerRepository.getPlayerByName("Dilma");
-
 		assertNull(player);
 	}
-
+	
 	@Test
-	public void GetAllPieces_WhenPlayerHasNoPieces_ReturnsEmptyList() {
-
+	public void GetPlayerByName_WhenPLayerNameIsNull_GetsPlayer() 
+	{
+		Player player = playerRepository.getPlayerByName(null);
+		assertNull(player);
+	}
+	
+	@Test
+	public void GetPlayerByName_WhenPLayerNameIsEmpty_GetsPlayer() 
+	{
+		Player player = playerRepository.getPlayerByName("");
+		assertNull(player);
+	}
+	
+	@Test
+	public void AddPlayerPiece_AddsPlayerPiece() 
+	{
+		Clone clone = new Clone();
+		clone.setPieceType(PieceType.CLONE);
+		playerRepository.addPlayerPiece("Lucas", "Trandosha", clone);
+		Player player = playerRepository.getPlayerByName("Lucas");
+		boolean result = false;
+		for (Piece piece : player.getPieces())
+			if (piece.getPieceType().equals(PieceType.CLONE))
+				result = true;
+		
+		assertTrue(result);
+	} 
+	
+	@Test
+	public void RemovePlayerPiece_RemovesPlayerPiece() 
+	{
+		Clone clone = new Clone();
+		clone.setPieceType(PieceType.CLONE);
+		playerRepository.addPlayerPiece("Lucas", "Trandosha", clone);
+		playerRepository.removePlayerPiece("Lucas", PieceType.CLONE);
+		Player player = playerRepository.getPlayerByName("Lucas");
+		
+		for (Piece piece : player.getPieces())
+			if (piece.getPieceType().equals(PieceType.CLONE))
+				assertTrue(false);
 	}
 
 	@Test
-	public void GetAllPieces_WhenPlayerHasPieces_ReturnsPiecesList() {
-
+	public void GetAllPieces_WhenPlayerHasPieces_ReturnsPiecesList() 
+	{
+		PlayerRepository newPlayerRepository = new PlayerRepository(planetRepository);
+		Player playerOne = new Player(PlayerRace.CLONE, "PlayerOne");
+		playerOne.addPiece(new Clone());
+		Player playerTwo = new Player(PlayerRace.DROIDE, "PlayerTwo");
+		playerTwo.addPiece(new Sith());
+		playerTwo.addPiece(new Padawan());
+		newPlayerRepository.addPlayer(playerOne);
+		newPlayerRepository.addPlayer(playerTwo);
+		
+		assertEquals(3, newPlayerRepository.getAllPieces().size());
 	}
 }

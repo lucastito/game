@@ -150,7 +150,8 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 	class PieceMouseAdapter extends MouseAdapter {
 		
 		@Override
-    	public void mouseEntered(MouseEvent e) {
+    	public void mouseEntered(MouseEvent e) 
+		{
     		frame.setCursor(new Cursor(12));
     	}
         @Override
@@ -189,6 +190,7 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
         		return;
         	Territory targetTerritory = findTerritoryOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y); 
         	List<Territory> neighbors = planetarySystemController.getTerritoriesToRedeploy(selectedPiece.getTerritoryName(), 0);
+        	
         	for (Territory territory : neighbors)
         	{
         		if(territory.getName().equals(targetTerritory.getName()))

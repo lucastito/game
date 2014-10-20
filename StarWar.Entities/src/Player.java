@@ -2,14 +2,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-	private short id;
 	private String name;
 	private List<Planet> territories;
 	private List<Piece> pieces;
 	private PlayerRace race;
 
-	public Player(short id, String name) {
-		this.id = id;
+	public Player(PlayerRace race, String name) {
+		this.race = race;
 		this.name = name;
 		pieces = new ArrayList<Piece>();
 		territories = new ArrayList<Planet>();
@@ -42,13 +41,5 @@ public class Player {
 
 	public PlayerRace getRace() {
 		return race;
-	}
-
-	public void setRace(PlayerRace race) {
-		this.race = race;
-	}
-
-	public short getId() {
-		return id;
 	}
 }

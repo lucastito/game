@@ -6,7 +6,8 @@ public class ObjectiveCardRepository {
 	private ObjectiveCard trandoshansObjectiveCard;
 	private ObjectiveCard wookieesObjectiveCard;
 
-	public ObjectiveCardRepository(PlanetRepository pr) {
+	public ObjectiveCardRepository(PlanetRepository pr) 
+	{
 		Planet[] padawansPlanets = { pr.getPlanetByName("Thule"),
 				pr.getPlanetByName("Raxus"), pr.getPlanetByName("Queita"),
 				pr.getPlanetByName("Coruscant"), pr.getPlanetByName("Sarapin"),
@@ -14,6 +15,7 @@ public class ObjectiveCardRepository {
 		padawansObjectiveCard = new ObjectiveCard((short) 1,
 				"Padawan's objective card", padawansPlanets, (short) 19,
 				"image/Padawan.png", "image/Verse.png");
+		
 		Planet[] sithsPlanets = { pr.getPlanetByName("Thule"),
 				pr.getPlanetByName("Raxus"), pr.getPlanetByName("Queita"),
 				pr.getPlanetByName("Coruscant"), pr.getPlanetByName("Sarapin"),
@@ -21,6 +23,7 @@ public class ObjectiveCardRepository {
 		sithsObjectiveCard = new ObjectiveCard((short) 2,
 				"Sith's objective card", sithsPlanets, (short) 19,
 				"image/Sith.png", "image/Verse.png");
+		
 		Planet[] clonesPlanets = { pr.getPlanetByName("Geonosis"),
 				pr.getPlanetByName("Tatooine"), pr.getPlanetByName("Mustafar"),
 				pr.getPlanetByName("Nivek"), pr.getPlanetByName("Hypori"),
@@ -28,6 +31,7 @@ public class ObjectiveCardRepository {
 		clonesObjectiveCard = new ObjectiveCard((short) 3,
 				"Clone's objective card", clonesPlanets, (short) 20,
 				"image/Clone.png", "image/Verse.png");
+		
 		Planet[] droidesPlanets = { pr.getPlanetByName("Geonosis"),
 				pr.getPlanetByName("Tatooine"), pr.getPlanetByName("Mustafar"),
 				pr.getPlanetByName("Nivek"), pr.getPlanetByName("Hypori"),
@@ -35,12 +39,14 @@ public class ObjectiveCardRepository {
 		droidesObjectiveCard = new ObjectiveCard((short) 4,
 				"Droide's objective card", droidesPlanets, (short) 20,
 				"image/Droide.png", "image/Verse.png");
+		
 		Planet[] trandoshansPlanets = { pr.getPlanetByName("Trandosha"),
 				pr.getPlanetByName("Kashyyyk"),
 				pr.getPlanetByName("Alaris Prime") };
 		trandoshansObjectiveCard = new ObjectiveCard((short) 5,
 				"Trandoshan's objective card", trandoshansPlanets, (short) 23,
 				"image/Trandoshan.png", "image/Verse.png");
+		
 		Planet[] wookieesPlanets = { pr.getPlanetByName("Trandosha"),
 				pr.getPlanetByName("Kashyyyk"),
 				pr.getPlanetByName("Alaris Prime") };
@@ -50,21 +56,21 @@ public class ObjectiveCardRepository {
 	}
 
 	public ObjectiveCard getObjectiveCard(Player owner) {
-		short id = owner.getId();
-		switch (id) {
-		case 1:
-			return padawansObjectiveCard;
-		case 2:
-			return sithsObjectiveCard;
-		case 3:
-			return clonesObjectiveCard;
-		case 4:
-			return droidesObjectiveCard;
-		case 5:
-			return trandoshansObjectiveCard;
-		case 6:
-			return wookieesObjectiveCard;
-		}
+		switch (owner.getRace()) 
+		{
+			case PADAWAN:
+				return padawansObjectiveCard;
+			case SITH:
+				return sithsObjectiveCard;
+			case CLONE:
+				return clonesObjectiveCard;
+			case DROIDE:
+				return droidesObjectiveCard;
+			case TRANDOSHAN:
+				return trandoshansObjectiveCard;
+			case WOOKIEE:
+				return wookieesObjectiveCard;
+			}
 		return null;
 	}
 

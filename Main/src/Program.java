@@ -7,7 +7,7 @@ public class Program
 		
 		PlayerRepository playerRepository = new PlayerRepository(planetRepository);
 		
-		Attack attack = new Attack();
+		Attack attack = new Attack(planetRepository, playerRepository);
 		
 		GameScreenPresenter presenter = new GameScreenPresenter();
 		
