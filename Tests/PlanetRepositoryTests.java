@@ -48,10 +48,52 @@ public class PlanetRepositoryTests
 	}
 	
 	@Test
+	public void AreNeighbors_SendingCorrectPlanetsName_ReturnsTrue()
+	{
+		assertFalse(planetRepository.areNeighbors("Trandosha", "Nivek"));
+	}
+	
+	@Test
 	public void GetNeighborPlanets_SendingWrongPlanetName_ReturnsNull()
 	{
 		List<Planet> results = planetRepository.getNeighborPlanets("Pluto");
 		assertEquals(null, results);
+	}
+	
+	@Test
+	public void AreNeighbors_SendingWrongSourcePlanetName_ReturnsFalse()
+	{
+		assertFalse(planetRepository.areNeighbors("Pluto", "Trandosha"));
+	}
+	
+	@Test
+	public void AreNeighbors_SendingWrongTargetPlanetName_ReturnsFalse()
+	{
+		assertFalse(planetRepository.areNeighbors("Trandosha", "Pluto"));
+	}
+	
+	@Test
+	public void AreNeighbors_SendingNullSourcePlanetName_ReturnsFalse()
+	{
+		assertFalse(planetRepository.areNeighbors(null, "Trandosha"));
+	}
+	
+	@Test
+	public void AreNeighbors_SendingNullTargetPlanetName_ReturnsFalse()
+	{
+		assertFalse(planetRepository.areNeighbors("Trandosha", null));
+	}
+	
+	@Test
+	public void AreNeighbors_SendingEmptySourcePlanetName_ReturnsFalse()
+	{
+		assertFalse(planetRepository.areNeighbors("", "Trandosha"));
+	}
+	
+	@Test
+	public void AreNeighbors_SendingEmptyTargetPlanetName_ReturnsFalse()
+	{
+		assertFalse(planetRepository.areNeighbors("Trandosha", ""));
 	}
 	
 	@Test
