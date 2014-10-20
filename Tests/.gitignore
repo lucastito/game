@@ -1,3 +1,5 @@
 /PlanetSystemRepositoryTests.class
 /bin/
 /PlayerRepositoryTests.class
+*.class
+*.classpath
