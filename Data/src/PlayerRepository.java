@@ -12,7 +12,6 @@ public class PlayerRepository implements IPlayerRepository
 	{
 		setPlanetRepository(planetRepository);
 		players = new HashMap<String, Player>();
-		initializePlayers();
 	}
 	
 	public List<Piece> getAllPieces() 
@@ -57,26 +56,6 @@ public class PlayerRepository implements IPlayerRepository
 			}
 		}
 	}
-
-	private void initializePlayers() 
-	{
-		// Método meramente ilustrativo
-		Player player = new Player(PlayerRace.SITH, "Leo");
-		addPlayer(player);
-		
-		Piece piece = new Padawan();
-		piece.setImagePath("image/padawan.png");
-		piece.setXAxisCoordinate((short)40);
-		piece.setYAxisCoordinate((short)40);
-		addPlayerPiece("Leo", "Trandosha", piece);
-		
-		piece = new Sith();
-		piece.setImagePath("image/sithtrooper.png");
-		piece.setXAxisCoordinate((short)20);
-		piece.setYAxisCoordinate((short)20);
-		
-		addPlayerPiece("Leo", "Trandosha", piece);		
-	}	
 	
 	public void setPlanetRepository(IPlanetRepository planetRepository)
 	{

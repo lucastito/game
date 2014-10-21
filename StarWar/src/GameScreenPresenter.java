@@ -116,22 +116,11 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 	}	
 
 	@Override
-	public void showReason(String reason) {
-
-	}
-
-	@Override
-	public void showRedeployedUnits() 
+	public void showReason(String reason) 
 	{
-		show();
+
 	}
 
-	@Override
-	public void showNumberOfUnitsToRedeploy(int numberOfUnits) 
-	{
-		
-	}
-	
 	public void setGameStateInputPort(GameStateInputPort gameState)
 	{
 		this.gameState = gameState;
@@ -152,7 +141,9 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 		@Override
     	public void mouseEntered(MouseEvent e) 
 		{
-    		frame.setCursor(new Cursor(12));
+			Piece piece = findPieceOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y);
+    		if (gameState.isPieceFromCurrentPlayer(piece.getOwnerName()) && (gameState.isRedeployPhase() || gameState.isAttackPhase()))
+    			frame.setCursor(new Cursor(12));
     	}
         @Override
     	public void mouseExited(MouseEvent e) {
@@ -161,9 +152,14 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
         
         @Override
     	public void mouseClicked(MouseEvent e) 
-    	{
+    	{        	
         	if (selectedPiece == null)
-        		selectedPiece = findPieceOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y);     	
+        	{
+        		Piece piece = findPieceOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y);
+        		if (gameState.isPieceFromCurrentPlayer(selectedPiece.getOwnerName()))
+        			selectedPiece = piece;
+        	}
+        		    	
     	}
         
         private Piece findPieceOnClick(int x, int y) 
@@ -181,24 +177,28 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
     	}
     }
 	
-	class TerritoryMouseAdapter extends MouseAdapter {
+	class TerritoryMouseAdapter extends MouseAdapter 
+	{
 		
         @Override
     	public void mouseEntered(MouseEvent e) 
         {
         	if (selectedPiece == null)
         		return;
-        	Territory targetTerritory = findTerritoryOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y); 
-        	List<Territory> neighbors = planetarySystemController.getTerritoriesToRedeploy(selectedPiece.getTerritoryName(), 0);
-        	
-        	for (Territory territory : neighbors)
-        	{
-        		if(territory.getName().equals(targetTerritory.getName()))
-        		{
-        			frame.setCursor(new Cursor(12));
-        			return;
-        		}
-        	}        	
+        	if (gameState.isPieceFromCurrentPlayer(selectedPiece.getOwnerName()) && (gameState.isRedeployPhase() || gameState.isAttackPhase()))
+			{
+	        	Territory targetTerritory = findTerritoryOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y); 
+	        	List<Territory> neighbors = planetarySystemController.getTerritoriesToRedeploy(selectedPiece.getTerritoryName(), 0);
+	        	
+	        	for (Territory territory : neighbors)
+	        	{
+	        		if(territory.getName().equals(targetTerritory.getName()))
+	        		{
+	        			frame.setCursor(new Cursor(12));
+	        			return;
+	        		}
+	        	} 
+			}
     	}
         
         @Override
@@ -213,12 +213,22 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
         	Territory targetTerritory;
 			if (selectedPiece != null)
 			{
-				targetTerritory = findTerritoryOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y);  
-				
-				if (targetTerritory != null)
+				if (gameState.isPieceFromCurrentPlayer(selectedPiece.getOwnerName()))
 				{
-					troopsRedeployInputPort.redeployUnits(selectedPiece.getTerritoryName(), targetTerritory.getName(), selectedPiece.getPieceType());
-					selectedPiece = null;
+					targetTerritory = findTerritoryOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y);  
+				
+					if (targetTerritory != null && gameState.isRedeployPhase())
+					{
+						troopsRedeployInputPort.redeployUnits(selectedPiece.getTerritoryName(), targetTerritory.getName(), selectedPiece.getPieceType());
+						selectedPiece = null;
+						return;
+					}
+					if (targetTerritory != null && gameState.isAttackPhase())
+					{
+						//attackInputPort.attack(selectedPiece.getTerritoryName(), targetTerritory.getName(), selectedPiece.getPieceType());
+						selectedPiece = null;
+						return;
+					}
 				}
 			}        		   	
     	}

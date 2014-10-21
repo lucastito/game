@@ -13,14 +13,9 @@ public class Attack implements AttackInputPort
 	}
 	public void possibilitiesOfTerritoriesToAttack(PlayerDTO player)
 	{
-		if (!isAttackTurn())
-			return;
+		//if (!isAttackTurn())
+			//return;
 		return;
-	}
-	
-	private boolean isAttackTurn() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	//4 sistema verifica quantas unidades de ataque existem
@@ -129,16 +124,16 @@ public class Attack implements AttackInputPort
 			return;
 		} 
 		
-		int[] attackerDice = War.getInstance().rollDice(pieces.size());
+		int[] attackerDice = War.rollDice(pieces.size());
 		int[] defenderDice;
 		/* Rolagem de dados:
 		 * 1. Nao importa a quantidade de pecas do atacante ele só pode atacar usando 3 por vez
 		 * 2. Nao importa a quantidade de peças do defensor ele só pode defender usando 3 por vez
 		 */
 		if(defender.getPieces().size() >= 3)
-			defenderDice = War.getInstance().rollDice(3);
+			defenderDice = War.rollDice(3);
 		else
-			defenderDice = War.getInstance().rollDice(defender.getPieces().size());
+			defenderDice = War.rollDice(defender.getPieces().size());
 				
 		int counter = 0;
 		while ((counter <= attackerDice.length || counter <= defenderDice.length) || 

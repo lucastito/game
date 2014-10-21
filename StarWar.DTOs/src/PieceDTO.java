@@ -1,12 +1,12 @@
 public class PieceDTO 
 {
 	private short id;
-	private String name;
 	private short xAxisCoordinate;
 	private short yAxisCoordinate;
 	private String imagePath;
 	private String territoryName;
 	private String pieceType;
+	private String ownerName;
 	
 	public short getId() 
 	{
@@ -16,16 +16,6 @@ public class PieceDTO
 	public void setId(short id) 
 	{
 		this.id = id;
-	}
-	
-	public String getName() 
-	{
-		return name;
-	}
-	
-	public void setName(String name) 
-	{
-		this.name = name;
 	}
 	
 	public short getxAxisCoordinate() 
@@ -74,5 +64,13 @@ public class PieceDTO
 
 	public void setPieceType(String pieceType) {
 		this.pieceType = pieceType;
+	}
+
+	public String getOwnerName() {
+		return ownerName;
+	}
+
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
 	}
 }

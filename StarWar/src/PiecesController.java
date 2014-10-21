@@ -22,7 +22,6 @@ public class PiecesController
 		{
 			Piece piece = new Piece(new ImageIcon(getClass().getResource(pieceDTO.getImagePath()).getPath().toString()));
 			piece.setId(pieceDTO.getId());
-			piece.setName(pieceDTO.getName());
 			piece.setxAxisCoordinate(pieceDTO.getxAxisCoordinate());
 			piece.setyAxisCoordinate(pieceDTO.getyAxisCoordinate());
 			piece.setImagePath(pieceDTO.getImagePath());

@@ -5,6 +5,9 @@ public interface GameStateInputPort
 	List<PieceDTO> getAllPieces();
 	List<TerritoryDTO> getAllPlanets();
 	void nextPlayerStep();
-	int currentPlayerId();
+	String currentPlayerName();
 	int currentPlayerStep();
+	boolean isPieceFromCurrentPlayer(String playerName);
+	boolean isRedeployPhase();
+	boolean isAttackPhase();
 }

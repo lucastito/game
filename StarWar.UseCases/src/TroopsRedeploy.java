@@ -30,10 +30,6 @@ public class TroopsRedeploy implements TroopsRedeployInputPort
 		// TODO Auto-generated method stub
 		return true;
 	}
-	public void numberOfUnitsAllowedToRedeploy(String sourceTerritory, String targetTerritory) 
-	{
-		troopsRedeployOutputPort.showNumberOfUnitsToRedeploy(1);
-	}
 
 	public void redeployUnits(String sourceTerritory, String targetTerritory, String pieceType) 
 	{
@@ -52,7 +48,7 @@ public class TroopsRedeploy implements TroopsRedeployInputPort
 		planetRepository.getPlanetByName(targetTerritory).addPiece(p);
 		planetRepository.getPlanetByName(sourceTerritory).getPieces().remove(0);
 		p.setTerritoryName(targetTerritory);
-		troopsRedeployOutputPort.showRedeployedUnits();
+		troopsRedeployOutputPort.show();
 	}
 	
 	public boolean isValidTerritoryToRedeploy(String sourcePlanetName, String targetPlanetName, String targetOwnerName)

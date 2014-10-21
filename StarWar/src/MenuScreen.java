@@ -22,8 +22,8 @@ public class MenuScreen extends JPanel implements MouseListener {
 		try 
 		{
 			nextPlayerArrow = new JLabel(new ImageIcon(ImageIO.read(new File(getClass().getResource("image/arrow.png").getPath().toString()))));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (IOException e) 
+		{
 			e.printStackTrace();
 		}
 		
@@ -37,8 +37,6 @@ public class MenuScreen extends JPanel implements MouseListener {
 		if (e.getSource() == nextPlayerArrow)
 		{
 			gameState.nextPlayerStep();
-			System.out.println(gameState.currentPlayerId());
-			System.out.println(gameState.currentPlayerStep());
 		}
 	}
 

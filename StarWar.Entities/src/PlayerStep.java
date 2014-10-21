@@ -1,11 +1,5 @@
-
-public class PlayerStep {
-	
-	// receber exércitos
-	// atacar inimigos
-	// remanejar exército
-	// receber carta
-	
+public class PlayerStep
+{	
 	public static final int RECEIVE_ARMY_PHASE = 0;
 	public static final int ATTACK_ENEMIES_PHASE = 1;
 	public static final int REDEPLOY_ARMY_PHASE = 2;

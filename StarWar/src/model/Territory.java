@@ -5,6 +5,8 @@ import javax.swing.JLabel;
 
 public class Territory extends JLabel
 {
+	private static final long serialVersionUID = 1L;
+
 	public Territory(Icon icon)
 	{
 		super(icon);

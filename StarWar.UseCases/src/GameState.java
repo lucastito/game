@@ -6,20 +6,13 @@ public class GameState implements GameStateInputPort
 {
 	IPlanetRepository planetRepository;
 	IPlayerRepository playerRepository;
-	private List<Integer> playingIdsOrder;
+	private List<String> playerNamesOrder;
 	private PlayerStep playerStep;
 	
 	public GameState()
 	{
-		playingIdsOrder = new LinkedList<Integer>();
+		playerNamesOrder = new LinkedList<String>();
 		playerStep = new PlayerStep();
-		
-//		decidir a ordem dos jogadores pelo dado
-//		adicionar ao playingIdsOrder
-		
-//		para propósito de teste apenas;
-		playingIdsOrder.add(0);
-		playingIdsOrder.add(1);
 	}
 
 	public List<TerritoryDTO> getAllPlanets() 
@@ -49,26 +42,50 @@ public class GameState implements GameStateInputPort
 		if (playerStep.getCurrentPhase() == PlayerStep.END_OF_TURN)
 		{
 			//troca o jogador
-			playingIdsOrder.add(playingIdsOrder.remove(0));
+			playerNamesOrder.add(playerNamesOrder.remove(0));
 			playerStep = new PlayerStep();
 		}
 		else
 		{
 			//troca de fase
 			playerStep.nextStep();
-		}
-			
+		}			
 	}
 	
-	public int currentPlayerId()
+	public String currentPlayerName()
 	{
-		return playingIdsOrder.get(0);
+		return playerNamesOrder.get(0);
 	}
 	
 	public int currentPlayerStep()
 	{
 		return playerStep.getCurrentPhase();
-	}	
+	}
+	
+	@Override
+	public boolean isPieceFromCurrentPlayer(String playerName) 
+	{
+		if (playerName.equals(currentPlayerName()))
+			return true;
+		
+		return false;
+	}
+
+	@Override
+	public boolean isRedeployPhase() 
+	{
+		if (playerStep.getCurrentPhase() == PlayerStep.REDEPLOY_ARMY_PHASE)
+			return true;
+		return false;
+	}
+
+	@Override
+	public boolean isAttackPhase() 
+	{
+		if (playerStep.getCurrentPhase() == PlayerStep.ATTACK_ENEMIES_PHASE)
+			return true;
+		return false;
+	}
 	
 	public void setPlanetRepository(IPlanetRepository planetRepository)
 	{

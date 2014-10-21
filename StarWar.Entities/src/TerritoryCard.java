@@ -25,7 +25,6 @@ public class TerritoryCard {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	public String getName() {

@@ -31,11 +31,12 @@ public class Mapper
 		PieceDTO pieceDTO = new PieceDTO();
 		pieceDTO.setId(piece.getId());
 		pieceDTO.setImagePath(piece.getImagePath());
-		pieceDTO.setName(piece.getName());
 		pieceDTO.setxAxisCoordinate(piece.getXAxisCoordinate());
 		pieceDTO.setyAxisCoordinate(piece.getYAxisCoordinate());
 		pieceDTO.setTerritoryName(piece.getTerritoryName());
-		pieceDTO.setPieceType(piece.getClass().getName());
+		if (piece.getPieceType() != null)
+			pieceDTO.setPieceType(piece.getPieceType().toString());
+		pieceDTO.setOwnerName(piece.getOwnerName());
 		return pieceDTO;
 	}
 
