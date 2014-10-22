@@ -43,7 +43,7 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 	{
 		planetarySystemController = new PlanetarySystemController(gameState, troopsRedeployInputPort, attackInputPort);
 		piecesController = new PiecesController(gameState, troopsRedeployInputPort);
-		gameScreenPanel = new GameScreen("image/outerspace.jpg", this.gameState, attackInputPort, troopsRedeployInputPort);
+		gameScreenPanel = new GameScreen("image/outerspace.jpg");
 		menuScreenPanel = new MenuScreen(this.gameState);
 		
     	EventQueue.invokeLater(new Runnable(){

@@ -8,12 +8,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-@SuppressWarnings("serial")
-public class GameScreen extends JPanel implements MouseListener
+
+public class SetUpGameScreen extends JPanel implements MouseListener
 {	
+	private static final long serialVersionUID = 1L;
 	private BufferedImage background;
 	
-	public GameScreen(String backgroundImage) 
+	public SetUpGameScreen(String backgroundImage) 
 	{
 		this.addMouseListener(this);
 		
