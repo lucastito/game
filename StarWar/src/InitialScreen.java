@@ -17,21 +17,19 @@ import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
 import java.io.File;
 
-public class InitialScreen 
-{
-	SetUpGameScreenPresenter setUpGameScreenPresenter;
+public class InitialScreen {
+
 	private JFrame frmStarwar;
 	
 	public JFrame getfrmStarwar(){
 		return frmStarwar;
 	}
 	
-	public InitialScreen() {
-		this.setUpGameScreenPresenter = new SetUpGameScreenPresenter();
-		initialize();
+	public InitialScreen(GameScreenPresenter presenter) {
+		initialize(presenter);
 	}
 
-	private void initialize() 
+	private void initialize(final GameScreenPresenter presenter) 
 	{
 		File mp3File = new File(InitialScreen.class.getResource("sound/theme.mp3").getPath());
 		MP3Runner backgroundMusic = new MP3Runner(mp3File);
@@ -40,7 +38,7 @@ public class InitialScreen
 
 		frmStarwar = new JFrame();
 		frmStarwar.setTitle("StarWar");
-		frmStarwar.setSize(1366, 768);
+		frmStarwar.setBounds(100, 100, 1366, 768);
 		frmStarwar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmStarwar.getContentPane().setLayout(new CardLayout(0, 0));
 				
@@ -65,8 +63,8 @@ public class InitialScreen
 		JButton btnNewButton = new JButton("Novo Jogo");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setUpGameScreenPresenter.show();
 				frmStarwar.dispose();
+				presenter.show();
 			}
 		});
 		btnNewButton.setForeground(Color.WHITE);

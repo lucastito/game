@@ -9,11 +9,16 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class GameScreen extends JPanel implements MouseListener
-{	
+public class GameScreen extends JPanel implements MouseListener{
+
+	PlanetarySystemController planetarySystemController;
+	PiecesController piecesController;
+	final int TERRITORYMAXSIZE = 80;
+	final int PIECEMAXSIZE = 15;
+	
 	private BufferedImage background;
 	
-	public GameScreen(String backgroundImage) 
+	public GameScreen(String backgroundImage, GameStateInputPort gameState, AttackInputPort attackInputPort, TroopsRedeployInputPort troopsRedeployInputPort) 
 	{
 		this.addMouseListener(this);
 		
@@ -27,6 +32,8 @@ public class GameScreen extends JPanel implements MouseListener
 		}
 		
 		this.setSize(background.getWidth(), background.getHeight());
+		planetarySystemController = new PlanetarySystemController(gameState, troopsRedeployInputPort, attackInputPort);
+		piecesController = new PiecesController(gameState, troopsRedeployInputPort);
 	}
 	
 	protected void paintComponent(Graphics g) 
