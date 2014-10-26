@@ -1,24 +1,25 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Player {
 	private String name;
-	private List<Planet> territories;
-	private List<Piece> pieces;
+	private Set<Planet> territories;
+	private Set<Piece> pieces;
+	private Set<TerritoryCard> territoryCards;
 	private PlayerRace race;
 
 	public Player(PlayerRace race, String name) {
 		this.race = race;
 		this.name = name;
-		pieces = new ArrayList<Piece>();
-		territories = new ArrayList<Planet>();
+		pieces = new HashSet<Piece>();
+		territories = new HashSet<Planet>();
 	}
 
-	public List<Planet> getTerritories() {
+	public Set<Planet> getTerritories() {
 		return territories;
 	}
 
-	public void setTerritories(List<Planet> territories) {
+	public void setTerritories(Set<Planet> territories) {
 		this.territories = territories;
 	}
 
@@ -35,7 +36,7 @@ public class Player {
 		this.name = name;
 	}
 
-	public List<Piece> getPieces() {
+	public Set<Piece> getPieces() {
 		return pieces;
 	}
 
@@ -45,6 +46,10 @@ public class Player {
 
 	public PlayerRace getRace() {
 		return race;
+	}
+
+	public void setTerritoryCards(Set<TerritoryCard> territoryCards) {
+		this.territoryCards = territoryCards;
 	}
 
 }
