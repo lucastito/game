@@ -5,11 +5,11 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Data"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DataInterfaces"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Entities"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Boundaries"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/DataTransferObjects"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Main"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/StarWar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/UseCases"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/StarWar.Boundaries"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/StarWar.DTOs"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/StarWar.Entities"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/StarWar.UseCases"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

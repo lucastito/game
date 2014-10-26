@@ -1,18 +1,20 @@
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class GameState implements GameStateInputPort
 {
 	IPlanetRepository planetRepository;
 	IPlayerRepository playerRepository;
-	private List<String> playerNamesOrder;
+	private ArrayList<Player> players;
 	private PlayerStep playerStep;
+	private int currentRound = 0;
+	private Player currentPlayer;
+	private int currentPlayerPositionInList = 0;
 	
 	public GameState()
-	{
-		playerNamesOrder = new LinkedList<String>();
+	{		
 		playerStep = new PlayerStep();
+		currentRound++;			
 	}
 
 	public List<TerritoryDTO> getAllPlanets() 
@@ -37,24 +39,54 @@ public class GameState implements GameStateInputPort
 		return pieces;
 	}
 	
-	public void nextPlayerStep()
+	public boolean nextPlayerStep()
 	{
+		int allPiecesCount = playerRepository.getAllPieces().size();
+		if (allPiecesCount <= 0)
+			return false;
 		if (playerStep.getCurrentPhase() == PlayerStep.END_OF_TURN)
 		{
 			//troca o jogador
-			playerNamesOrder.add(playerNamesOrder.remove(0));
-			playerStep = new PlayerStep();
+			if (currentPlayerPositionInList + 1 < players.size())
+				currentPlayerPositionInList++;
+			else
+			{
+				currentPlayerPositionInList = 0;
+				currentRound++;				
+			}
+			int pieceCount = playerRepository.getPlayerByName(players.get(currentPlayerPositionInList).getName()).getPieces().size();
+			if (pieceCount >= allPiecesCount)
+				return false;
+			if(pieceCount > 0)	
+			{
+				currentPlayer = players.get(currentPlayerPositionInList);
+				playerStep = new PlayerStep();
+			}
+			else
+				if (currentPlayerPositionInList + 1 < players.size())
+					currentPlayerPositionInList++;
+				else
+				{
+					currentPlayerPositionInList = 0;
+				}
+				nextPlayerStep();
 		}
 		else
 		{
 			//troca de fase
 			playerStep.nextStep();
-		}			
+		}
+		return true;
 	}
 	
 	public String currentPlayerName()
 	{
-		return playerNamesOrder.get(0);
+		return currentPlayer.getName();
+	}
+	
+	public Player getCurrentPlayer()
+	{
+		return currentPlayer;
 	}
 	
 	public int currentPlayerStep()
@@ -63,10 +95,13 @@ public class GameState implements GameStateInputPort
 	}
 	
 	@Override
-	public boolean isPieceFromCurrentPlayer(String playerName) 
+	public boolean isPieceFromCurrentPlayer(int pieceId) 
 	{
-		if (playerName.equals(currentPlayerName()))
-			return true;
+		for(Piece piece : currentPlayer.getPieces())
+		{
+			if (pieceId == piece.getId())
+				return true;
+		}
 		
 		return false;
 	}
@@ -94,6 +129,13 @@ public class GameState implements GameStateInputPort
 	
 	public void setPlayerRepository(IPlayerRepository playerRepository)
 	{
-		this.playerRepository = playerRepository;
+		this.playerRepository = playerRepository;		
+		players = playerRepository.getAllPlayers();
+		currentPlayer = players.get(0);
+	}
+
+	public int getCurrentRound() 
+	{
+		return currentRound;
 	}
 }

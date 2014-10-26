@@ -14,6 +14,18 @@ public class PlayerRepository implements IPlayerRepository
 		players = new HashMap<String, Player>();
 	}
 	
+	public ArrayList<Player> getAllPlayers()
+	{
+		ArrayList<Player> playersList = new ArrayList<Player>();
+		for(String playerName : players.keySet())
+		{
+			Player player = getPlayerByName(playerName);
+			playersList.add(player);
+		}
+			
+		return playersList;
+	}
+	
 	public List<Piece> getAllPieces() 
 	{
 		ArrayList<Piece> pieces = new ArrayList<Piece>();
@@ -37,6 +49,7 @@ public class PlayerRepository implements IPlayerRepository
 		
 	public void addPlayerPiece(String playerName, String planetName, Piece piece)
 	{
+		piece.setId(RandomNumberGenerator.generateRandomNumber());
 		piece.setTerritoryName(planetName);
 		Player player = getPlayerByName(playerName);
 		player.addPiece(piece);

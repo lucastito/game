@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Player {
 	private String name;
-	private List<Planet> territoris;
+	private List<Planet> territories;
 	private List<Piece> pieces;
 	private PlayerRace race;
 
@@ -16,14 +16,6 @@ public class Player {
 
 	public List<Planet> getTerritories() {
 		return territories;
-	}
-
-	public List<Planet> getTerritoris() {
-		return territoris;
-	}
-
-	public void setTerritoris(List<Planet> territoris) {
-		this.territoris = territoris;
 	}
 
 	public void addTerritory(Planet territory) {

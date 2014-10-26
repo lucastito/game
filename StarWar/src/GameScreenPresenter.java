@@ -142,7 +142,7 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
     	public void mouseEntered(MouseEvent e) 
 		{
 			Piece piece = findPieceOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y);
-    		if (gameState.isPieceFromCurrentPlayer(piece.getOwnerName()) && (gameState.isRedeployPhase() || gameState.isAttackPhase()))
+    		if (gameState.isPieceFromCurrentPlayer(piece.getId()) && (gameState.isRedeployPhase() || gameState.isAttackPhase()))
     			frame.setCursor(new Cursor(12));
     	}
         @Override
@@ -156,7 +156,7 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
         	if (selectedPiece == null)
         	{
         		Piece piece = findPieceOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y);
-        		if (gameState.isPieceFromCurrentPlayer(selectedPiece.getOwnerName()))
+        		if (gameState.isPieceFromCurrentPlayer(selectedPiece.getId()))
         			selectedPiece = piece;
         	}
         		    	
@@ -185,7 +185,7 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
         {
         	if (selectedPiece == null)
         		return;
-        	if (gameState.isPieceFromCurrentPlayer(selectedPiece.getOwnerName()) && (gameState.isRedeployPhase() || gameState.isAttackPhase()))
+        	if (gameState.isPieceFromCurrentPlayer(selectedPiece.getId()) && (gameState.isRedeployPhase() || gameState.isAttackPhase()))
 			{
 	        	Territory targetTerritory = findTerritoryOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y); 
 	        	List<Territory> neighbors = planetarySystemController.getTerritoriesToRedeploy(selectedPiece.getTerritoryName(), 0);
@@ -213,7 +213,7 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
         	Territory targetTerritory;
 			if (selectedPiece != null)
 			{
-				if (gameState.isPieceFromCurrentPlayer(selectedPiece.getOwnerName()))
+				if (gameState.isPieceFromCurrentPlayer(selectedPiece.getId()))
 				{
 					targetTerritory = findTerritoryOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y);  
 				

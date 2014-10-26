@@ -19,7 +19,8 @@ public class PlayerRepositoryTests {
 	}
 
 	@Test
-	public void AddPlayer_AddsPlayer() {
+	public void AddPlayer_AddsPlayer() 
+	{
 		Piece piece = new Clone();
 		Planet planet = planetRepository.getPlanetByName("Trandosha");
 		Player player = new Player(PlayerRace.CLONE, "Leonardo");
@@ -105,5 +106,17 @@ public class PlayerRepositoryTests {
 		newPlayerRepository.addPlayer(playerTwo);
 		
 		assertEquals(3, newPlayerRepository.getAllPieces().size());
+	}
+	
+	@Test
+	public void GetAllPLayers_ReturnsPlayersList() 
+	{
+		PlayerRepository newPlayerRepository = new PlayerRepository(planetRepository);
+		Player playerOne = new Player(PlayerRace.CLONE, "PlayerOne");
+		Player playerTwo = new Player(PlayerRace.DROIDE, "PlayerTwo");
+		newPlayerRepository.addPlayer(playerOne);
+		newPlayerRepository.addPlayer(playerTwo);
+		
+		assertEquals(2, newPlayerRepository.getAllPlayers().size());
 	}
 }

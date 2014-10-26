@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 public class Piece extends JLabel
 {
 	private static final long serialVersionUID = 1L;
-	private short id;
+	private int id;
 	private short xAxisCoordinate;
 	private short yAxisCoordinate;
 	private String imagePath;
@@ -18,12 +18,12 @@ public class Piece extends JLabel
 		super(pieceIcon);
 	}
 
-	public short getId() 
+	public int getId() 
 	{
 		return id;
 	}
 	
-	public void setId(short id) 
+	public void setId(int id) 
 	{
 		this.id = id;
 	}

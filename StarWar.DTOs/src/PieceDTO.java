@@ -1,6 +1,6 @@
 public class PieceDTO 
 {
-	private short id;
+	private int id;
 	private short xAxisCoordinate;
 	private short yAxisCoordinate;
 	private String imagePath;
@@ -8,12 +8,12 @@ public class PieceDTO
 	private String pieceType;
 	private String ownerName;
 	
-	public short getId() 
+	public int getId() 
 	{
 		return id;
 	}
 	
-	public void setId(short id) 
+	public void setId(int id) 
 	{
 		this.id = id;
 	}

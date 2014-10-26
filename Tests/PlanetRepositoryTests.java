@@ -119,7 +119,7 @@ public class PlanetRepositoryTests
 		assertEquals("Coruscant", result.getName());
 		assertEquals(650, result.getXAxisCoordinate());
 		assertEquals(290, result.getYAxisCoordinate());
-		assertEquals("image/coruscant.png", result.getImagePath());
+		assertEquals("image/planets/Coruscant.png", result.getImagePath());
 	}
 	
 	@Test
