@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="setTerr" key="selection"/>
+		<item value="Repository" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="Repository"/>
+			<item value="set"/>
+			<item value="setTe"/>
 			<item value="setTerr"/>
 			<item value="return planet"/>
 			<item value="get"/>
 			<item value="territ"/>
-			<item value="set"/>
 			<item value="reposi"/>
-			<item value="&quot;"/>
-			<item value="new Planet"/>
 		</list>
 		<list key="replacehistory">
 		</list>

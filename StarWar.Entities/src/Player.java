@@ -18,6 +18,10 @@ public class Player {
 		return territories;
 	}
 
+	public void setTerritories(List<Planet> territories) {
+		this.territories = territories;
+	}
+
 	public void addTerritory(Planet territory) {
 		this.territories.add(territory);
 		territory.setOwnerName(this.name);
@@ -42,4 +46,5 @@ public class Player {
 	public PlayerRace getRace() {
 		return race;
 	}
+
 }
