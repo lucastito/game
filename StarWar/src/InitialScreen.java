@@ -44,6 +44,11 @@ public class InitialScreen {
 				
 		final JPanel mainPanel = new JPanel()
 		{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public void paintComponent(Graphics g) {  
 				                      Image img = Toolkit.getDefaultToolkit().getImage(  
 				                                InitialScreen.class.getResource("image/outerspace.jpg"));  
@@ -75,6 +80,11 @@ public class InitialScreen {
 		
 		final JPanel aboutPanel = new JPanel()
 		{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public void paintComponent(Graphics g) {  
 				                      Image img = Toolkit.getDefaultToolkit().getImage(  
 				                                InitialScreen.class.getResource("image/outerspace.jpg"));  
@@ -85,6 +95,11 @@ public class InitialScreen {
 		aboutPanel.setLayout(null);
 		
 		final JPanel helpPanel = new JPanel() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public void paintComponent(Graphics g) {
 				Image img = Toolkit.getDefaultToolkit().getImage(  
                         InitialScreen.class.getResource("image/outerspace.jpg"));  
@@ -95,6 +110,11 @@ public class InitialScreen {
 		frmStarwar.getContentPane().add(helpPanel, "name_11996292856650");
 		
 		final JPanel configurationPanel = new JPanel() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public void paintComponent(Graphics g) {
 				Image img = Toolkit.getDefaultToolkit().getImage(  
                         InitialScreen.class.getResource("image/outerspace.jpg"));  

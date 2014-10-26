@@ -1,4 +1,4 @@
-public class ObjectiveCardRepository {
+public class ObjectiveCardRepository implements IObjectiveCardRepository{
 	private ObjectiveCard padawansObjectiveCard;
 	private ObjectiveCard sithsObjectiveCard;
 	private ObjectiveCard clonesObjectiveCard;
