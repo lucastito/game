@@ -6,11 +6,9 @@ import java.util.List;
 public class PlayerRepository implements IPlayerRepository
 {
 	private HashMap<String, Player> players;
-	private IPlanetRepository planetRepository;
 	
-	public PlayerRepository(IPlanetRepository planetRepository)
+	public PlayerRepository()
 	{
-		setPlanetRepository(planetRepository);
 		players = new HashMap<String, Player>();
 	}
 	
@@ -35,6 +33,15 @@ public class PlayerRepository implements IPlayerRepository
 		return pieces;
 	}
 	
+	public Piece getPiece(int pieceId) 
+	{
+		for (Player player : players.values())
+			for (Piece piece : player.getPieces())
+				if (piece.getId() == pieceId)
+					return piece;
+		return null;
+	}
+	
 	public void addPlayer(Player player)
 	{
 		players.put(player.getName(), player);
@@ -49,29 +56,23 @@ public class PlayerRepository implements IPlayerRepository
 		
 	public void addPlayerPiece(String playerName, String planetName, Piece piece)
 	{
-		piece.setId(RandomNumberGenerator.generateRandomNumber());
+		if (piece.getId() == 0)
+			piece.setId(RandomNumberGenerator.generateRandomNumber());
 		piece.setTerritoryName(planetName);
 		Player player = getPlayerByName(playerName);
 		player.addPiece(piece);
-		planetRepository.getPlanetByName(planetName).addPiece(piece);
 	}
 	
-	public void removePlayerPiece(String playerName, PieceType type)
+	public void removePlayerPiece(String playerName, int pieceId)
 	{
 		Player player = getPlayerByName(playerName);
-		
 		for (Piece piece : player.getPieces())
 		{
-			if (piece.getPieceType().equals(type))
+			if (piece.getId() == pieceId)
 			{
 				player.getPieces().remove(piece);
 				break;
 			}
 		}
-	}
-	
-	public void setPlanetRepository(IPlanetRepository planetRepository)
-	{
-		this.planetRepository = planetRepository;
 	}
 }

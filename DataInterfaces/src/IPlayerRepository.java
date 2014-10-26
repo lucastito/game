@@ -7,6 +7,7 @@ public interface IPlayerRepository
 	void addPlayer(Player player);
 	Player getPlayerByName(String name);
 	void addPlayerPiece(String playerName, String planetName, Piece piece);
-	void removePlayerPiece(String playerName, PieceType type);
+	void removePlayerPiece(String playerName, int pieceId);
 	ArrayList<Player> getAllPlayers();
+	Piece getPiece(int pieceId);
 }

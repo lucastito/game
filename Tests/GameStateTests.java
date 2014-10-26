@@ -35,7 +35,7 @@ public class GameStateTests
 	@Test
 	public void GetAllPieces_MustReturnAllPieceDTOs() 
 	{
-		PlayerRepository playerRepository = new PlayerRepository(planetRepository);
+		PlayerRepository playerRepository = new PlayerRepository();
 		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
 		playerRepository.addPlayerPiece("Leo", "Trandosha", new Sith());
 		playerRepository.addPlayerPiece("Leo", "Coruscant", new Clone());
@@ -48,7 +48,7 @@ public class GameStateTests
 	@Test
 	public void GetAllPieces_MustReturnFilledPieceDTOs() 
 	{
-		PlayerRepository playerRepository = new PlayerRepository(planetRepository);
+		PlayerRepository playerRepository = new PlayerRepository();
 		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
 		Clone clone = new Clone();
 		clone.setId((short) 1);
@@ -76,7 +76,7 @@ public class GameStateTests
 	@Test
 	public void NextStep_ModifiesCurrentStep() 
 	{
-		PlayerRepository playerRepository = new PlayerRepository(planetRepository);
+		PlayerRepository playerRepository = new PlayerRepository();
 		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
 		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
 		playerRepository.addPlayerPiece("Leo", "Trandosha", new Clone());
@@ -99,7 +99,7 @@ public class GameStateTests
 	@Test
 	public void CurrentPlayerName_InFirstTurn_ReturnsCurrentPlayerName() 
 	{
-		PlayerRepository playerRepository = new PlayerRepository(planetRepository);
+		PlayerRepository playerRepository = new PlayerRepository();
 		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
 		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
 		GameState gameState = new GameState();
@@ -111,7 +111,7 @@ public class GameStateTests
 	@Test
 	public void CurrentPlayerName_InSecondTurn_ReturnsCurrentPlayerName() 
 	{
-		PlayerRepository playerRepository = new PlayerRepository(planetRepository);
+		PlayerRepository playerRepository = new PlayerRepository();
 		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
 		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
 		playerRepository.addPlayerPiece("Leo", "Trandosha", new Clone());
@@ -130,7 +130,7 @@ public class GameStateTests
 	@Test
 	public void CurrentROund_ReturnsCurrentRound() 
 	{
-		PlayerRepository playerRepository = new PlayerRepository(planetRepository);
+		PlayerRepository playerRepository = new PlayerRepository();
 		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
 		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
 		playerRepository.addPlayerPiece("Leo", "Trandosha", new Clone());
@@ -155,7 +155,7 @@ public class GameStateTests
 	@Test
 	public void IsPieceFromCurrentPlayer_WhenCurrentPlayerIsTheOwner_ReturnTrue() 
 	{
-		PlayerRepository playerRepository = new PlayerRepository(planetRepository);
+		PlayerRepository playerRepository = new PlayerRepository();
 		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
 		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
 		playerRepository.addPlayerPiece("Lucas", "Trandosha", new Clone());
@@ -169,7 +169,7 @@ public class GameStateTests
 	@Test
 	public void IsPieceFromCurrentPlayer_WhenCurrentPlayerIsNotTheOwner_ReturnFalse() 
 	{
-		PlayerRepository playerRepository = new PlayerRepository(planetRepository);
+		PlayerRepository playerRepository = new PlayerRepository();
 		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
 		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
 		playerRepository.addPlayerPiece("Leo", "Trandosha", new Clone());
@@ -182,7 +182,7 @@ public class GameStateTests
 	@Test
 	public void IsAttackPhase_WhenCurrentPhaseIsAttackPhase_ReturnsTrue() 
 	{
-		PlayerRepository playerRepository = new PlayerRepository(planetRepository);
+		PlayerRepository playerRepository = new PlayerRepository();
 		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
 		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
 		playerRepository.addPlayerPiece("Leo", "Trandosha", new Clone());
@@ -204,7 +204,7 @@ public class GameStateTests
 	@Test
 	public void IsRedeployPhase_WhenCurrentPhaseIsRedeployPhase_ReturnsTrue() 
 	{
-		PlayerRepository playerRepository = new PlayerRepository(planetRepository);
+		PlayerRepository playerRepository = new PlayerRepository();
 		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
 		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
 		playerRepository.addPlayerPiece("Leo", "Trandosha", new Clone());

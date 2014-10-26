@@ -7,15 +7,12 @@ public class Planet
 	private short id;
 	private String name;
 	private String ownerName;
-	private List<Piece> pieces;
 	private short xAxisCoordinate;
 	private short yAxisCoordinate;
 	private String imagePath;
 	private List<Border> internalBorders;	
 	private List<Border> externalBorders;	
-	private List<Border> allBorders;
-	
-	
+	private List<Border> allBorders;	
 
 	public Planet(short id, String name, short xAxisCoordinate, short yAxisCoordinate, String imagePath)
 	{
@@ -26,7 +23,6 @@ public class Planet
 		this.imagePath = imagePath;
 		
 		ownerName = "";
-		pieces = new ArrayList<Piece>();
 		internalBorders = new ArrayList<Border>();
 		externalBorders = new ArrayList<Border>();
 		allBorders = new ArrayList<Border>();
@@ -62,22 +58,7 @@ public class Planet
 	public String getImagePath() {
 		return imagePath;
 	}
-	
-	public List<Piece> getPieces(){
-		return this.pieces;
-	}
-	
-	public void setPieces(List<Piece> pieces){
-		this.pieces = pieces;
-	}
-	
-	public void addPiece(Piece piece){
-		this.pieces.add(piece);
-	}
-	
-	public void removePiece(Piece piece){
-		this.pieces.remove(piece);
-	}
+
 	public void addInternalBorder(Border border)
 	{
 		internalBorders.add(border);

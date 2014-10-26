@@ -162,12 +162,12 @@ public class Attack implements AttackInputPort
 			}
 			if (maiorAttacker > maiorDefender) 
 			{
-				playerRepository.removePlayerPiece(defender.getName(), defender.getPieces().get(0).getPieceType());
+				playerRepository.removePlayerPiece(defender.getName(), defender.getPieces().get(0).getId());
 			} 
 			else 
 				if(maiorAttacker <= maiorDefender && maiorAttacker != 0 && maiorDefender != 0) 
 				{
-					playerRepository.removePlayerPiece(attacker.getName(), pieces.get(pieces.size() - 1).getPieceType());
+					playerRepository.removePlayerPiece(attacker.getName(), pieces.get(pieces.size() - 1).getId());
 					pieces.remove(pieces.size() - 1);
 				}
 				else

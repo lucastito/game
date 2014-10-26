@@ -5,36 +5,29 @@ public class TroopsRedeploy implements TroopsRedeployInputPort
 {
 	private TroopsRedeployOutputPort troopsRedeployOutputPort;
 	private IPlanetRepository planetRepository;
+	private IPlayerRepository playerRepository;
 	
-	public TroopsRedeploy(TroopsRedeployOutputPort troopsRedeployOutputPort, IPlanetRepository planetRepository)
+	public TroopsRedeploy(TroopsRedeployOutputPort troopsRedeployOutputPort, IPlanetRepository planetRepository, IPlayerRepository playerRepository)
 	{
 		this.troopsRedeployOutputPort = troopsRedeployOutputPort;
 		this.planetRepository = planetRepository;
+		this.playerRepository = playerRepository;
 	}
 	public List<TerritoryDTO> possibleTerritoriesToRedeploy(String sourceTerritory) 
 	{
-		if (!isRedeployTurn())
-			return null;
 		List<Planet> neighborPlanets = 	planetRepository.getNeighborPlanets(sourceTerritory);
-		
 		List<TerritoryDTO> territories = new ArrayList<TerritoryDTO>();
 		for(Planet neighborPlanet : neighborPlanets)
 		{
-			territories.add(Mapper.mapTerritoryDTO(neighborPlanet));
+			if (!neighborPlanet.getOwnerName().equals(sourceTerritory))
+				territories.add(Mapper.mapTerritoryDTO(neighborPlanet));
 		}
 				
 		return territories;		
 	}
 
-	private boolean isRedeployTurn() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	public void redeployUnits(String sourceTerritory, String targetTerritory, String pieceType) 
+	public void redeployUnits(String sourceTerritory, String targetTerritory, List<PieceDTO> pieces) 
 	{
-		if (!isRedeployTurn())
-			return;
 		Planet targetPlanet = planetRepository.getPlanetByName(targetTerritory);
 		if (!isValidTerritoryToRedeploy(sourceTerritory, targetPlanet.getName(), targetPlanet.getOwnerName()))
 		{
@@ -42,12 +35,14 @@ public class TroopsRedeploy implements TroopsRedeployInputPort
 			return;
 		}
 		
-		Piece p = planetRepository.getPlanetByName(sourceTerritory).getPieces().get(0);
-		p.setXAxisCoordinate(targetPlanet.getXAxisCoordinate());
-		p.setYAxisCoordinate(targetPlanet.getYAxisCoordinate());
-		planetRepository.getPlanetByName(targetTerritory).addPiece(p);
-		planetRepository.getPlanetByName(sourceTerritory).getPieces().remove(0);
-		p.setTerritoryName(targetTerritory);
+		for (PieceDTO pieceDTO : pieces)
+		{
+			Piece piece = playerRepository.getPiece(pieceDTO.getId());
+			playerRepository.removePlayerPiece(targetPlanet.getOwnerName(), pieceDTO.getId());
+			piece.setTerritoryName(targetTerritory);
+			playerRepository.addPlayerPiece(targetPlanet.getOwnerName(), targetTerritory, piece);
+		}
+
 		troopsRedeployOutputPort.show();
 	}
 	

@@ -219,7 +219,15 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 				
 					if (targetTerritory != null && gameState.isRedeployPhase())
 					{
-						troopsRedeployInputPort.redeployUnits(selectedPiece.getTerritoryName(), targetTerritory.getName(), selectedPiece.getPieceType());
+						ArrayList<PieceDTO> piecesDTO = new ArrayList<PieceDTO>();
+						PieceDTO pieceDTO = new PieceDTO();
+						pieceDTO.setId(selectedPiece.getId());
+						pieceDTO.setTerritoryName(selectedPiece.getTerritoryName());
+						if (selectedPiece.getPieceType() != null)
+							pieceDTO.setPieceType(selectedPiece.getPieceType().toString());
+						pieceDTO.setOwnerName(selectedPiece.getOwnerName());
+						piecesDTO.add(pieceDTO);
+						troopsRedeployInputPort.redeployUnits(selectedPiece.getTerritoryName(), targetTerritory.getName(), piecesDTO);
 						selectedPiece = null;
 						return;
 					}

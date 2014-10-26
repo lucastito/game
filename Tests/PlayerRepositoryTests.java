@@ -12,7 +12,7 @@ public class PlayerRepositoryTests {
 	@Before
 	public void setUp() throws Exception {
 		planetRepository = new PlanetRepository();
-		playerRepository = new PlayerRepository(planetRepository);
+		playerRepository = new PlayerRepository();
 
 		Player player = new Player(PlayerRace.CLONE, "Lucas");
 		playerRepository.addPlayer(player);
@@ -85,7 +85,7 @@ public class PlayerRepositoryTests {
 		Clone clone = new Clone();
 		clone.setPieceType(PieceType.CLONE);
 		playerRepository.addPlayerPiece("Lucas", "Trandosha", clone);
-		playerRepository.removePlayerPiece("Lucas", PieceType.CLONE);
+		playerRepository.removePlayerPiece("Lucas", clone.getId());
 		Player player = playerRepository.getPlayerByName("Lucas");
 		
 		for (Piece piece : player.getPieces())
@@ -96,7 +96,7 @@ public class PlayerRepositoryTests {
 	@Test
 	public void GetAllPieces_WhenPlayerHasPieces_ReturnsPiecesList() 
 	{
-		PlayerRepository newPlayerRepository = new PlayerRepository(planetRepository);
+		PlayerRepository newPlayerRepository = new PlayerRepository();
 		Player playerOne = new Player(PlayerRace.CLONE, "PlayerOne");
 		playerOne.addPiece(new Clone());
 		Player playerTwo = new Player(PlayerRace.DROIDE, "PlayerTwo");
@@ -111,7 +111,7 @@ public class PlayerRepositoryTests {
 	@Test
 	public void GetAllPLayers_ReturnsPlayersList() 
 	{
-		PlayerRepository newPlayerRepository = new PlayerRepository(planetRepository);
+		PlayerRepository newPlayerRepository = new PlayerRepository();
 		Player playerOne = new Player(PlayerRace.CLONE, "PlayerOne");
 		Player playerTwo = new Player(PlayerRace.DROIDE, "PlayerTwo");
 		newPlayerRepository.addPlayer(playerOne);
