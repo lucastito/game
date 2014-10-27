@@ -69,7 +69,8 @@ public class InitialScreen {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmStarwar.dispose();
-				presenter.show();
+				CharacterSelectScreen css = new CharacterSelectScreen(presenter);
+				css.getFrame().setVisible(true);
 			}
 		});
 		btnNewButton.setForeground(Color.WHITE);
