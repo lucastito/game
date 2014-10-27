@@ -15,16 +15,16 @@ public class DistributeTerritoryCard {
 		verifyAndDistributeForRace(player2.getRace(), player2sPlanet, planets,
 				pr);
 		int cont = sizePlanets;
-Iterator<Planet> iterator = planets.iterator();
+		Iterator<Planet> iterator = planets.iterator();
 		while (cont > 0) {
 			if (player1sPlanet.size() < sizePlanets / 2) {
 				player1sPlanet.add(iterator.next());
-iterator.remove();
+				iterator.remove();
 				cont--;
 			}
 			if (player2sPlanet.size() < sizePlanets / 2) {
 				player2sPlanet.add(iterator.next());
-iterator.remove();
+				iterator.remove();
 				cont--;
 			}
 		}
@@ -76,7 +76,13 @@ iterator.remove();
 		}
 	}
 
-	public void distributTerritoryCards() {
-
+	public void distributTerritoryCards(Player player, ITerritoryCardRepository itcr) {
+Set<Planet> territories = player.getTerritories();
+Set<TerritoryCard> territoryCards = new HashSet<TerritoryCard>();
+Iterator<Planet> iterator = territories.iterator();
+while (iterator.hasNext()){
+	territoryCards.add(itcr.getTerritoryCardByName(iterator.next().getName()));
+}
+player.setTerritoryCards(territoryCards);
 	}
 }
