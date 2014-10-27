@@ -163,7 +163,8 @@ public class GameStateTests
 		GameState gameState = new GameState();
 		gameState.setPlayerRepository(playerRepository);
 				
-		assertTrue(gameState.isPieceFromCurrentPlayer(playerRepository.getPlayerByName("Lucas").getPieces().get(0).getId()));
+		assertTrue(gameState.isPieceFromCurrentPlayer(playerRepository.getPlayerByName("Lucas").getPieces().iterator().next().getId()));
+
 	}
 	
 	@Test
@@ -176,7 +177,7 @@ public class GameStateTests
 		GameState gameState = new GameState();
 		gameState.setPlayerRepository(playerRepository);
 		
-		assertFalse(gameState.isPieceFromCurrentPlayer(playerRepository.getPlayerByName("Leo").getPieces().get(0).getId()));
+		assertFalse(gameState.isPieceFromCurrentPlayer(playerRepository.getPlayerByName("Leo").getPieces().iterator().next().getId()));
 	}
 	
 	@Test
