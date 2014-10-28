@@ -5,7 +5,7 @@ public class GameState implements GameStateInputPort
 {
 	IPlanetRepository planetRepository;
 	IPlayerRepository playerRepository;
-	private ArrayList<Player> players;
+	private List<Player> players;
 	private PlayerStep playerStep;
 	private int currentRound = 0;
 	private Player currentPlayer;

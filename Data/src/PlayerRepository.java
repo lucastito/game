@@ -12,16 +12,17 @@ public class PlayerRepository implements IPlayerRepository
 		players = new HashMap<String, Player>();
 	}
 	
-	public ArrayList<Player> getAllPlayers()
+	public List<Player> getAllPlayers()
 	{
-		ArrayList<Player> playersList = new ArrayList<Player>();
-		for(String playerName : players.keySet())
+List<Player> playersList = new ArrayList<Player>();
+Player player;
+for(String playerName : players.keySet())
 		{
-			Player player = getPlayerByName(playerName);
+			player = getPlayerByName(playerName);
 			playersList.add(player);
 		}
 			
-		return playersList;
+return playersList;
 	}
 	
 	public List<Piece> getAllPieces() 

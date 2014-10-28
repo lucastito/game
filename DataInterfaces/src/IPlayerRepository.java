@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public interface IPlayerRepository 
@@ -8,6 +7,6 @@ public interface IPlayerRepository
 	Player getPlayerByName(String name);
 	void addPlayerPiece(String playerName, String planetName, Piece piece);
 	void removePlayerPiece(String playerName, int pieceId);
-	ArrayList<Player> getAllPlayers();
+	List<Player> getAllPlayers();
 	Piece getPiece(int pieceId);
 }

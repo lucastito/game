@@ -15,14 +15,15 @@ public class Program
 		
 		GameState gameState = new GameState();		
 		gameState.setPlanetRepository(planetRepository);
-		gameState.setPlayerRepository(playerRepository);
-		
+/**
+*você precisa adicionar jogadores ao playerrepository pelo metodo add, quando o usuário clicar nos personagens, na linha abaixo da treta, porque ainda não existem personagens da lista
+*		gameState.setPlayerRepository(playerRepository);
+**/		
 		presenter.setAttackInputPort(attack);
 		presenter.setGameStateInputPort(gameState);
 		presenter.setTroopsRedeployInputPort(troopsRedeploy);
 		
 		InitialScreen is = new InitialScreen(presenter);
 		is.getfrmStarwar().setVisible(true);
-		//presenter.show();
 	}
 }
