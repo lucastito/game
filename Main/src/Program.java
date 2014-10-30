@@ -7,6 +7,8 @@ public class Program
 		
 		PlayerRepository playerRepository = new PlayerRepository();
 		
+		
+		
 		Attack attack = new Attack(planetRepository, playerRepository);
 		
 		GameScreenPresenter presenter = new GameScreenPresenter();
@@ -15,10 +17,9 @@ public class Program
 		
 		GameState gameState = new GameState();		
 		gameState.setPlanetRepository(planetRepository);
-/**
-*você precisa adicionar jogadores ao playerrepository pelo metodo add, quando o usuário clicar nos personagens, na linha abaixo da treta, porque ainda não existem personagens da lista
-*		gameState.setPlayerRepository(playerRepository);
-**/		
+
+		gameState.setPlayerRepository(playerRepository);
+
 		presenter.setAttackInputPort(attack);
 		presenter.setGameStateInputPort(gameState);
 		presenter.setTroopsRedeployInputPort(troopsRedeploy);

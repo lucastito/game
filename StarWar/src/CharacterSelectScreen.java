@@ -22,14 +22,13 @@ public class CharacterSelectScreen {
 	
 	
 	public void startGameWith(){
+		
 		frame.dispose();
 		presenter.show();
 	}
 	
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1366, 768);
@@ -38,9 +37,6 @@ public class CharacterSelectScreen {
 		final JPanel mainPanel = new JPanel()
 		{
 
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = 1L;
 
 			public void paintComponent(Graphics g) {  
@@ -59,7 +55,7 @@ public class CharacterSelectScreen {
 			}
 		});
 		chooseSith.setBounds(84, 440, 130, 279);
-//		btnNewButton.setBorder(null);
+//		btnNewButton.setBorder(null);  Esse codigo comentado será necessario para fazer um aperfeicoamento na tela futuramente
 //		btnNewButton.setBorderPainted(false);
 		chooseSith.setContentAreaFilled(false);
 //		btnNewButton.setOpaque(false);

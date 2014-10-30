@@ -10,6 +10,7 @@ public class PlayerRepository implements IPlayerRepository
 	public PlayerRepository()
 	{
 		players = new HashMap<String, Player>();
+		initializePlayers();
 	}
 	
 	public List<Player> getAllPlayers()
@@ -75,5 +76,20 @@ return playersList;
 				break;
 			}
 		}
+	}
+	
+	private void initializePlayers() {
+		Player player = new Player(PlayerRace.PADAWAN,"Player 1");
+		this.addPlayer(player);
+//		player = new Player(PlayerRace.CLONE,"Player 2");
+//		this.addPlayer(player);
+//		player = new Player(PlayerRace.DROIDE,"Player 3");
+//		this.addPlayer(player);
+//		player = new Player(PlayerRace.SITH,"Player 4");
+//		this.addPlayer(player);
+//		player = new Player(PlayerRace.TRANDOSHAN,"Player 5");
+//		this.addPlayer(player);
+//		player = new Player(PlayerRace.WOOKIEE,"Player 6");
+//		this.addPlayer(player);
 	}
 }
