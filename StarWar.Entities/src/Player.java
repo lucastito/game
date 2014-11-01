@@ -7,6 +7,7 @@ public class Player {
 	private Set<Piece> pieces;
 	private Set<TerritoryCard> territoryCards;
 	private PlayerRace race;
+	private ObjectiveCard objectiveCard;
 
 	public Player(PlayerRace race, String name) {
 		this.race = race;
@@ -50,6 +51,14 @@ public class Player {
 
 	public void setTerritoryCards(Set<TerritoryCard> territoryCards) {
 		this.territoryCards = territoryCards;
+	}
+
+	public ObjectiveCard getObjectiveCard() {
+		return objectiveCard;
+	}
+
+	public void setObjectiveCard(ObjectiveCard objectiveCard) {
+		this.objectiveCard = objectiveCard;
 	}
 
 }

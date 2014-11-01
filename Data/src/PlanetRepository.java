@@ -67,6 +67,10 @@ public class PlanetRepository implements IPlanetRepository
 		}
 		return false;
 	}
+	
+	public int getPlanetRepositorySize(){
+		return planets.size();
+	}
 		
 //		{Trandosha, Muunlist, Bakura, Calamari, Naboo, 
 //		Dantooine, Ilum, Sarapin, Eredenn_Prime, Coruscant, 

@@ -30,9 +30,21 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 	private PlanetarySystemController planetarySystemController;
 	List<Piece> pieceLabels;
 	List<Territory> territoryLabels;
+	private GameCreationInputPort gameCreation;
+	
     
+	
 	public GameScreenPresenter() 
 	{
+		frame = new JFrame();
+		panel = new JPanel();
+		pieceLabels = new ArrayList<Piece>();
+		territoryLabels = new ArrayList<Territory>();
+	}
+	
+	public GameScreenPresenter(GameCreationInputPort gameCreation) 
+	{
+		this.setGameCreation(gameCreation);
 		frame = new JFrame();
 		panel = new JPanel();
 		pieceLabels = new ArrayList<Piece>();
@@ -70,6 +82,7 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 		        frame.setVisible(true);
 		    }
     	});
+    	gameCreation.printInfo();
 	}
 
 	protected void showTerritories() 
@@ -134,6 +147,14 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 	public void setAttackInputPort(AttackInputPort attackInputPort)
 	{
 		this.attackInputPort = attackInputPort;
+	}
+
+	public GameCreationInputPort getGameCreation() {
+		return gameCreation;
+	}
+
+	public void setGameCreation(GameCreationInputPort gameCreation) {
+		this.gameCreation = gameCreation;
 	}
 
 	class PieceMouseAdapter extends MouseAdapter {

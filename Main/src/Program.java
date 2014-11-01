@@ -11,15 +11,19 @@ public class Program
 		
 		Attack attack = new Attack(planetRepository, playerRepository);
 		
-		GameScreenPresenter presenter = new GameScreenPresenter();
 		
-		TroopsRedeploy troopsRedeploy = new TroopsRedeploy(presenter, planetRepository, playerRepository);
+		
+		
 		
 		GameState gameState = new GameState();		
 		gameState.setPlanetRepository(planetRepository);
 
 		gameState.setPlayerRepository(playerRepository);
+		
+		GameCreation gameCreation = new GameCreation(playerRepository, new ObjectiveCardRepository(planetRepository), planetRepository, new TerritoryCardRepository());
 
+		GameScreenPresenter presenter = new GameScreenPresenter(gameCreation);
+		TroopsRedeploy troopsRedeploy = new TroopsRedeploy(presenter, planetRepository, playerRepository);
 		presenter.setAttackInputPort(attack);
 		presenter.setGameStateInputPort(gameState);
 		presenter.setTroopsRedeployInputPort(troopsRedeploy);

@@ -9,4 +9,5 @@ public interface IPlayerRepository
 	void removePlayerPiece(String playerName, int pieceId);
 	List<Player> getAllPlayers();
 	Piece getPiece(int pieceId);
+	void restartRepository();
 }

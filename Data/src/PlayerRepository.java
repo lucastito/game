@@ -78,6 +78,10 @@ return playersList;
 		}
 	}
 	
+	public void restartRepository(){
+		players = new HashMap<String, Player>();
+	}
+	
 	private void initializePlayers() {
 		Player player = new Player(PlayerRace.PADAWAN,"Player 1");
 		this.addPlayer(player);

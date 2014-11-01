@@ -8,4 +8,5 @@ public interface IPlanetRepository
 	Planet getPlanetByName(String name);
 	List<Planet> getNeighborPlanets(String planetName);
 	boolean areNeighbors(String sourceTerritoryName, String targetTerritoryName);
+	int getPlanetRepositorySize();
 }

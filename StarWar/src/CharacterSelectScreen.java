@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -21,10 +22,17 @@ public class CharacterSelectScreen {
 	}
 	
 	
-	public void startGameWith(){
-		
+	public void startGameWith(String race){
+		PlayerDTO player1 = new PlayerDTO(1, "Player 1", race);
+		PlayerDTO player2 = new PlayerDTO(2, "Player 2", "SITH");
+		GameCreationInputPort gameCreation = presenter.getGameCreation();
+		gameCreation.addPlayerToCurrentGame(player1);
+		gameCreation.addPlayerToCurrentGame(player2);
+		gameCreation.setUpPlayersObjective();
+		gameCreation.setUpPlayersTerritoriesAndTerritoriesCards();
 		frame.dispose();
 		presenter.show();
+		JOptionPane.showMessageDialog(null, "Você escolheu a raça "+race);
 	}
 	
 
@@ -51,7 +59,7 @@ public class CharacterSelectScreen {
 		JButton chooseSith = new JButton("");
 		chooseSith.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				startGameWith();
+				startGameWith("SITH");
 			}
 		});
 		chooseSith.setBounds(84, 440, 130, 279);
@@ -62,6 +70,11 @@ public class CharacterSelectScreen {
 		mainPanel.add(chooseSith);
 		
 		JButton chooseClone = new JButton("");
+		chooseClone.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				startGameWith("CLONE");
+			}
+		});
 		chooseClone.setContentAreaFilled(false);
 		chooseClone.setBounds(224, 440, 130, 279);
 		mainPanel.add(chooseClone);
@@ -69,7 +82,7 @@ public class CharacterSelectScreen {
 		JButton choosePadawan = new JButton("");
 		choosePadawan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				startGameWith();
+				startGameWith("PADAWAN");
 			}
 		});
 		choosePadawan.setContentAreaFilled(false);
@@ -79,7 +92,7 @@ public class CharacterSelectScreen {
 		JButton chooseDroid = new JButton("");
 		chooseDroid.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				startGameWith();
+				startGameWith("DROIDE");
 			}
 		});
 		chooseDroid.setContentAreaFilled(false);
@@ -89,7 +102,7 @@ public class CharacterSelectScreen {
 		JButton chooseTrandosh = new JButton("");
 		chooseTrandosh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				startGameWith();
+				startGameWith("TRANDOSHAN");
 			}
 		});
 		chooseTrandosh.setContentAreaFilled(false);
@@ -99,7 +112,7 @@ public class CharacterSelectScreen {
 		JButton chooseWookie = new JButton("");
 		chooseWookie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				startGameWith();
+				startGameWith("WOOKIEE");
 			}
 		});
 		chooseWookie.setContentAreaFilled(false);

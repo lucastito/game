@@ -4,7 +4,7 @@ import java.util.Set;
 
 public class DistributeTerritoryCard {
 
-	public void distributeTerritories(Player player1, Player player2,
+	public static void distributeTerritories(Player player1, Player player2,
 			IPlanetRepository pr) {
 		Set<Planet> planets = new HashSet<Planet>(pr.getPlanets().values());
 		int sizePlanets = planets.size();
@@ -26,13 +26,14 @@ public class DistributeTerritoryCard {
 				player2sPlanet.add(iterator.next());
 				iterator.remove();
 				cont--;
-			}
+			}else
+				break;
 		}
 		player1.setTerritories(player1sPlanet);
 		player2.setTerritories(player2sPlanet);
 	}
 
-	private void verifyAndDistributeForRace(PlayerRace playerRace,
+	private static void verifyAndDistributeForRace(PlayerRace playerRace,
 			Set<Planet> pl, Set<Planet> planets, IPlanetRepository pr) {
 		switch (playerRace) {
 		case PADAWAN:
@@ -76,7 +77,7 @@ public class DistributeTerritoryCard {
 		}
 	}
 
-	public void distributTerritoryCards(Player player, ITerritoryCardRepository itcr) {
+	public static void distributTerritoryCards(Player player, ITerritoryCardRepository itcr) {
 Set<Planet> territories = player.getTerritories();
 Set<TerritoryCard> territoryCards = new HashSet<TerritoryCard>();
 Iterator<Planet> iterator = territories.iterator();
