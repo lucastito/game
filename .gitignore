@@ -1,7 +1,6 @@
 *.index
 *.index
 *.snap
-.metadata/.plugins/org.eclipse.core.resources/.projects/StarWar.DTOs/org.eclipse.jdt.core/state.dat
 *.class
 *.classpath
 .metadata/
