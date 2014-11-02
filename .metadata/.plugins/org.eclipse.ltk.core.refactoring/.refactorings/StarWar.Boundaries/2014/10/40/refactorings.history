@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename type &apos;TroopsRedeployBoundary&apos; to &apos;TroopsRedeployInputPort&apos;&#x0D;&#x0A;- Original project: &apos;StarWar.Boundaries&apos;&#x0D;&#x0A;- Original element: &apos;TroopsRedeployBoundary&apos;&#x0D;&#x0A;- Renamed element: &apos;TroopsRedeployInputPort&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;TroopsRedeployBoundary&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;{TroopsRedeployBoundary.java[TroopsRedeployBoundary" matchStrategy="1" name="TroopsRedeployInputPort" qualified="false" references="true" similarDeclarations="false" stamp="1412454968165" textual="false" version="1.0"/>
-</session>
