@@ -15,6 +15,7 @@ public class Territory extends JLabel
 	private String name;
 	private short xAxisCoordinate;
 	private short yAxisCoordinate;
+	private String ownerName;
 	private String imagePath;
 	
 	public short getId() {
@@ -55,5 +56,13 @@ public class Territory extends JLabel
 	
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
+	}
+
+	public String getOwnerName() {
+		return ownerName;
+	}
+
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
 	}
 }

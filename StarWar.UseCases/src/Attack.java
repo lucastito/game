@@ -1,6 +1,3 @@
-import java.util.Collections;
-import java.util.List;
-
 public class Attack implements AttackInputPort {
 	IPlanetRepository planetRepository;
 	IPlayerRepository playerRepository;
@@ -26,58 +23,11 @@ public class Attack implements AttackInputPort {
 		return true;
 	}
 
-	// se (quantidade de unidades - 1) > 3, sistema gera 3 números aleatórios,
-	// caso contrário sistema gera (quantidade de unidades - 1) números de
-	// ataque
-	public List<Integer> generateAttackingUnits(PlayerDTO player,
-			TerritoryDTO territory) {
-		throw new UnsupportedOperationException();
-	}
-
-	// sistema verifica quantas unidades de batalha existem no território que
-	// será atacado
-	// 8 se (quantidade de unidades que serão atacadas) > 3,
-	// sistema gera 3 números de defesa, caso contrário,
-	// sistema gera (quantidade de unidades que serão atacadas) números de
-	// defesa
-	public List<Integer> generateDefendingUnits(PlayerDTO player,
-			TerritoryDTO territory) {
-		throw new UnsupportedOperationException();
-	}
-
-	public int compareUnits(List<Integer> firstUnits, List<Integer> secondUnits) {
-		int firstScore = 0;
-		int secondScore = 0;
-		int minorListSize = firstUnits.size() <= secondUnits.size() ? firstUnits
-				.size() : secondUnits.size();
-
-		Collections.sort(firstUnits);
-		Collections.sort(secondUnits);
-		Collections.reverse(firstUnits);
-		Collections.reverse(secondUnits);
-
-		for (int i = 0; i < minorListSize; i++) {
-			int result = firstUnits.get(i).compareTo(secondUnits.get(i));
-			if (result > 0)
-				firstScore++;
-			else
-				secondScore++;
-		}
-
-		if (firstScore == secondScore)
-			return 0;
-		if (firstScore > secondScore)
-			return 1;
-		return -1;
-	}
-
 	/*
 	 * Attack: Planeta atacante, Planeta defensor, e lista de peças que vao
 	 * atacar no max 3 peças podem atacar
 	 */
-	public void attack(String attackerPlanetName, String defenderPlanetName,
-			List<PieceDTO> piecesDTO) {
-		List<Piece> pieces = Mapper.mapPiece(piecesDTO);
+	public void attack(String attackerPlanetName, String defenderPlanetName, int numberOfPieces) {
 		Planet attackerPlanet = planetRepository
 				.getPlanetByName(attackerPlanetName);
 		if (attackerPlanet == null) {
@@ -102,14 +52,13 @@ public class Attack implements AttackInputPort {
 			return;
 		}
 
-		int remainingAttackerPieces = attacker.getPieces().size()
-				- pieces.size();
+		int remainingAttackerPieces = attacker.getPieces().size() - numberOfPieces;
 
 		if (attacker.getName() == defender.getName()) {
 			return;
 		}
 
-		if (pieces.size() < 1 || pieces.size() > 3) {
+		if (numberOfPieces < 1 || numberOfPieces > 3) {
 			return;
 		}
 
@@ -126,7 +75,7 @@ public class Attack implements AttackInputPort {
 			return;
 		}
 
-		int[] attackerDice = War.rollDice(pieces.size());
+		int[] attackerDice = War.rollDice(numberOfPieces);
 		int[] defenderDice;
 		/*
 		 * Rolagem de dados: 1. Nao importa a quantidade de pecas do atacante
@@ -161,13 +110,10 @@ public class Attack implements AttackInputPort {
 				}
 			}
 			if (maiorAttacker > maiorDefender) {
-				playerRepository.removePlayerPiece(defender.getName(), defender
-						.getPieces().iterator().next().getId());
+				playerRepository.removePlayerPiece(defender.getName(), defenderPlanetName, numberOfPieces);
 			} else if (maiorAttacker <= maiorDefender && maiorAttacker != 0
 					&& maiorDefender != 0) {
-				playerRepository.removePlayerPiece(attacker.getName(), pieces
-						.get(pieces.size() - 1).getId());
-				pieces.remove(pieces.size() - 1);
+				playerRepository.removePlayerPiece(attacker.getName(), attackerPlanetName, numberOfPieces);
 			} else
 				break;
 

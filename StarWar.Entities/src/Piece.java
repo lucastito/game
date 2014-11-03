@@ -1,4 +1,4 @@
-public abstract class Piece 
+public class Piece 
 {
 	private int id;
 	private short xAxisCoordinate;

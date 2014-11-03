@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path=".settings"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Boundaries"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Data"/>
@@ -10,5 +10,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/Main"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/StarWar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/UseCases"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

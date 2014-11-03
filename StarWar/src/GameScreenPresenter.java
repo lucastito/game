@@ -18,7 +18,8 @@ import model.Territory;
 
 public class GameScreenPresenter implements TroopsRedeployOutputPort
 {
-	Piece selectedPiece;
+	Territory selectedTerritory;
+	int numberOfPieces;
 	private GameStateInputPort gameState;
 	private TroopsRedeployInputPort troopsRedeployInputPort;
 	private AttackInputPort attackInputPort;
@@ -119,8 +120,6 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
         	Piece pieceLabel = new Piece(pieceIcon);
         	System.out.println(piece.getxAxisCoordinate() +" "+ piece.getxAxisCoordinate());
         	pieceLabel.setBounds(piece.getxAxisCoordinate(), piece.getyAxisCoordinate(), pieceIcon.getIconWidth(), pieceIcon.getIconHeight());
-			MouseListener listener = new PieceMouseAdapter();
-			pieceLabel.addMouseListener(listener);
 			pieceLabels.add(pieceLabel);
 			frame.add(pieceLabel);			
         }	
@@ -157,46 +156,6 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 		this.gameCreation = gameCreation;
 	}
 
-	class PieceMouseAdapter extends MouseAdapter {
-		
-		@Override
-    	public void mouseEntered(MouseEvent e) 
-		{
-			Piece piece = findPieceOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y);
-    		if (gameState.isPieceFromCurrentPlayer(piece.getId()) && (gameState.isRedeployPhase() || gameState.isAttackPhase()))
-    			frame.setCursor(new Cursor(12));
-    	}
-        @Override
-    	public void mouseExited(MouseEvent e) {
-        	frame.setCursor(new Cursor(0));    		
-    	}
-        
-        @Override
-    	public void mouseClicked(MouseEvent e) 
-    	{        	
-        	if (selectedPiece == null)
-        	{
-        		Piece piece = findPieceOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y);
-        		if (gameState.isPieceFromCurrentPlayer(selectedPiece.getId()))
-        			selectedPiece = piece;
-        	}
-        		    	
-    	}
-        
-        private Piece findPieceOnClick(int x, int y) 
-    	{
-    		for(Piece piece : piecesController.getAllPieces())
-    		{
-    			if(x < piece.getxAxisCoordinate() + 40 && x > piece.getxAxisCoordinate()
-    					&& y < piece.getyAxisCoordinate() + 40 && y > piece.getyAxisCoordinate())
-    			{
-    				System.out.println(piece.getName()+" " + piece.getxAxisCoordinate() + " " + x + " " + piece.getyAxisCoordinate() + " " + y );	
-    				return piece;}
-    			System.out.println(piece.getName()+" " + piece.getxAxisCoordinate() + " " + x + " " + piece.getyAxisCoordinate() + " " + y );	
-    		}		
-    		return null;
-    	}
-    }
 	
 	class TerritoryMouseAdapter extends MouseAdapter 
 	{
@@ -204,12 +163,12 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
         @Override
     	public void mouseEntered(MouseEvent e) 
         {
-        	if (selectedPiece == null)
+        	if (selectedTerritory == null)
         		return;
-        	if (gameState.isPieceFromCurrentPlayer(selectedPiece.getId()) && (gameState.isRedeployPhase() || gameState.isAttackPhase()))
+        	if (gameState.isPieceFromCurrentPlayer(selectedTerritory.getId()) && (gameState.isRedeployPhase() || gameState.isAttackPhase()))
 			{
 	        	Territory targetTerritory = findTerritoryOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y); 
-	        	List<Territory> neighbors = planetarySystemController.getTerritoriesToRedeploy(selectedPiece.getTerritoryName(), 0);
+	        	List<Territory> neighbors = planetarySystemController.getTerritoriesToRedeploy(selectedTerritory.getName(), 0);
 	        	
 	        	for (Territory territory : neighbors)
 	        	{
@@ -232,30 +191,22 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
     	public void mouseClicked(MouseEvent e) 
     	{
         	Territory targetTerritory;
-			if (selectedPiece != null)
+			if (selectedTerritory != null)
 			{
-				if (gameState.isPieceFromCurrentPlayer(selectedPiece.getId()))
+				if (selectedTerritory.getOwnerName().equals(gameState.currentPlayerName()))
 				{
 					targetTerritory = findTerritoryOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y);  
 				
 					if (targetTerritory != null && gameState.isRedeployPhase())
 					{
-						ArrayList<PieceDTO> piecesDTO = new ArrayList<PieceDTO>();
-						PieceDTO pieceDTO = new PieceDTO();
-						pieceDTO.setId(selectedPiece.getId());
-						pieceDTO.setTerritoryName(selectedPiece.getTerritoryName());
-						if (selectedPiece.getPieceType() != null)
-							pieceDTO.setPieceType(selectedPiece.getPieceType().toString());
-						pieceDTO.setOwnerName(selectedPiece.getOwnerName());
-						piecesDTO.add(pieceDTO);
-						troopsRedeployInputPort.redeployUnits(selectedPiece.getTerritoryName(), targetTerritory.getName(), piecesDTO);
-						selectedPiece = null;
+						troopsRedeployInputPort.redeployUnits(selectedTerritory.getName(), targetTerritory.getName(), numberOfPieces);
+						selectedTerritory = null;
 						return;
 					}
 					if (targetTerritory != null && gameState.isAttackPhase())
 					{
-						//attackInputPort.attack(selectedPiece.getTerritoryName(), targetTerritory.getName(), selectedPiece.getPieceType());
-						selectedPiece = null;
+						attackInputPort.attack(selectedTerritory.getName(), targetTerritory.getName(), numberOfPieces);
+						selectedTerritory = null;
 						return;
 					}
 				}

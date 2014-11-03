@@ -15,15 +15,15 @@ public class PlayerRepository implements IPlayerRepository
 	
 	public List<Player> getAllPlayers()
 	{
-List<Player> playersList = new ArrayList<Player>();
-Player player;
-for(String playerName : players.keySet())
+		List<Player> playersList = new ArrayList<Player>();
+		Player player;
+		for(String playerName : players.keySet())
 		{
 			player = getPlayerByName(playerName);
 			playersList.add(player);
 		}
 			
-return playersList;
+		return playersList;
 	}
 	
 	public List<Piece> getAllPieces() 
@@ -56,26 +56,27 @@ return playersList;
 		return players.get(name);
 	}
 		
-	public void addPlayerPiece(String playerName, String planetName, Piece piece)
+	public void addPlayerPiece(String playerName, String planetName, int numberOfPieces)
 	{
-		if (piece.getId() == 0)
-			piece.setId(RandomNumberGenerator.generateRandomNumber());
-		piece.setTerritoryName(planetName);
-		Player player = getPlayerByName(playerName);
-		player.addPiece(piece);
+		for (int i = 0 ; i < numberOfPieces; i++)
+		{
+			Piece piece = new Piece();
+			if (piece.getId() == 0)
+				piece.setId(RandomNumberGenerator.generateRandomNumber());
+			piece.setTerritoryName(planetName);
+			Player player = getPlayerByName(playerName);
+			player.addPiece(piece);
+		}		
 	}
 	
-	public void removePlayerPiece(String playerName, int pieceId)
+	public void removePlayerPiece(String playerName, String planetName, int numberOfPieces)
 	{
-		Player player = getPlayerByName(playerName);
-		for (Piece piece : player.getPieces())
-		{
-			if (piece.getId() == pieceId)
-			{
-				player.getPieces().remove(piece);
-				break;
-			}
-		}
+		//Player player = getPlayerByName(playerName);
+		//for (int i = 0 ; i < player.getPieces().size(); i++)
+		//{
+		////	if (player.getPieces().)
+		//	player.getPieces().remove(player.get);
+		//}	
 	}
 	
 	public void restartRepository(){
