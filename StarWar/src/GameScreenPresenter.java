@@ -73,6 +73,7 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 		        panel.add(gameScreenPanel);
 		        panel.add(menuScreenPanel, BorderLayout.SOUTH);
 		        
+		        showArmyCount();
 		        showPieces();
 			    showTerritories();
 			    
@@ -99,25 +100,12 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 			territoryLabel.addMouseListener(listener);
 			territoryLabels.add(territoryLabel);
 			
-			int armyCount = 0;
-			for (PieceDTO piece : gameState.getAllPieces())
-			{
-				if (piece.getTerritoryName().equals(territoryLabel.getName()))
-				{
-					armyCount++;
-				}
-			}
-			JLabel armyCountLabel = new JLabel("" + armyCount);
-			armyCountLabel.setBounds(territory.getxAxisCoordinate() + territoryIcon.getIconWidth()/2, territory.getyAxisCoordinate() + territoryIcon.getIconHeight()/2, 20, 20);
-			armyCountLabel.setForeground(new Color(255, 215, 0));
-			armyCountLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			armyCountLabels.add(armyCountLabel);
+
 			selectedTerritoryLabel = new JLabel("*");
 			selectedTerritoryLabel.setForeground(new Color(255, 215, 0));
 			selectedTerritoryLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 			selectedTerritoryLabel.setVisible(false);
 			frame.add(selectedTerritoryLabel);
-			frame.add(armyCountLabel);
 			frame.add(territoryLabel);
 	    }
 		frame.repaint();
@@ -140,7 +128,6 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
         {
         	ImageIcon pieceIcon = new ImageIcon(getClass().getResource(piece.getImagePath()).getPath().toString());
         	Piece pieceLabel = new Piece(pieceIcon);
-        	System.out.println(piece.getxAxisCoordinate() +" "+ piece.getxAxisCoordinate());
         	pieceLabel.setBounds(piece.getxAxisCoordinate(), piece.getyAxisCoordinate(), pieceIcon.getIconWidth(), pieceIcon.getIconHeight());
 			pieceLabels.add(pieceLabel);
 			frame.add(pieceLabel);		
@@ -244,7 +231,6 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 						if (gameState.isRedeployPhase() && targetTerritory.getOwnerName().equals(gameState.currentPlayerName()))
 						{
 							troopsRedeployInputPort.redeployUnits(selectedTerritory.getName(), targetTerritory.getName(), numberOfPieces);
-							updateArmyCount();
 							selectedTerritory = null;
 							selectedTerritoryLabel.setVisible(false);
 							return;
@@ -252,7 +238,6 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 						if (gameState.isAttackPhase() && !targetTerritory.getOwnerName().equals(gameState.currentPlayerName()))
 						{
 							attackInputPort.attack(selectedTerritory.getName(), targetTerritory.getName(), numberOfPieces);
-							updateArmyCount();
 							selectedTerritory = null;
 							selectedTerritoryLabel.setVisible(false);
 							return;
@@ -275,9 +260,23 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
     		return null;
     	}    	
 	}
-	private void updateArmyCount()
+	private void showArmyCount()
 	{
-		for (Territory territory : territoryLabels)
+		for (JLabel label : armyCountLabels)
+		{
+			frame.remove(label);
+		}
+		
+		for (Piece label : pieceLabels)
+		{
+			frame.remove(label);
+		}
+		
+		for (Territory label : territoryLabels)
+		{
+			frame.remove(label);
+		}
+		for (Territory territory : planetarySystemController.getAllTerritories())
         {
 			int armyCount = 0;
 			for (PieceDTO piece : gameState.getAllPieces())
@@ -293,6 +292,7 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 			armyCountLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 			armyCountLabels = new ArrayList<JLabel>();
 			armyCountLabels.add(armyCountLabel);
+			frame.add(armyCountLabel);
 	    }
 		frame.repaint();
 	}
