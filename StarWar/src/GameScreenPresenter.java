@@ -1,6 +1,8 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.MouseInfo;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -11,6 +13,7 @@ import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Piece;
@@ -31,9 +34,9 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 	private PlanetarySystemController planetarySystemController;
 	List<Piece> pieceLabels;
 	List<Territory> territoryLabels;
+	List<JLabel> armyCountLabels;
 	private GameCreationInputPort gameCreation;
-	
-    
+	private JLabel selectedTerritoryLabel;
 	
 	public GameScreenPresenter() 
 	{
@@ -41,6 +44,7 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 		panel = new JPanel();
 		pieceLabels = new ArrayList<Piece>();
 		territoryLabels = new ArrayList<Territory>();
+		armyCountLabels = new ArrayList<JLabel>();
 	}
 	
 	public GameScreenPresenter(GameCreationInputPort gameCreation) 
@@ -75,6 +79,8 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 		        showPieces();
 			    showTerritories();
 			    
+			    
+			    
 			    frame.add(panel);
 			    
 		        frame.repaint();
@@ -96,6 +102,26 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 			MouseListener listener = new TerritoryMouseAdapter();
 			territoryLabel.addMouseListener(listener);
 			territoryLabels.add(territoryLabel);
+			
+			int armyCount = 0;
+			for (PieceDTO piece : gameState.getAllPieces())
+			{
+				if (piece.getTerritoryName().equals(territoryLabel.getName()))
+				{
+					armyCount++;
+				}
+			}
+			JLabel armyCountLabel = new JLabel("" + armyCount);
+			armyCountLabel.setBounds(territory.getxAxisCoordinate() + territoryIcon.getIconWidth()/2, territory.getyAxisCoordinate() + territoryIcon.getIconHeight()/2, 20, 20);
+			armyCountLabel.setForeground(new Color(255, 215, 0));
+			armyCountLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+//			armyCountLabels.add(armyCountLabel);
+			selectedTerritoryLabel = new JLabel("*");
+			selectedTerritoryLabel.setForeground(new Color(255, 215, 0));
+			selectedTerritoryLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			selectedTerritoryLabel.setVisible(false);
+			frame.add(selectedTerritoryLabel);
+			frame.add(armyCountLabel);
 			frame.add(territoryLabel);
 	    }
 		frame.repaint();
@@ -121,7 +147,8 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
         	System.out.println(piece.getxAxisCoordinate() +" "+ piece.getxAxisCoordinate());
         	pieceLabel.setBounds(piece.getxAxisCoordinate(), piece.getyAxisCoordinate(), pieceIcon.getIconWidth(), pieceIcon.getIconHeight());
 			pieceLabels.add(pieceLabel);
-			frame.add(pieceLabel);			
+			frame.add(pieceLabel);		
+			
         }	
 		
 		frame.repaint();
@@ -191,23 +218,47 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
     	public void mouseClicked(MouseEvent e) 
     	{
         	Territory targetTerritory;
+        	Territory candidateTerritory;
+        	
+        	candidateTerritory = findTerritoryOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y);
+        	if (selectedTerritory == null)
+        	{
+        		candidateTerritory.setOwnerName(gameState.currentPlayerName());
+        		if (candidateTerritory.getOwnerName().equals(gameState.currentPlayerName()))
+        		{
+        			selectedTerritory = candidateTerritory;
+        			selectedTerritoryLabel.setBounds(selectedTerritory.getX() + selectedTerritory.getWidth()/2, selectedTerritory.getY(), 20, 20);
+        			selectedTerritoryLabel.setVisible(true);
+        		}
+        		return;
+        	}
+        	if (selectedTerritory.getName().equals(candidateTerritory.getName()))
+        	{
+        		selectedTerritory = null;
+        		selectedTerritoryLabel.setVisible(false);
+        		return;
+        	}
 			if (selectedTerritory != null)
 			{
 				if (selectedTerritory.getOwnerName().equals(gameState.currentPlayerName()))
 				{
-					targetTerritory = findTerritoryOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y);  
-				
-					if (targetTerritory != null && gameState.isRedeployPhase())
+					targetTerritory = findTerritoryOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y);
+					if (targetTerritory != null)
 					{
-						troopsRedeployInputPort.redeployUnits(selectedTerritory.getName(), targetTerritory.getName(), numberOfPieces);
-						selectedTerritory = null;
-						return;
-					}
-					if (targetTerritory != null && gameState.isAttackPhase())
-					{
-						attackInputPort.attack(selectedTerritory.getName(), targetTerritory.getName(), numberOfPieces);
-						selectedTerritory = null;
-						return;
+						if (gameState.isRedeployPhase() && targetTerritory.getOwnerName().equals(gameState.currentPlayerName()))
+						{
+							troopsRedeployInputPort.redeployUnits(selectedTerritory.getName(), targetTerritory.getName(), numberOfPieces);
+							selectedTerritory = null;
+							selectedTerritoryLabel.setVisible(true);
+							return;
+						}
+						if (gameState.isAttackPhase() && !targetTerritory.getOwnerName().equals(gameState.currentPlayerName()))
+						{
+							attackInputPort.attack(selectedTerritory.getName(), targetTerritory.getName(), numberOfPieces);
+							selectedTerritory = null;
+							selectedTerritoryLabel.setVisible(true);
+							return;
+						}
 					}
 				}
 			}        		   	
@@ -226,4 +277,9 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
     		return null;
     	}    	
 	}
+	private void updateArmyCount()
+	{
+		
+	}
 }
+
