@@ -6,11 +6,10 @@ import java.util.List;
 public class PlayerRepository implements IPlayerRepository
 {
 	private HashMap<String, Player> players;
-	
+	private IPlanetRepository planetRepository;
 	public PlayerRepository()
 	{
 		players = new HashMap<String, Player>();
-		initializePlayers();
 	}
 	
 	public List<Player> getAllPlayers()
@@ -60,11 +59,41 @@ public class PlayerRepository implements IPlayerRepository
 	{
 		for (int i = 0 ; i < numberOfPieces; i++)
 		{
+			Player player = getPlayerByName(playerName);
 			Piece piece = new Piece();
 			if (piece.getId() == 0)
 				piece.setId(RandomNumberGenerator.generateRandomNumber());
 			piece.setTerritoryName(planetName);
-			Player player = getPlayerByName(playerName);
+			
+			switch (player.getRace())
+			{
+				case PADAWAN:
+					piece.setImagePath("image/padawan.png");
+					piece.setPieceType(PieceType.JEDI);
+					break;
+				case TRANDOSHAN:
+					piece.setImagePath("image/trandoshan.png");
+					piece.setPieceType(PieceType.TRANDOSHAN);
+					break;
+				case SITH:
+					piece.setImagePath("image/sithtrooper.png");
+					piece.setPieceType(PieceType.SITH);
+					break;
+				case CLONE:
+					piece.setImagePath("image/clone.png");
+					piece.setPieceType(PieceType.CLONE);
+					break;
+				case DROIDE:
+					piece.setImagePath("image/droide.png");
+					piece.setPieceType(PieceType.DROIDE);
+					break;
+				case WOOKIEE:
+					piece.setImagePath("image/wookiee.png");
+					piece.setPieceType(PieceType.WOOKIEE);
+					break;
+			}
+			piece.setXAxisCoordinate(planetRepository.getPlanetByName(planetName).getXAxisCoordinate());
+			piece.setYAxisCoordinate(planetRepository.getPlanetByName(planetName).getYAxisCoordinate());
 			player.addPiece(piece);
 		}		
 	}
@@ -82,19 +111,13 @@ public class PlayerRepository implements IPlayerRepository
 	public void restartRepository(){
 		players = new HashMap<String, Player>();
 	}
-	
-	private void initializePlayers() {
-		Player player = new Player(PlayerRace.PADAWAN,"Player 1");
-		this.addPlayer(player);
-//		player = new Player(PlayerRace.CLONE,"Player 2");
-//		this.addPlayer(player);
-//		player = new Player(PlayerRace.DROIDE,"Player 3");
-//		this.addPlayer(player);
-//		player = new Player(PlayerRace.SITH,"Player 4");
-//		this.addPlayer(player);
-//		player = new Player(PlayerRace.TRANDOSHAN,"Player 5");
-//		this.addPlayer(player);
-//		player = new Player(PlayerRace.WOOKIEE,"Player 6");
-//		this.addPlayer(player);
+
+	public IPlanetRepository getPlanetRepository() {
+		return planetRepository;
 	}
+
+	public void setPlanetRepository(IPlanetRepository planetRepository) {
+		this.planetRepository = planetRepository;
+	}
+	
 }

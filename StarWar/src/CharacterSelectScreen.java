@@ -24,7 +24,29 @@ public class CharacterSelectScreen {
 	
 	public void startGameWith(String race){
 		PlayerDTO player1 = new PlayerDTO(1, "Player 1", race);
-		PlayerDTO player2 = new PlayerDTO(2, "Player 2", "SITH");
+		String oponentsRace = "";
+		while (oponentsRace == null || oponentsRace == "")
+		{
+			int random = (int)(1 + 6*Math.random());
+			
+			if (random == 1)
+				oponentsRace = "SITH";
+			if (random == 2)
+				oponentsRace = "CLONE";
+			if (random == 3)
+				oponentsRace = "PADAWAN";
+			if (random == 4)
+				oponentsRace = "DROIDE";
+			if (random == 5)
+				oponentsRace = "TRANDOSHAN";
+			if (random == 6)
+				oponentsRace = "WOOKIEE";
+			
+			if (oponentsRace.equals(race))
+				oponentsRace = "";			
+		}
+		
+		PlayerDTO player2 = new PlayerDTO(2, "Player 2", oponentsRace);
 		GameCreationInputPort gameCreation = presenter.getGameCreation();
 		gameCreation.addPlayerToCurrentGame(player1);
 		gameCreation.addPlayerToCurrentGame(player2);

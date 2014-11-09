@@ -6,7 +6,7 @@ public class Program
 		PlanetRepository planetRepository = new PlanetRepository();
 		
 		PlayerRepository playerRepository = new PlayerRepository();
-		
+		playerRepository.setPlanetRepository(planetRepository);
 		
 		
 		Attack attack = new Attack(planetRepository, playerRepository);		

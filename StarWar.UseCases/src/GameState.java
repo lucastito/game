@@ -131,7 +131,6 @@ public class GameState implements GameStateInputPort
 	{
 		this.playerRepository = playerRepository;		
 		players = playerRepository.getAllPlayers();
-		currentPlayer = players.get(0);
 	}
 
 	public int getCurrentRound() 
