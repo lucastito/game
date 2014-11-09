@@ -2,24 +2,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class GameCreation implements GameCreationInputPort {
-
-	private List<Player> players;
+public class GameCreation implements GameCreationInputPort 
+{
 	private IPlayerRepository playerRepository;
 	private IObjectiveCardRepository objectiveCardRepository;
 	private ITerritoryCardRepository territoryCardRepository;
 	private IPlanetRepository planetRepository;
+	private TroopsRedeployOutputPort outputPort;
 	
-	public GameCreation(IPlayerRepository playerRepository, IObjectiveCardRepository objectiveCardRepository, IPlanetRepository planetRepository, ITerritoryCardRepository territoryCardRepository){
+	public GameCreation(IPlayerRepository playerRepository, IObjectiveCardRepository objectiveCardRepository, IPlanetRepository planetRepository, ITerritoryCardRepository territoryCardRepository, TroopsRedeployOutputPort outputPort){
 		this.playerRepository = playerRepository;
 		this.planetRepository = planetRepository;
 		this.objectiveCardRepository = objectiveCardRepository;
 		this.territoryCardRepository = territoryCardRepository;
-		this.players = new ArrayList<Player>();
 		this.playerRepository.restartRepository();
+		this.outputPort = outputPort;
 	}
 	
-	public int addPlayerToCurrentGame(PlayerDTO playerDto){
+	public int addPlayerToCurrentGame(PlayerDTO playerDto)
+	{
 //		PADAWAN,
 //		SITH,
 //		CLONE,
@@ -45,34 +46,21 @@ public class GameCreation implements GameCreationInputPort {
 			
 		Player player = new Player(convertedRace, playerDto.getName());
 		playerRepository.addPlayer(player);
-		this.players.add(player);
+		this.playerRepository.addPlayer(player);
 		return 0;
 	}
 	
 	public void setUpPlayersObjective(){
-		for (int i = 0; i < players.size(); i++) {
-			players.get(i).setObjectiveCard(objectiveCardRepository.getObjectiveCard(players.get(i)));
-		}
+		for (Player player : playerRepository.getAllPlayers()) 
+			playerRepository.getPlayerByName(player.getName()).setObjectiveCard(objectiveCardRepository.getObjectiveCard(player));
 	}
 	
 	public void setUpPlayersTerritoriesAndTerritoriesCards(){
-		DistributeTerritoryCard.distributeTerritories(players.get(0), players.get(1), planetRepository);
-		DistributeTerritoryCard.distributTerritoryCards(players.get(0), territoryCardRepository);
-		DistributeTerritoryCard.distributTerritoryCards(players.get(1), territoryCardRepository);
-	}
-	
-	public void printInfo(){
-		System.out.println("Players:");
-		System.out.println(players.size());
-		System.out.println("Players Repo:");
-		System.out.println(playerRepository.getAllPlayers().size());
-		System.out.println("Cartas Objetivo:");
-		System.out.println(objectiveCardRepository.getObjectiveCard(players.get(0)).getName());
-		System.out.println(objectiveCardRepository.getObjectiveCard(players.get(1)).getName());
-		System.out.println("Cartas Territorio:");
-		System.out.println(territoryCardRepository.getTerritoryCardAmount());
-		System.out.println("Planetas:");
-		System.out.println(planetRepository.getPlanetRepositorySize());
-	}
-	
+		DistributeTerritoryCard.distributeTerritories(playerRepository, planetRepository);
+		
+		for (Player player : playerRepository.getAllPlayers()) 
+			DistributeTerritoryCard.distributTerritoryCards(player, territoryCardRepository);
+		
+		outputPort.show();
+	}	
 }

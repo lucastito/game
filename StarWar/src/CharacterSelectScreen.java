@@ -31,7 +31,6 @@ public class CharacterSelectScreen {
 		gameCreation.setUpPlayersObjective();
 		gameCreation.setUpPlayersTerritoriesAndTerritoriesCards();
 		frame.dispose();
-		presenter.show();
 		JOptionPane.showMessageDialog(null, "Você escolheu a raça "+race);
 	}
 	

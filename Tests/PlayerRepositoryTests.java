@@ -69,7 +69,7 @@ public class PlayerRepositoryTests {
 	{
 		Clone clone = new Clone();
 		clone.setPieceType(PieceType.CLONE);
-		playerRepository.addPlayerPiece("Lucas", "Trandosha", clone);
+		playerRepository.addPlayerPiece("Lucas", "Trandosha", 1);
 		Player player = playerRepository.getPlayerByName("Lucas");
 		boolean result = false;
 		for (Piece piece : player.getPieces())
@@ -84,8 +84,8 @@ public class PlayerRepositoryTests {
 	{
 		Clone clone = new Clone();
 		clone.setPieceType(PieceType.CLONE);
-		playerRepository.addPlayerPiece("Lucas", "Trandosha", clone);
-		playerRepository.removePlayerPiece("Lucas", clone.getId());
+		playerRepository.addPlayerPiece("Lucas", "Trandosha", 1);
+		playerRepository.removePlayerPiece("Lucas", "Trandosha", 1);
 		Player player = playerRepository.getPlayerByName("Lucas");
 		
 		for (Piece piece : player.getPieces())

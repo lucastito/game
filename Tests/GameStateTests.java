@@ -37,8 +37,8 @@ public class GameStateTests
 	{
 		PlayerRepository playerRepository = new PlayerRepository();
 		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
-		playerRepository.addPlayerPiece("Leo", "Trandosha", new Sith());
-		playerRepository.addPlayerPiece("Leo", "Coruscant", new Clone());
+		playerRepository.addPlayerPiece("Leo", "Trandosha", 1);
+		playerRepository.addPlayerPiece("Leo", "Coruscant", 1);
 		GameState gameState = new GameState();
 		gameState.setPlayerRepository(playerRepository);
 		List<PieceDTO> pieces = gameState.getAllPieces();
@@ -58,7 +58,7 @@ public class GameStateTests
 		clone.setTerritoryName("Trandosha");
 		clone.setXAxisCoordinate((short) 10);
 		clone.setYAxisCoordinate((short) 10);
-		playerRepository.addPlayerPiece("Leo", "Coruscant", clone);
+		playerRepository.addPlayerPiece("Leo", "Coruscant", 1);
 		
 		GameState gameState = new GameState();
 		gameState.setPlayerRepository(playerRepository);
@@ -79,8 +79,8 @@ public class GameStateTests
 		PlayerRepository playerRepository = new PlayerRepository();
 		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
 		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
-		playerRepository.addPlayerPiece("Leo", "Trandosha", new Clone());
-		playerRepository.addPlayerPiece("Lucas", "Trandosha", new Clone());
+		playerRepository.addPlayerPiece("Leo", "Trandosha", 1);
+		playerRepository.addPlayerPiece("Lucas", "Trandosha", 1);
 		GameState gameState = new GameState();
 		gameState.setPlayerRepository(playerRepository);
 		
@@ -114,8 +114,8 @@ public class GameStateTests
 		PlayerRepository playerRepository = new PlayerRepository();
 		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
 		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
-		playerRepository.addPlayerPiece("Leo", "Trandosha", new Clone());
-		playerRepository.addPlayerPiece("Lucas", "Trandosha", new Clone());
+		playerRepository.addPlayerPiece("Leo", "Trandosha", 1);
+		playerRepository.addPlayerPiece("Lucas", "Trandosha", 1);
 		GameState gameState = new GameState();
 		gameState.setPlayerRepository(playerRepository);
 		gameState.nextPlayerStep();
@@ -133,8 +133,8 @@ public class GameStateTests
 		PlayerRepository playerRepository = new PlayerRepository();
 		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
 		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
-		playerRepository.addPlayerPiece("Leo", "Trandosha", new Clone());
-		playerRepository.addPlayerPiece("Lucas", "Trandosha", new Clone());
+		playerRepository.addPlayerPiece("Leo", "Trandosha", 1);
+		playerRepository.addPlayerPiece("Lucas", "Trandosha", 1);
 		
 		GameState gameState = new GameState();
 		gameState.setPlayerRepository(playerRepository);
@@ -158,7 +158,7 @@ public class GameStateTests
 		PlayerRepository playerRepository = new PlayerRepository();
 		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
 		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
-		playerRepository.addPlayerPiece("Lucas", "Trandosha", new Clone());
+		playerRepository.addPlayerPiece("Lucas", "Trandosha", 1);
 		
 		GameState gameState = new GameState();
 		gameState.setPlayerRepository(playerRepository);
@@ -173,7 +173,7 @@ public class GameStateTests
 		PlayerRepository playerRepository = new PlayerRepository();
 		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
 		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
-		playerRepository.addPlayerPiece("Leo", "Trandosha", new Clone());
+		playerRepository.addPlayerPiece("Leo", "Trandosha", 1);
 		GameState gameState = new GameState();
 		gameState.setPlayerRepository(playerRepository);
 		
@@ -186,8 +186,8 @@ public class GameStateTests
 		PlayerRepository playerRepository = new PlayerRepository();
 		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
 		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
-		playerRepository.addPlayerPiece("Leo", "Trandosha", new Clone());
-		playerRepository.addPlayerPiece("Lucas", "Trandosha", new Clone());
+		playerRepository.addPlayerPiece("Leo", "Trandosha", 1);
+		playerRepository.addPlayerPiece("Lucas", "Trandosha", 1);
 		GameState gameState = new GameState();
 		gameState.setPlayerRepository(playerRepository);
 		
@@ -208,8 +208,8 @@ public class GameStateTests
 		PlayerRepository playerRepository = new PlayerRepository();
 		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
 		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
-		playerRepository.addPlayerPiece("Leo", "Trandosha", new Clone());
-		playerRepository.addPlayerPiece("Lucas", "Trandosha", new Clone());
+		playerRepository.addPlayerPiece("Leo", "Trandosha", 1);
+		playerRepository.addPlayerPiece("Lucas", "Trandosha", 1);
 		GameState gameState = new GameState();
 		gameState.setPlayerRepository(playerRepository);
 		

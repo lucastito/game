@@ -9,24 +9,22 @@ public class Program
 		
 		
 		
-		Attack attack = new Attack(planetRepository, playerRepository);
-		
-		
+		Attack attack = new Attack(planetRepository, playerRepository);		
 		
 		
 		
 		GameState gameState = new GameState();		
 		gameState.setPlanetRepository(planetRepository);
 
-		gameState.setPlayerRepository(playerRepository);
-		
-		GameCreation gameCreation = new GameCreation(playerRepository, new ObjectiveCardRepository(planetRepository), planetRepository, new TerritoryCardRepository());
+		gameState.setPlayerRepository(playerRepository);		
 
-		GameScreenPresenter presenter = new GameScreenPresenter(gameCreation);
+		GameScreenPresenter presenter = new GameScreenPresenter();
+		GameCreation gameCreation = new GameCreation(playerRepository, new ObjectiveCardRepository(planetRepository), planetRepository, new TerritoryCardRepository(), presenter);
 		TroopsRedeploy troopsRedeploy = new TroopsRedeploy(presenter, planetRepository, playerRepository);
 		presenter.setAttackInputPort(attack);
 		presenter.setGameStateInputPort(gameState);
 		presenter.setTroopsRedeployInputPort(troopsRedeploy);
+		presenter.setGameCreation(gameCreation);
 		
 		InitialScreen is = new InitialScreen(presenter);
 		is.getfrmStarwar().setVisible(true);

@@ -86,7 +86,6 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 		        frame.setVisible(true);
 		    }
     	});
-    	gameCreation.printInfo();
 	}
 
 	protected void showTerritories() 
