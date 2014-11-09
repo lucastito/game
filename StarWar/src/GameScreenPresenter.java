@@ -49,11 +49,8 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 	
 	public GameScreenPresenter(GameCreationInputPort gameCreation) 
 	{
+		this();
 		this.setGameCreation(gameCreation);
-		frame = new JFrame();
-		panel = new JPanel();
-		pieceLabels = new ArrayList<Piece>();
-		territoryLabels = new ArrayList<Territory>();
 	}
 	
 	public void show() 
@@ -115,7 +112,7 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 			armyCountLabel.setBounds(territory.getxAxisCoordinate() + territoryIcon.getIconWidth()/2, territory.getyAxisCoordinate() + territoryIcon.getIconHeight()/2, 20, 20);
 			armyCountLabel.setForeground(new Color(255, 215, 0));
 			armyCountLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-//			armyCountLabels.add(armyCountLabel);
+			armyCountLabels.add(armyCountLabel);
 			selectedTerritoryLabel = new JLabel("*");
 			selectedTerritoryLabel.setForeground(new Color(255, 215, 0));
 			selectedTerritoryLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -248,15 +245,17 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 						if (gameState.isRedeployPhase() && targetTerritory.getOwnerName().equals(gameState.currentPlayerName()))
 						{
 							troopsRedeployInputPort.redeployUnits(selectedTerritory.getName(), targetTerritory.getName(), numberOfPieces);
+							updateArmyCount();
 							selectedTerritory = null;
-							selectedTerritoryLabel.setVisible(true);
+							selectedTerritoryLabel.setVisible(false);
 							return;
 						}
 						if (gameState.isAttackPhase() && !targetTerritory.getOwnerName().equals(gameState.currentPlayerName()))
 						{
 							attackInputPort.attack(selectedTerritory.getName(), targetTerritory.getName(), numberOfPieces);
+							updateArmyCount();
 							selectedTerritory = null;
-							selectedTerritoryLabel.setVisible(true);
+							selectedTerritoryLabel.setVisible(false);
 							return;
 						}
 					}
@@ -279,7 +278,24 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 	}
 	private void updateArmyCount()
 	{
-		
+		for (Territory territory : territoryLabels)
+        {
+			int armyCount = 0;
+			for (PieceDTO piece : gameState.getAllPieces())
+			{
+				if (piece.getTerritoryName().equals(territory.getName()))
+				{
+					armyCount++;
+				}
+			}
+			JLabel armyCountLabel = new JLabel("" + armyCount);
+			armyCountLabel.setBounds(territory.getxAxisCoordinate() + territory.getWidth()/2, territory.getyAxisCoordinate() + territory.getHeight()/2, 20, 20);
+			armyCountLabel.setForeground(new Color(255, 215, 0));
+			armyCountLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			armyCountLabels = new ArrayList<JLabel>();
+			armyCountLabels.add(armyCountLabel);
+	    }
+		frame.repaint();
 	}
 }
 
