@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -54,8 +53,7 @@ public class CharacterSelectScreen {
 		gameCreation.setUpPlayersObjective();
 		gameCreation.setUpPlayersTerritoriesAndTerritoriesCards();
 		gameState.initializePlayers();
-		frame.dispose();
-		JOptionPane.showMessageDialog(null, "Você escolheu a raça "+race);
+		frame.dispose();		
 	}
 	
 
