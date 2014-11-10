@@ -64,6 +64,7 @@ public class CharacterSelectScreen {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1366, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
 		
 		final JPanel mainPanel = new JPanel()
 		{

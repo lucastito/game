@@ -41,6 +41,7 @@ public class InitialScreen {
 		frmStarwar.setBounds(100, 100, 1366, 768);
 		frmStarwar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmStarwar.getContentPane().setLayout(new CardLayout(0, 0));
+		frmStarwar.setLocationRelativeTo(null);
 				
 		final JPanel mainPanel = new JPanel()
 		{
