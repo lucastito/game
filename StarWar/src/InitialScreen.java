@@ -25,11 +25,11 @@ public class InitialScreen {
 		return frmStarwar;
 	}
 	
-	public InitialScreen(GameScreenPresenter presenter) {
-		initialize(presenter);
+	public InitialScreen(GameScreenPresenter presenter, GameStateInputPort gameState) {
+		initialize(presenter, gameState);
 	}
 
-	private void initialize(final GameScreenPresenter presenter) 
+	private void initialize(final GameScreenPresenter presenter, final GameStateInputPort gameState) 
 	{
 		File mp3File = new File(InitialScreen.class.getResource("sound/theme.mp3").getPath());
 		MP3Runner backgroundMusic = new MP3Runner(mp3File);
@@ -69,7 +69,7 @@ public class InitialScreen {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmStarwar.dispose();
-				CharacterSelectScreen css = new CharacterSelectScreen(presenter);
+				CharacterSelectScreen css = new CharacterSelectScreen(presenter, gameState);
 				css.getFrame().setVisible(true);
 			}
 		});

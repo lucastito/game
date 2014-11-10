@@ -50,7 +50,7 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 	public GameScreenPresenter(GameCreationInputPort gameCreation) 
 	{
 		this();
-		this.setGameCreation(gameCreation);
+		this.setGameCreation(gameCreation);		
 	}
 	
 	public void show() 
@@ -75,9 +75,7 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 		        
 		        showArmyCount();
 		        showPieces();
-			    showTerritories();
-			    
-			    
+			    showTerritories();			    
 			    
 			    frame.add(panel);
 			    
@@ -95,11 +93,16 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
         {
         	ImageIcon territoryIcon = new ImageIcon(getClass().getResource(territory.getImagePath()).getPath().toString());
         	Territory territoryLabel = new Territory(territoryIcon);
+        	territoryLabel.setImagePath(territory.getImagePath());
+        	territoryLabel.setOwnerName(territory.getOwnerName());
+        	territoryLabel.setxAxisCoordinate(territory.getxAxisCoordinate());
+        	territoryLabel.setyAxisCoordinate(territory.getyAxisCoordinate());
+        	territoryLabel.setName(territory.getName());
+        	territoryLabel.setId(territory.getId());
         	territoryLabel.setBounds(territory.getxAxisCoordinate(), territory.getyAxisCoordinate(), territoryIcon.getIconWidth(), territoryIcon.getIconHeight());
 			MouseListener listener = new TerritoryMouseAdapter();
 			territoryLabel.addMouseListener(listener);
-			territoryLabels.add(territoryLabel);
-			
+			territoryLabels.add(territoryLabel);			
 
 			selectedTerritoryLabel = new JLabel("*");
 			selectedTerritoryLabel.setForeground(new Color(255, 215, 0));
@@ -174,21 +177,45 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
     	public void mouseEntered(MouseEvent e) 
         {
         	if (selectedTerritory == null)
-        		return;
-        	if (gameState.isPieceFromCurrentPlayer(selectedTerritory.getId()) && (gameState.isRedeployPhase() || gameState.isAttackPhase()))
-			{
-	        	Territory targetTerritory = findTerritoryOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y); 
-	        	List<Territory> neighbors = planetarySystemController.getTerritoriesToRedeploy(selectedTerritory.getName(), 0);
-	        	
-	        	for (Territory territory : neighbors)
-	        	{
-	        		if(territory.getName().equals(targetTerritory.getName()))
-	        		{
-	        			frame.setCursor(new Cursor(12));
-	        			return;
-	        		}
-	        	} 
-			}
+        	{
+        		Territory enteredTerritory = null;
+            	for (Territory t : territoryLabels)
+            	{
+            		if(t.hashCode() == e.getComponent().hashCode())
+            		{
+            			enteredTerritory = t;
+            			break;
+            		}
+            	}        		
+        		if (enteredTerritory != null && gameState.currentPlayerName().equalsIgnoreCase(enteredTerritory.getOwnerName()))
+        				frame.setCursor(new Cursor(12));
+        	}
+        	else
+        	{
+        		if (gameState.currentPlayerName().equalsIgnoreCase(selectedTerritory.getOwnerName()) && (gameState.isRedeployPhase() || gameState.isAttackPhase()))
+				{      		
+        			Territory targetTerritory = null;
+                	for (Territory t : territoryLabels)
+                	{
+                		if(t.hashCode() == e.getComponent().hashCode())
+                		{
+                			targetTerritory = t;
+                			break;
+                		}
+                	}        		
+		        	List<Territory> neighbors = planetarySystemController.getTerritoriesToRedeploy(selectedTerritory.getName(), 0);
+		        	
+		        	for (Territory territory : neighbors)
+		        	{
+		        		if(territory.getName().equals(targetTerritory.getName()))
+		        		{
+		        			frame.setCursor(new Cursor(12));
+		        			return;
+		        		}
+		        	} 
+				}
+        	}
+        	
     	}
         
         @Override
@@ -200,10 +227,16 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
         @Override
     	public void mouseClicked(MouseEvent e) 
     	{
-        	Territory targetTerritory;
-        	Territory candidateTerritory;
+        	Territory candidateTerritory = null;
+        	for (Territory t : territoryLabels)
+        	{
+        		if(t.hashCode() == e.getComponent().hashCode())
+        		{
+        			candidateTerritory = t;
+        			break;
+        		}
+        	}   
         	
-        	candidateTerritory = findTerritoryOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y);
         	if (selectedTerritory == null)
         	{
         		candidateTerritory.setOwnerName(gameState.currentPlayerName());
@@ -225,7 +258,16 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 			{
 				if (selectedTerritory.getOwnerName().equals(gameState.currentPlayerName()))
 				{
-					targetTerritory = findTerritoryOnClick(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y);
+					Territory targetTerritory = null;
+		        	for (Territory t : territoryLabels)
+		        	{
+		        		if(t.hashCode() == e.getComponent().hashCode())
+		        		{
+		        			targetTerritory = t;
+		        			break;
+		        		}
+		        	} 
+					
 					if (targetTerritory != null)
 					{
 						if (gameState.isRedeployPhase() && targetTerritory.getOwnerName().equals(gameState.currentPlayerName()))
@@ -245,20 +287,7 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 					}
 				}
 			}        		   	
-    	}
-    	private Territory findTerritoryOnClick(int x, int y) 
-    	{
-    		for(Territory territory : planetarySystemController.getAllTerritories())
-    		{
-    			if(x <= territory.getxAxisCoordinate() + 100 && x >= territory.getxAxisCoordinate()
-    					&& y <= territory.getyAxisCoordinate() + 100 && y >= territory.getyAxisCoordinate())
-    			{
-    				return territory;
-    			}
-    			System.out.println(territory.getName()+" " + territory.getxAxisCoordinate() + " " + x + " " + territory.getyAxisCoordinate() + " " + y );	
-    		}		
-    		return null;
-    	}    	
+    	}    	   	
 	}
 	private void showArmyCount()
 	{

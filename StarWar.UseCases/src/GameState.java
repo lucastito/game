@@ -16,6 +16,12 @@ public class GameState implements GameStateInputPort
 		playerStep = new PlayerStep();
 		currentRound++;			
 	}
+	
+	public void initializePlayers()
+	{
+		players = playerRepository.getAllPlayers();
+		currentPlayer = players.get(currentPlayerPositionInList);
+	}
 
 	public List<TerritoryDTO> getAllPlanets() 
 	{
@@ -129,8 +135,7 @@ public class GameState implements GameStateInputPort
 	
 	public void setPlayerRepository(IPlayerRepository playerRepository)
 	{
-		this.playerRepository = playerRepository;		
-		players = playerRepository.getAllPlayers();
+		this.playerRepository = playerRepository;	
 	}
 
 	public int getCurrentRound() 

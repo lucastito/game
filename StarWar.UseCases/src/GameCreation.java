@@ -46,7 +46,7 @@ public class GameCreation implements GameCreationInputPort
 			
 		Player player = new Player(convertedRace, playerDto.getName());
 		playerRepository.addPlayer(player);
-		this.playerRepository.addPlayer(player);
+		this.playerRepository.addPlayer(player);		
 		return 0;
 	}
 	

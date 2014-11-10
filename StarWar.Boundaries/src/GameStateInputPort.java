@@ -10,4 +10,5 @@ public interface GameStateInputPort
 	boolean isPieceFromCurrentPlayer(int pieceId);
 	boolean isRedeployPhase();
 	boolean isAttackPhase();
+	void initializePlayers();
 }

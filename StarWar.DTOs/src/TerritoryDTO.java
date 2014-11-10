@@ -6,6 +6,7 @@ public class TerritoryDTO
 	private short xAxisCoordinate;
 	private short yAxisCoordinate;
 	private String imagePath;
+	private String ownerName;
 	
 	public short getId() {
 		return id;
@@ -45,5 +46,13 @@ public class TerritoryDTO
 	
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
+	}
+
+	public String getOwnerName() {
+		return ownerName;
+	}
+
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
 	}
 }

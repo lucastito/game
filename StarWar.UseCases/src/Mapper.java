@@ -14,7 +14,7 @@ public class Mapper
 		territory.setName(planet.getName());
 		territory.setxAxisCoordinate(planet.getXAxisCoordinate());
 		territory.setyAxisCoordinate(planet.getYAxisCoordinate());
-		
+		territory.setOwnerName(planet.getOwnerName());
 		return territory;
 	}
 

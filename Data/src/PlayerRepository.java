@@ -92,6 +92,7 @@ public class PlayerRepository implements IPlayerRepository
 					piece.setPieceType(PieceType.WOOKIEE);
 					break;
 			}
+			planetRepository.getPlanetByName(planetName).setOwnerName(playerName);
 			piece.setXAxisCoordinate(planetRepository.getPlanetByName(planetName).getXAxisCoordinate());
 			piece.setYAxisCoordinate(planetRepository.getPlanetByName(planetName).getYAxisCoordinate());
 			player.addPiece(piece);

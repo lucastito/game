@@ -14,10 +14,11 @@ public class CharacterSelectScreen {
 
 	private JFrame frame;
 	private GameScreenPresenter presenter;
+	private GameStateInputPort gameState;
 
-
-	public CharacterSelectScreen(GameScreenPresenter presenter) {
+	public CharacterSelectScreen(GameScreenPresenter presenter, GameStateInputPort gameState) {
 		this.presenter = presenter;
+		this.gameState = gameState;
 		initialize();
 	}
 	
@@ -52,6 +53,7 @@ public class CharacterSelectScreen {
 		gameCreation.addPlayerToCurrentGame(player2);
 		gameCreation.setUpPlayersObjective();
 		gameCreation.setUpPlayersTerritoriesAndTerritoriesCards();
+		gameState.initializePlayers();
 		frame.dispose();
 		JOptionPane.showMessageDialog(null, "Você escolheu a raça "+race);
 	}

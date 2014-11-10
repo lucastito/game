@@ -27,6 +27,7 @@ public class PlanetarySystemController
 			territory.setxAxisCoordinate(territoryDTO.getxAxisCoordinate());
 			territory.setyAxisCoordinate(territoryDTO.getyAxisCoordinate());
 			territory.setImagePath(territoryDTO.getImagePath());
+			territory.setOwnerName(territoryDTO.getOwnerName());
 			territories.add(territory);
 		}
 		return territories;
@@ -50,6 +51,7 @@ public class PlanetarySystemController
 			territory.setxAxisCoordinate(territoryDTO.getxAxisCoordinate());
 			territory.setyAxisCoordinate(territoryDTO.getyAxisCoordinate());
 			territory.setImagePath(territoryDTO.getImagePath());
+			territory.setOwnerName(territoryDTO.getOwnerName());
 			territories.add(territory);
 		}
 		return territories;
