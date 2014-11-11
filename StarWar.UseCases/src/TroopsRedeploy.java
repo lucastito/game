@@ -3,11 +3,11 @@ import java.util.List;
 
 public class TroopsRedeploy implements TroopsRedeployInputPort
 {
-	private TroopsRedeployOutputPort troopsRedeployOutputPort;
+	private GamePresenterOutputPort troopsRedeployOutputPort;
 	private IPlanetRepository planetRepository;
 	private IPlayerRepository playerRepository;
 	
-	public TroopsRedeploy(TroopsRedeployOutputPort troopsRedeployOutputPort, IPlanetRepository planetRepository, IPlayerRepository playerRepository)
+	public TroopsRedeploy(GamePresenterOutputPort troopsRedeployOutputPort, IPlanetRepository planetRepository, IPlayerRepository playerRepository)
 	{
 		this.troopsRedeployOutputPort = troopsRedeployOutputPort;
 		this.planetRepository = planetRepository;

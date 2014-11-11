@@ -1,11 +1,5 @@
 public class Mapper 
 {
-	public static Planet mapPlanet(TerritoryDTO territory) 
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	public static TerritoryDTO mapTerritoryDTO(Planet planet) 
 	{
 		TerritoryDTO territory = new TerritoryDTO();
@@ -16,12 +10,6 @@ public class Mapper
 		territory.setyAxisCoordinate(planet.getYAxisCoordinate());
 		territory.setOwnerName(planet.getOwnerName());
 		return territory;
-	}
-
-	public static Player mapPlayer(PlayerDTO playerDTO) 
-	{
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public static PieceDTO mapPieceDTO(Piece piece) 

@@ -20,4 +20,7 @@ public interface GameStateInputPort
 	String getCurrentPlayerRace();
 	List<BufferedImage> getCurrentPlayerTerritoryCardsImages();
 	BufferedImage getTerritoryCardVerseImage();
+	int getUnitsToDistribute();
+	void removeUnitsToDistribute(int numberOfPieces);
+	boolean isDistributionPhase();
 }

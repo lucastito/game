@@ -13,6 +13,7 @@ public class GameState implements GameStateInputPort
 	private int currentRound = 0;
 	private Player currentPlayer;
 	private int currentPlayerPositionInList = 0;
+	int numberOfDistributionUnits;
 	
 	public GameState()
 	{		
@@ -24,6 +25,7 @@ public class GameState implements GameStateInputPort
 	{
 		players = playerRepository.getAllPlayers();
 		currentPlayer = players.get(currentPlayerPositionInList);
+		numberOfDistributionUnits = currentPlayer.getTerritories().size() / 2;
 	}
 
 	public List<TerritoryDTO> getAllPlanets() 
@@ -70,6 +72,7 @@ public class GameState implements GameStateInputPort
 			{
 				currentPlayer = players.get(currentPlayerPositionInList);
 				playerStep = new PlayerStep();
+				numberOfDistributionUnits = currentPlayer.getTerritories().size() / 2;
 			}
 			else
 				if (currentPlayerPositionInList + 1 < players.size())
@@ -88,6 +91,11 @@ public class GameState implements GameStateInputPort
 		return true;
 	}
 	
+	private boolean isFirstRound() 
+	{		
+		return currentRound == 0;
+	}
+
 	public String currentPlayerName()
 	{
 		return currentPlayer.getName();
@@ -184,5 +192,25 @@ public class GameState implements GameStateInputPort
 	
 	public String getCurrentPlayerRace(){
 		return currentPlayer.getRace().toString();
+	}
+
+	@Override
+	public int getUnitsToDistribute() 
+	{
+		return numberOfDistributionUnits;
+	}
+
+	@Override
+	public void removeUnitsToDistribute(int numberOfPieces) 
+	{
+		numberOfDistributionUnits = numberOfDistributionUnits - numberOfPieces;
+	}
+
+	@Override
+	public boolean isDistributionPhase() 
+	{
+		if (playerStep.getCurrentPhase() == PlayerStep.RECEIVE_ARMY_PHASE)
+			return true;
+		return false;
 	}
 }

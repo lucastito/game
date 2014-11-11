@@ -13,8 +13,6 @@ public class GameScreen extends JPanel implements MouseListener{
 
 	PlanetarySystemController planetarySystemController;
 	PiecesController piecesController;
-	final int TERRITORYMAXSIZE = 80;
-	final int PIECEMAXSIZE = 15;
 	
 	private BufferedImage background;
 	
