@@ -1,5 +1,6 @@
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -151,6 +152,20 @@ public class GameState implements GameStateInputPort
 	
 	public BufferedImage getCardVerseImage(){
 		return currentPlayer.getObjectiveCard().getBackImage();
+	}
+	
+	public List<BufferedImage> getCurrentPlayerTerritoryCardsImages(){
+		List<BufferedImage> images = new ArrayList<BufferedImage>();
+		while(currentPlayer.getTerritoryCards().iterator().hasNext()){
+			images.add(currentPlayer.getTerritoryCards().iterator().next().getFrontImage());
+		}
+		
+		return images;
+	}
+	
+	public BufferedImage getTerritoryCardVerseImage(){
+		TerritoryCard tc = (TerritoryCard)currentPlayer.getTerritoryCards().toArray()[0];
+		return tc.getBackImage();
 	}
 	
 	public void finishTurn(){

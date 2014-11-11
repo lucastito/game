@@ -12,8 +12,10 @@ import javax.swing.JPanel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
 import java.awt.Font;
 import java.awt.Color;
+import java.util.List;
 
 
 public class MainScreen {
@@ -21,6 +23,9 @@ public class MainScreen {
 	private JFrame frame;
 	private GameStateInputPort gameState;
 	private GameCreationInputPort gameCreation;
+	private JLabel currentPlayerLabel = new JLabel();
+	private JPanel panel_1 = new JPanel();
+	private JLabel lblNewLabel = null;
 
 	/**
 	 * Launch the application.
@@ -47,10 +52,13 @@ public class MainScreen {
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
 		
-		JLabel currentPlayerLabel = new JLabel();
+		
 		
 		Image verseCardImage = gameState.getCardVerseImage();
 		verseCardImage = verseCardImage.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
+		
+//		Image verseTerritoryCardImage = gameState.getTerritoryCardVerseImage();
+//		verseTerritoryCardImage = verseTerritoryCardImage.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
 		
 		
 		JPanel panel = new JPanel(){
@@ -73,7 +81,7 @@ public class MainScreen {
 				JOptionPane.showMessageDialog(null, objectiveImageLabel," ",JOptionPane.PLAIN_MESSAGE, null);
 			}
 		});
-		objectiveButton.setBounds(571, 292, 200, 200);
+		objectiveButton.setBounds(0, 530, 200, 200);
 		objectiveButton.setIcon(new ImageIcon(verseCardImage));
 		objectiveButton.setContentAreaFilled(false);
 		objectiveButton.setBorder(null);
@@ -85,6 +93,7 @@ public class MainScreen {
 			public void actionPerformed(ActionEvent arg0) {
 				gameState.finishTurn();
 				initialize();
+				currentPlayerLabel.validate();
 				JOptionPane.showMessageDialog(null, "Turno: "+gameState.getCurrentRound()+"  Jogador: "+gameState.getCurrentPlayerName());
 			
 			}
@@ -92,12 +101,56 @@ public class MainScreen {
 		endTurnButton.setBounds(730, 140, 89, 23);
 		panel.add(endTurnButton);
 		
+		//JPanel panel_1 = new JPanel();
+		panel_1.setBounds(129, 140, 550, 167);
+		panel_1.setVisible(false);
+		panel.add(panel_1);
+		
+		lblNewLabel = new JLabel("Muda por favor");
+		panel_1.add(lblNewLabel);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(panel_1.isVisible())
+					panel_1.setVisible(false);
+				else
+					panel_1.setVisible(true);
+				lblNewLabel.setText("Mudei"+Math.random());
+			}
+		});
+		btnNewButton.setBounds(310, 399, 89, 23);
+		panel.add(btnNewButton);
+		currentPlayerLabel.setBounds(233, 11, 609, 66);
+		panel.add(currentPlayerLabel);
+		
 		
 		currentPlayerLabel.setText(gameState.getCurrentPlayerName()+" ("+gameState.getCurrentPlayerRace()+")");
 		currentPlayerLabel.setForeground(Color.YELLOW);
 		currentPlayerLabel.setFont(new Font("Tahoma", Font.PLAIN, 54));
-		currentPlayerLabel.setBounds(497, 11, 635, 105);
-		panel.add(currentPlayerLabel);
+		
+//		JButton territoryCardsButton = new JButton("");
+//		territoryCardsButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				
+//				
+//				
+//				List<BufferedImage> currentPlayerTerritoryCardsImages = gameState.getCurrentPlayerTerritoryCardsImages();
+//				while(currentPlayerTerritoryCardsImages.iterator().hasNext()){
+//					Image territoryCardImage = currentPlayerTerritoryCardsImages.iterator().next();
+//					territoryCardImage = territoryCardImage.getScaledInstance(500, 500, java.awt.Image.SCALE_SMOOTH);
+//			        JLabel territoryCardImageLabel = new JLabel(new ImageIcon(territoryCardImage));
+//					JOptionPane.showMessageDialog(null, territoryCardImageLabel," ",JOptionPane.PLAIN_MESSAGE, null);
+//				}
+//				
+//				
+//			}
+//		});
+//		territoryCardsButton.setContentAreaFilled(false);
+//		territoryCardsButton.setBorder(null);
+//		objectiveButton.setIcon(new ImageIcon(verseTerritoryCardImage));
+//		territoryCardsButton.setBounds(210, 530, 200, 200);
+//		panel.add(territoryCardsButton);
 		
 	}
 

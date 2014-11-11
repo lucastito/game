@@ -61,4 +61,8 @@ public class Player {
 		this.objectiveCard = objectiveCard;
 	}
 
+	public Set<TerritoryCard> getTerritoryCards() {
+		return territoryCards;
+	}
+
 }
