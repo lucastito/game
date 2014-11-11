@@ -50,7 +50,7 @@ public class GameStateTests
 	{
 		PlayerRepository playerRepository = new PlayerRepository();
 		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
-		Clone clone = new Clone();
+		Piece clone = new Piece();
 		clone.setId((short) 1);
 		clone.setImagePath("123");
 		clone.setOwnerName("Leo");

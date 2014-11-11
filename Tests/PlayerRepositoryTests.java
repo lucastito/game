@@ -21,7 +21,7 @@ public class PlayerRepositoryTests {
 	@Test
 	public void AddPlayer_AddsPlayer() 
 	{
-		Piece piece = new Clone();
+		Piece piece = new Piece();
 		Planet planet = planetRepository.getPlanetByName("Trandosha");
 		Player player = new Player(PlayerRace.CLONE, "Leonardo");
 		player.addTerritory(planet);
@@ -67,7 +67,7 @@ public class PlayerRepositoryTests {
 	@Test
 	public void AddPlayerPiece_AddsPlayerPiece() 
 	{
-		Clone clone = new Clone();
+		Piece clone = new Piece();
 		clone.setPieceType(PieceType.CLONE);
 		playerRepository.addPlayerPiece("Lucas", "Trandosha", 1);
 		Player player = playerRepository.getPlayerByName("Lucas");
@@ -82,7 +82,7 @@ public class PlayerRepositoryTests {
 	@Test
 	public void RemovePlayerPiece_RemovesPlayerPiece() 
 	{
-		Clone clone = new Clone();
+		Piece clone = new Piece();
 		clone.setPieceType(PieceType.CLONE);
 		playerRepository.addPlayerPiece("Lucas", "Trandosha", 1);
 		playerRepository.removePlayerPiece("Lucas", "Trandosha", 1);
@@ -98,10 +98,10 @@ public class PlayerRepositoryTests {
 	{
 		PlayerRepository newPlayerRepository = new PlayerRepository();
 		Player playerOne = new Player(PlayerRace.CLONE, "PlayerOne");
-		playerOne.addPiece(new Clone());
+		playerOne.addPiece(new Piece());
 		Player playerTwo = new Player(PlayerRace.DROIDE, "PlayerTwo");
-		playerTwo.addPiece(new Sith());
-		playerTwo.addPiece(new Padawan());
+		playerTwo.addPiece(new Piece());
+		playerTwo.addPiece(new Piece());
 		newPlayerRepository.addPlayer(playerOne);
 		newPlayerRepository.addPlayer(playerTwo);
 		

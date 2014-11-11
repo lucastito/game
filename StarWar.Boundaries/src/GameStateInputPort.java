@@ -11,4 +11,7 @@ public interface GameStateInputPort
 	boolean isRedeployPhase();
 	boolean isAttackPhase();
 	void initializePlayers();
+	int getUnitsToDistribute();
+	void removeUnitsToDistribute(int numberOfPieces);
+	boolean isDistributionPhase();
 }

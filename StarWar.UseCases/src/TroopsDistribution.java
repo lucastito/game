@@ -1,60 +1,64 @@
-
-
-
 public class TroopsDistribution implements TroopsDistributionBoundary
 {
-	public int calculateNumberOfPiecesPlayerIsAllowedToDistribute(PlayerDTO player) 
+	GamePresenterOutputPort gameScreen;
+	IPlayerRepository playerRepository;
+	IPlanetRepository planetRepository;
+	GameStateInputPort gameState;
+	
+	public TroopsDistribution(GamePresenterOutputPort presenter, IPlanetRepository planetRepository, IPlayerRepository playerRepository, GameStateInputPort gameState)
 	{
-		throw new UnsupportedOperationException();
+		this.gameScreen = presenter;
+		this.planetRepository = planetRepository;
+		this.playerRepository = playerRepository;
+		this.gameState = gameState;
 	}
 	
-	public int maxNumberOfUnitsAPlayerCanPutInATerritory(TerritoryDTO territory) 
+	public void distributeTroops(int numberOfPieces, String playerName, String planetName) 
 	{
-		throw new UnsupportedOperationException();
-	}
-
-	public BoardDTO distributeTroops(int numberOfPieces, PlayerDTO playerDTO, TerritoryDTO territory) 
-	{
-		Player player = Mapper.mapPlayer(playerDTO);
-		Planet planet = Mapper.mapPlanet(territory);
+		Player player = playerRepository.getPlayerByName(playerName);
+		Planet planet = planetRepository.getPlanetByName(planetName);
 		
-		if (isFirstRound())
-			return firstRoundDistribution(numberOfPieces, player, planet);
+		int numberOfUnitsToDistribute = gameState.getUnitsToDistribute();
+		
+		if (!planet.getOwnerName().equals(playerName))
+		{
+			gameScreen.showReason("Player does not own this territory.");
+			return;
+		}
+		
+		if (numberOfPieces > numberOfUnitsToDistribute)
+		{
+			gameScreen.showReason("Number of pieces exceeds number of units to distribute.");
+			return;
+		}
+		else
+		{
+			playerRepository.addPlayerPiece(playerName, planetName, numberOfPieces);
+			gameState.removeUnitsToDistribute(numberOfPieces);
+		}		
 		
 		if (playerNeedsToExchangeCards(player))
 		{
-			BoardDTO board = new BoardDTO();
-			board.setReason("Player Has Five Territory Cards.");
-			return board;
+			gameScreen.showReason("Player Has Five Territory Cards.");
+			return;
 		}
 		
 		if (playerHasConqueredPlanetarySystem(player))
 		{
-			BoardDTO board = new BoardDTO();
-			board.setReason("Player Conquerede Planetary Systems.");
-			return board;
+			gameScreen.showReason(("Player Conquered Planetary Systems."));
+			return;
 		}
-		throw new UnsupportedOperationException();
+		
+		gameScreen.show();
 	}
 
 	private boolean playerHasConqueredPlanetarySystem(Player player) 
 	{
-		throw new UnsupportedOperationException();
+		return false;
 	}
 
 	private boolean playerNeedsToExchangeCards(Player player) 
 	{
-		throw new UnsupportedOperationException();
+		return false;
 	}
-
-	private BoardDTO firstRoundDistribution(int numberOfPieces, Player player, Planet planet) 
-	{
-		throw new UnsupportedOperationException();
-	}
-
-	private boolean isFirstRound() 
-	{
-		throw new UnsupportedOperationException();
-	}
-
 }

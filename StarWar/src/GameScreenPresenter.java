@@ -3,7 +3,6 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.MouseInfo;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -19,12 +18,13 @@ import javax.swing.JPanel;
 import model.Piece;
 import model.Territory;
 
-public class GameScreenPresenter implements TroopsRedeployOutputPort
+public class GameScreenPresenter implements GamePresenterOutputPort
 {
 	Territory selectedTerritory;
 	int numberOfPieces;
 	private GameStateInputPort gameState;
 	private TroopsRedeployInputPort troopsRedeployInputPort;
+	private TroopsDistributionBoundary troopsDistributionInputPort;
 	private AttackInputPort attackInputPort;
 	JFrame frame;
 	static GameScreen gameScreenPanel;
@@ -133,8 +133,7 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
         	Piece pieceLabel = new Piece(pieceIcon);
         	pieceLabel.setBounds(piece.getxAxisCoordinate(), piece.getyAxisCoordinate(), pieceIcon.getIconWidth(), pieceIcon.getIconHeight());
 			pieceLabels.add(pieceLabel);
-			frame.add(pieceLabel);		
-			
+			frame.add(pieceLabel);					
         }	
 		
 		frame.repaint();
@@ -154,6 +153,11 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 	public void setTroopsRedeployInputPort(TroopsRedeployInputPort troopsRedeployInputPort)
 	{
 		this.troopsRedeployInputPort = troopsRedeployInputPort;
+	}
+	
+	public void setTroopsDistribution(TroopsDistributionBoundary troopsDistributionInputPort)
+	{
+		this.troopsDistributionInputPort = troopsDistributionInputPort;
 	}
 	
 	public void setAttackInputPort(AttackInputPort attackInputPort)
@@ -250,12 +254,15 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
         	}
         	else
         	{
-        		//if (isDistributionTurn())
-        		//{
-        		//	getnumberofpiecestodistribute()
-        		//	while(numberofpiecestodistribute > 0)
-        		//	addplayerpiece
-        		//}
+        		if (gameState.isDistributionPhase())
+        		{
+        			int numberOfPiecesToDistribute = gameState.getUnitsToDistribute();
+        			if(numberOfPiecesToDistribute > 0)
+        			{
+        				troopsDistributionInputPort.distributeTroops(1, selectedTerritory.getOwnerName(), selectedTerritory.getName());
+        			}		
+        		}
+        		
 	        	if (selectedTerritory.getName().equals(candidateTerritory.getName()))
 	        	{
 	        		selectedTerritory = null;

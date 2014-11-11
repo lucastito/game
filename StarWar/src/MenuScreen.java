@@ -25,7 +25,7 @@ public class MenuScreen extends JPanel implements MouseListener {
 		{
 			nextPlayerArrow = new JLabel(new ImageIcon(ImageIO.read(new File(getClass().getResource("image/arrow.png").getPath().toString()))));		
 			playerStepLabel = new JLabel();
-			playerStepLabel.setText("Start Game!");
+			playerStepLabel.setText("Distribua suas 8 peças");
 		} catch (IOException e) 
 		{
 			e.printStackTrace();
@@ -45,16 +45,16 @@ public class MenuScreen extends JPanel implements MouseListener {
 			String currentPhase = "";
 			switch (gameState.currentPlayerStep())
 			{
-				case 1:
+				case 0:
 					currentPhase = "Receive Army Phase";
 					break;
-				case 2:
+				case 1:
 					currentPhase = "Attack Enemies Phase";
 					break;
-				case 3:
+				case 2:
 					currentPhase = "Redeploy Troops Phase";
 					break;
-				case 4:
+				case 3:
 					currentPhase = "End Turn";
 					break;
 			}

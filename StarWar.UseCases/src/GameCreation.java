@@ -8,9 +8,9 @@ public class GameCreation implements GameCreationInputPort
 	private IObjectiveCardRepository objectiveCardRepository;
 	private ITerritoryCardRepository territoryCardRepository;
 	private IPlanetRepository planetRepository;
-	private TroopsRedeployOutputPort outputPort;
+	private GamePresenterOutputPort outputPort;
 	
-	public GameCreation(IPlayerRepository playerRepository, IObjectiveCardRepository objectiveCardRepository, IPlanetRepository planetRepository, ITerritoryCardRepository territoryCardRepository, TroopsRedeployOutputPort outputPort){
+	public GameCreation(IPlayerRepository playerRepository, IObjectiveCardRepository objectiveCardRepository, IPlanetRepository planetRepository, ITerritoryCardRepository territoryCardRepository, GamePresenterOutputPort outputPort){
 		this.playerRepository = playerRepository;
 		this.planetRepository = planetRepository;
 		this.objectiveCardRepository = objectiveCardRepository;
