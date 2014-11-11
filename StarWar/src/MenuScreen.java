@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -14,6 +15,7 @@ public class MenuScreen extends JPanel implements MouseListener {
 	
 	GameStateInputPort gameState;
 	JLabel nextPlayerArrow = null;
+	JLabel playerStepLabel = null;
     
 	public MenuScreen(GameStateInputPort gameState)
 	{
@@ -21,7 +23,9 @@ public class MenuScreen extends JPanel implements MouseListener {
 		this.gameState = gameState;
 		try 
 		{
-			nextPlayerArrow = new JLabel(new ImageIcon(ImageIO.read(new File(getClass().getResource("image/arrow.png").getPath().toString()))));
+			nextPlayerArrow = new JLabel(new ImageIcon(ImageIO.read(new File(getClass().getResource("image/arrow.png").getPath().toString()))));		
+			playerStepLabel = new JLabel();
+			playerStepLabel.setText("Start Game!");
 		} catch (IOException e) 
 		{
 			e.printStackTrace();
@@ -29,6 +33,7 @@ public class MenuScreen extends JPanel implements MouseListener {
 		
 	    nextPlayerArrow.setBounds(1270, 670, nextPlayerArrow.getIcon().getIconWidth(), nextPlayerArrow.getIcon().getIconHeight());
 	    add(nextPlayerArrow);
+	    add(playerStepLabel);
 	    nextPlayerArrow.addMouseListener(this);
 	}
 
@@ -37,6 +42,23 @@ public class MenuScreen extends JPanel implements MouseListener {
 		if (e.getSource() == nextPlayerArrow)
 		{
 			gameState.nextPlayerStep();
+			String currentPhase = "";
+			switch (gameState.currentPlayerStep())
+			{
+				case 1:
+					currentPhase = "Receive Army Phase";
+					break;
+				case 2:
+					currentPhase = "Attack Enemies Phase";
+					break;
+				case 3:
+					currentPhase = "Redeploy Troops Phase";
+					break;
+				case 4:
+					currentPhase = "End Turn";
+					break;
+			}
+			playerStepLabel.setText(gameState.currentPlayerName() + " " + currentPhase);
 		}
 	}
 

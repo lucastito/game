@@ -250,14 +250,20 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
         		}
         		return;
         	}
-        	if (selectedTerritory.getName().equals(candidateTerritory.getName()))
+        	else
         	{
-        		selectedTerritory = null;
-        		selectedTerritoryLabel.setVisible(false);
-        		return;
-        	}
-			if (selectedTerritory != null)
-			{
+        		//if (isDistributionTurn())
+        		//{
+        		//	getnumberofpiecestodistribute()
+        		//	while(numberofpiecestodistribute > 0)
+        		//	addplayerpiece
+        		//}
+	        	if (selectedTerritory.getName().equals(candidateTerritory.getName()))
+	        	{
+	        		selectedTerritory = null;
+	        		selectedTerritoryLabel.setVisible(false);
+	        		return;
+	        	}
 				if (selectedTerritory.getOwnerName().equals(gameState.currentPlayerName()))
 				{
 					Territory targetTerritory = null;
@@ -287,8 +293,8 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 							return;
 						}
 					}
-				}
-			}        		   	
+				}				
+        	}
     	}    	   	
 	}
 	private void showArmyCount()
