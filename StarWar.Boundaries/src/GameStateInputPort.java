@@ -1,3 +1,4 @@
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 public interface GameStateInputPort 
@@ -11,4 +12,10 @@ public interface GameStateInputPort
 	boolean isRedeployPhase();
 	boolean isAttackPhase();
 	void initializePlayers();
+	BufferedImage getCurrentPlayerObjectiveCardImage();
+	BufferedImage getCardVerseImage();
+	int getCurrentRound();
+	void finishTurn();
+	String getCurrentPlayerName();
+	String getCurrentPlayerRace();
 }

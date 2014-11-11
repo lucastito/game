@@ -1,5 +1,7 @@
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class GameState implements GameStateInputPort
 {
@@ -141,5 +143,31 @@ public class GameState implements GameStateInputPort
 	public int getCurrentRound() 
 	{
 		return currentRound;
+	}
+	
+	public BufferedImage getCurrentPlayerObjectiveCardImage(){
+		return currentPlayer.getObjectiveCard().getFrontImage();
+	}
+	
+	public BufferedImage getCardVerseImage(){
+		return currentPlayer.getObjectiveCard().getBackImage();
+	}
+	
+	public void finishTurn(){
+		playerStep = new PlayerStep();
+		currentRound++;
+		if(currentPlayerPositionInList >= players.size() - 1)
+			currentPlayerPositionInList = 0;
+		else
+			currentPlayerPositionInList++;
+		currentPlayer = players.get(currentPlayerPositionInList);
+	}
+	
+	public String getCurrentPlayerName(){
+		return currentPlayer.getName();
+	}
+	
+	public String getCurrentPlayerRace(){
+		return currentPlayer.getRace().toString();
 	}
 }

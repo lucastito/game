@@ -83,6 +83,8 @@ public class GameScreenPresenter implements TroopsRedeployOutputPort
 		        frame.validate();
 		        frame.setLocationRelativeTo(null);
 		        frame.setVisible(true);
+		        MainScreen window = new MainScreen(gameState, gameCreation);
+				window.getFrame().setVisible(true);
 		    }
     	});
 	}

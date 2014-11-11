@@ -15,7 +15,7 @@ public class GameCreation implements GameCreationInputPort
 		this.planetRepository = planetRepository;
 		this.objectiveCardRepository = objectiveCardRepository;
 		this.territoryCardRepository = territoryCardRepository;
-		this.playerRepository.restartRepository();
+		//this.playerRepository.restartRepository();
 		this.outputPort = outputPort;
 	}
 	
@@ -46,7 +46,7 @@ public class GameCreation implements GameCreationInputPort
 			
 		Player player = new Player(convertedRace, playerDto.getName());
 		playerRepository.addPlayer(player);
-		this.playerRepository.addPlayer(player);		
+		//this.playerRepository.addPlayer(player);		
 		return 0;
 	}
 	
