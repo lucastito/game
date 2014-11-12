@@ -1,12 +1,16 @@
-import java.util.List;
+import java.util.Iterator;
 
-public class CardsAchievement implements CardsAchievementBoundary
-{
-	public List<CardDTO> addTerritoryToPlayerCards(PlayerDTO player, TerritoryDTO territory) {
-		throw new UnsupportedOperationException();
+public class CardsAchievement {
+
+	public void giveTerritoryCard(Player player) {
+		War war = War.getInstance();
+		if (war.getTerritoryWon()) {
+			Iterator<TerritoryCard> iterator = war.getTerritoryCards()
+					.iterator();
+			TerritoryCard tc = iterator.next();
+			player.addTerritoryCards(tc);
+			war.getTerritoryCards().remove(tc);
+		}
 	}
 
-	public List<CardDTO> removeTerritoryFromPlayerCards(PlayerDTO player, TerritoryDTO territory) {
-		throw new UnsupportedOperationException();
-	}
 }

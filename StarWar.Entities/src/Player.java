@@ -49,10 +49,6 @@ public class Player {
 		return race;
 	}
 
-	public void setTerritoryCards(Set<TerritoryCard> territoryCards) {
-		this.territoryCards = territoryCards;
-	}
-
 	public ObjectiveCard getObjectiveCard() {
 		return objectiveCard;
 	}
@@ -63,6 +59,14 @@ public class Player {
 
 	public Set<TerritoryCard> getTerritoryCards() {
 		return territoryCards;
+	}
+
+	public void addTerritoryCards(TerritoryCard tc) {
+		territoryCards.add(tc);
+	}
+
+	public void setTerritoryCards(Set<TerritoryCard> territoryCards) {
+		this.territoryCards = territoryCards;
 	}
 
 }
