@@ -162,17 +162,22 @@ public class GameState implements GameStateInputPort
 		return currentPlayer.getObjectiveCard().getBackImage();
 	}
 	
-	public List<BufferedImage> getCurrentPlayerTerritoryCardsImages(){
-		List<BufferedImage> images = new ArrayList<BufferedImage>();
-		while(currentPlayer.getTerritoryCards().iterator().hasNext()){
-			images.add(currentPlayer.getTerritoryCards().iterator().next().getFrontImage());
+	public BufferedImage[] getCurrentPlayerTerritoryCardsImages(){
+		BufferedImage[] images = null;
+		Object[] territoryCards = currentPlayer.getTerritoryCards().toArray();
+		images = new BufferedImage[territoryCards.length];
+		for (int i = 0; i < territoryCards.length; i++) {
+			TerritoryCard tc = (TerritoryCard)territoryCards[i];
+			images[i] = tc.getFrontImage();
 		}
+		
+		
 		
 		return images;
 	}
 	
 	public BufferedImage getTerritoryCardVerseImage(){
-		TerritoryCard tc = (TerritoryCard)currentPlayer.getTerritoryCards().toArray()[0];
+		TerritoryCard tc = (TerritoryCard)currentPlayer.getTerritoryCards().toArray()[1];
 		return tc.getBackImage();
 	}
 	

@@ -18,7 +18,7 @@ public interface GameStateInputPort
 	void finishTurn();
 	String getCurrentPlayerName();
 	String getCurrentPlayerRace();
-	List<BufferedImage> getCurrentPlayerTerritoryCardsImages();
+	BufferedImage[] getCurrentPlayerTerritoryCardsImages();
 	BufferedImage getTerritoryCardVerseImage();
 	int getUnitsToDistribute();
 	void removeUnitsToDistribute(int numberOfPieces);
