@@ -1,6 +1,6 @@
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -24,6 +24,7 @@ public class GameState implements GameStateInputPort
 	public void initializePlayers()
 	{
 		players = playerRepository.getAllPlayers();
+		Collections.reverse(players);
 		currentPlayer = players.get(currentPlayerPositionInList);
 		numberOfDistributionUnits = currentPlayer.getTerritories().size() / 2;
 	}
