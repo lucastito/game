@@ -23,4 +23,5 @@ public interface GameStateInputPort
 	int getUnitsToDistribute();
 	void removeUnitsToDistribute(int numberOfPieces);
 	boolean isDistributionPhase();
+	int currentPlayerNumberOfOwnedPlanets();
 }

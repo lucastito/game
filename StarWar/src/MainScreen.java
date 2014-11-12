@@ -26,12 +26,14 @@ public class MainScreen {
 	private GameStateInputPort gameState;
 	private GameCreationInputPort gameCreation;
 	private JPanel playerMenuPanel1 = new JPanel();
-	private JLabel lblNewLabel = null;
+	private JLabel planetasGalaxiasLabel;
+	private JLabel turnoJogadorLabel;
 	JButton objectiveButton = new JButton("");
 	JButton territoryCardsButton = new JButton("");
 	ImageIcon verseIcon = new ImageIcon();
 	ImageIcon verseTerritoryIcon = new ImageIcon();
 	int territoryCardCounter = 0;
+	private final JLabel diceLabel = new JLabel("<html>\r\n<br>\r\nDADOS<br><br>\r\n\r\nAtaque: 6, 6, 6<br>\r\nDefesa: 6, 6, 6<br>\r\n</html>");
 
 	/**
 	 * Launch the application.
@@ -124,11 +126,11 @@ public class MainScreen {
 		objectiveButton.setContentAreaFilled(false);
 		objectiveButton.setBorder(null);
 		
-		lblNewLabel = new JLabel("");
-		lblNewLabel.setForeground(new Color(255, 255, 0));
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 31));
-		lblNewLabel.setBounds(719, 258, 585, 51);
-		playerMenuPanel1.add(lblNewLabel);;
+		turnoJogadorLabel = new JLabel("");
+		turnoJogadorLabel.setForeground(new Color(255, 255, 0));
+		turnoJogadorLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
+		turnoJogadorLabel.setBounds(719, 220, 507, 68);
+		playerMenuPanel1.add(turnoJogadorLabel);;
 		
 		
 		menuButton.addActionListener(new ActionListener() {
@@ -137,7 +139,8 @@ public class MainScreen {
 					playerMenuPanel1.setVisible(false);
 				else
 					playerMenuPanel1.setVisible(true);
-				lblNewLabel.setText("Turno: "+gameState.getCurrentRound()+ " Jogador: "+gameState.getCurrentPlayerName()+"("+gameState.getCurrentPlayerRace()+")");
+				turnoJogadorLabel.setText("<html>Turno: "+gameState.getCurrentRound()+ "<br>Jogador: "+gameState.getCurrentPlayerName()+"("+gameState.getCurrentPlayerRace()+")</html>");
+				planetasGalaxiasLabel.setText("Planetas: "+gameState.currentPlayerNumberOfOwnedPlanets());
 			}
 		});
 		
@@ -166,6 +169,17 @@ public class MainScreen {
 		territoryCardsButton.setIcon(verseTerritoryIcon);
 		territoryCardsButton.setContentAreaFilled(false);
 		territoryCardsButton.setBorder(null);
+		
+		planetasGalaxiasLabel = new JLabel("");
+		planetasGalaxiasLabel.setForeground(Color.YELLOW);
+		planetasGalaxiasLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
+		planetasGalaxiasLabel.setBounds(719, 281, 507, 39);
+		playerMenuPanel1.add(planetasGalaxiasLabel);
+		diceLabel.setForeground(Color.RED);
+		diceLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
+		diceLabel.setBounds(1090, 175, 250, 145);
+		
+		playerMenuPanel1.add(diceLabel);
 		
 	}
 

@@ -199,7 +199,7 @@ public class GameState implements GameStateInputPort
 	public String getCurrentPlayerRace(){
 		return currentPlayer.getRace().toString();
 	}
-
+	
 	@Override
 	public int getUnitsToDistribute() 
 	{
@@ -218,5 +218,9 @@ public class GameState implements GameStateInputPort
 		if (playerStep.getCurrentPhase() == PlayerStep.RECEIVE_ARMY_PHASE)
 			return true;
 		return false;
+	}
+	
+	public int currentPlayerNumberOfOwnedPlanets(){
+		return currentPlayer.getTerritories().size();
 	}
 }
