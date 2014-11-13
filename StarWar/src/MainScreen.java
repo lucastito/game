@@ -180,6 +180,14 @@ public class MainScreen {
 		diceLabel.setBounds(1090, 175, 250, 145);
 
 		playerMenuPanel1.add(diceLabel);
+		
+		JLabel qntCartasTerritorioLabel = new JLabel();
+		qntCartasTerritorioLabel.setForeground(new Color(255, 255, 255));
+		qntCartasTerritorioLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		qntCartasTerritorioLabel.setText(""+gameState
+				.getCurrentPlayerTerritoryCardsImages().length);
+		qntCartasTerritorioLabel.setBounds(595, 281, 46, 14);
+		playerMenuPanel1.add(qntCartasTerritorioLabel);
 
 		playerMenuPanel2.setBounds(951, 0, 399, 412);
 		panel.add(playerMenuPanel2);
