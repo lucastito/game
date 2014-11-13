@@ -2,6 +2,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 
 public class GameState implements GameStateInputPort
@@ -74,6 +75,18 @@ public class GameState implements GameStateInputPort
 				currentPlayer = players.get(currentPlayerPositionInList);
 				playerStep = new PlayerStep();
 				numberOfDistributionUnits = currentPlayer.getTerritories().size() / 2;
+				Set<TerritoryCard> territoryCards = currentPlayer.getTerritoryCards();
+				if (territoryCards != null)
+				{
+					for (TerritoryCard card : currentPlayer.getTerritoryCards())
+					{
+						for (Planet planet : currentPlayer.getTerritories())
+							if (card.getName().toLowerCase().equals(planet.getName().toLowerCase()))
+							{
+								numberOfDistributionUnits += 2;
+							}
+					}
+				}
 			}
 			else
 				if (currentPlayerPositionInList + 1 < players.size())

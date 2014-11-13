@@ -14,7 +14,7 @@ public class PlayerRepositoryTests {
 		planetRepository = new PlanetRepository();
 		playerRepository = new PlayerRepository();
 
-		Player player = new Player(PlayerRace.CLONE, "Lucas");
+		Player player = new Player(PlayerRace.CLONE, "Lucas", false);
 		playerRepository.addPlayer(player);
 	}
 
@@ -23,7 +23,7 @@ public class PlayerRepositoryTests {
 	{
 		Piece piece = new Piece();
 		Planet planet = planetRepository.getPlanetByName("Trandosha");
-		Player player = new Player(PlayerRace.CLONE, "Leonardo");
+		Player player = new Player(PlayerRace.CLONE, "Leonardo", false);
 		player.addTerritory(planet);
 		player.addPiece(piece);
 
@@ -97,9 +97,9 @@ public class PlayerRepositoryTests {
 	public void GetAllPieces_WhenPlayerHasPieces_ReturnsPiecesList() 
 	{
 		PlayerRepository newPlayerRepository = new PlayerRepository();
-		Player playerOne = new Player(PlayerRace.CLONE, "PlayerOne");
+		Player playerOne = new Player(PlayerRace.CLONE, "PlayerOne", false);
 		playerOne.addPiece(new Piece());
-		Player playerTwo = new Player(PlayerRace.DROIDE, "PlayerTwo");
+		Player playerTwo = new Player(PlayerRace.DROIDE, "PlayerTwo", false);
 		playerTwo.addPiece(new Piece());
 		playerTwo.addPiece(new Piece());
 		newPlayerRepository.addPlayer(playerOne);
@@ -112,8 +112,8 @@ public class PlayerRepositoryTests {
 	public void GetAllPLayers_ReturnsPlayersList() 
 	{
 		PlayerRepository newPlayerRepository = new PlayerRepository();
-		Player playerOne = new Player(PlayerRace.CLONE, "PlayerOne");
-		Player playerTwo = new Player(PlayerRace.DROIDE, "PlayerTwo");
+		Player playerOne = new Player(PlayerRace.CLONE, "PlayerOne", false);
+		Player playerTwo = new Player(PlayerRace.DROIDE, "PlayerTwo", false);
 		newPlayerRepository.addPlayer(playerOne);
 		newPlayerRepository.addPlayer(playerTwo);
 		

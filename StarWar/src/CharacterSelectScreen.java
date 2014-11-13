@@ -23,7 +23,7 @@ public class CharacterSelectScreen {
 	
 	
 	public void startGameWith(String race){
-		PlayerDTO player1 = new PlayerDTO(1, "Player 1", race);
+		PlayerDTO player1 = new PlayerDTO(1, "Player 1", race, false);
 		String oponentsRace = "";
 		while (oponentsRace == null || oponentsRace == "")
 		{
@@ -46,7 +46,7 @@ public class CharacterSelectScreen {
 				oponentsRace = "";			
 		}
 		
-		PlayerDTO player2 = new PlayerDTO(2, "Player 2", oponentsRace);
+		PlayerDTO player2 = new PlayerDTO(2, "Player 2", oponentsRace, true);
 		GameCreationInputPort gameCreation = presenter.getGameCreation();
 		gameCreation.addPlayerToCurrentGame(player1);
 		gameCreation.addPlayerToCurrentGame(player2);

@@ -2,9 +2,9 @@ import java.util.Iterator;
 
 public class CardsAchievement {
 
-	public void giveTerritoryCard(Player player) {
+	public static void giveTerritoryCard(Player player) {
 		War war = War.getInstance();
-		if (war.getTerritoryWon()) {
+		if (war.territoryWon) {
 			Iterator<TerritoryCard> iterator = war.getTerritoryCards()
 					.iterator();
 			TerritoryCard tc = iterator.next();
