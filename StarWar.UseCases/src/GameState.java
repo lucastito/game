@@ -165,21 +165,14 @@ public class GameState implements GameStateInputPort
 	
 	public BufferedImage[] getCurrentPlayerTerritoryCardsImages(){
 		BufferedImage[] images = null;
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		Object[] territoryCards = currentPlayer.getTerritoryCards().toArray();
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		images = new BufferedImage[territoryCards.length];
 		for (int i = 0; i < territoryCards.length; i++) {
 			TerritoryCard tc = (TerritoryCard)territoryCards[i];
-			images[i] = tc.getFrontImage();
+			if(tc==null){
+				
+			}else
+				images[i] = tc.getFrontImage();
 		}
 		
 		
@@ -188,17 +181,7 @@ public class GameState implements GameStateInputPort
 	}
 	
 	public BufferedImage getTerritoryCardVerseImage(){
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		TerritoryCard tc = (TerritoryCard)currentPlayer.getTerritoryCards().toArray()[1];
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		return tc.getBackImage();
 	}
 	

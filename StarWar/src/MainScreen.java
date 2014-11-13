@@ -19,7 +19,6 @@ import java.util.List;
 
 import javax.swing.border.EtchedBorder;
 
-
 public class MainScreen {
 
 	private JFrame frame;
@@ -35,18 +34,19 @@ public class MainScreen {
 	ImageIcon verseIcon = new ImageIcon();
 	ImageIcon verseTerritoryIcon = new ImageIcon();
 	int territoryCardCounter = 0;
-	private final JLabel diceLabel = new JLabel("<html>\r\n<br>\r\nDADOS<br><br>\r\n\r\nAtaque: 6, 6, 6<br>\r\nDefesa: 6, 6, 6<br>\r\n</html>");
+	private final JLabel diceLabel = new JLabel(
+			"<html>\r\n<br>\r\nDADOS<br><br>\r\n\r\nAtaque: 6, 6, 6<br>\r\nDefesa: 6, 6, 6<br>\r\n</html>");
 
 	/**
 	 * Launch the application.
 	 */
-	
 
 	/**
 	 * Create the application.
 	 */
-	
-	public MainScreen(GameStateInputPort gameState, GameCreationInputPort gameCreation) {
+
+	public MainScreen(GameStateInputPort gameState,
+			GameCreationInputPort gameCreation) {
 		this.gameState = gameState;
 		this.gameCreation = gameCreation;
 		initialize();
@@ -61,27 +61,26 @@ public class MainScreen {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
-		
-		
-		
+
 		Image verseCardImage = gameState.getCardVerseImage();
-		verseCardImage = verseCardImage.getScaledInstance(356, 320, java.awt.Image.SCALE_SMOOTH);
-		
+		verseCardImage = verseCardImage.getScaledInstance(356, 320,
+				java.awt.Image.SCALE_SMOOTH);
+
 		Image verseTerritoryCardImage = gameState.getTerritoryCardVerseImage();
-		verseTerritoryCardImage = verseTerritoryCardImage.getScaledInstance(356, 320, java.awt.Image.SCALE_SMOOTH);
-		
-		
-		JPanel panel = new JPanel(){
-			public void paintComponent(Graphics g) {  
-                Image img = Toolkit.getDefaultToolkit().getImage(  
-                          MainScreen.class.getResource("image/outerspace.jpg"));  
-                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);  
-           }
+		verseTerritoryCardImage = verseTerritoryCardImage.getScaledInstance(
+				356, 320, java.awt.Image.SCALE_SMOOTH);
+
+		JPanel panel = new JPanel() {
+			public void paintComponent(Graphics g) {
+				Image img = Toolkit.getDefaultToolkit().getImage(
+						MainScreen.class.getResource("image/outerspace.jpg"));
+				g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+			}
 		};
 		panel.setBounds(0, 0, 1350, 730);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
-		
+
 		JButton menuButton = new JButton("MENU");
 		menuButton.setBounds(246, 696, 91, 23);
 		panel.add(menuButton);
@@ -94,74 +93,83 @@ public class MainScreen {
 		playerMenuPanel1.setLayout(null);
 		playerMenuPanel1.setVisible(false);
 		playerMenuPanel1.setOpaque(false);
-		
-		
-		
+
 		objectiveButton.setBounds(0, 0, 356, 320);
 		playerMenuPanel1.add(objectiveButton);
 		verseIcon = new ImageIcon(verseCardImage);
 		objectiveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Image currentPlayerObjectiveCardImage = gameState.getCurrentPlayerObjectiveCardImage();
-				currentPlayerObjectiveCardImage = currentPlayerObjectiveCardImage.getScaledInstance(356, 320, java.awt.Image.SCALE_SMOOTH);
-				ImageIcon currentPlayerObjectiveIcon = new ImageIcon(currentPlayerObjectiveCardImage);
-				if(objectiveButton.getIcon().equals(verseIcon))
+				Image currentPlayerObjectiveCardImage = gameState
+						.getCurrentPlayerObjectiveCardImage();
+				currentPlayerObjectiveCardImage = currentPlayerObjectiveCardImage
+						.getScaledInstance(356, 320,
+								java.awt.Image.SCALE_SMOOTH);
+				ImageIcon currentPlayerObjectiveIcon = new ImageIcon(
+						currentPlayerObjectiveCardImage);
+				if (objectiveButton.getIcon().equals(verseIcon))
 					objectiveButton.setIcon(currentPlayerObjectiveIcon);
 				else
 					objectiveButton.setIcon(verseIcon);
 			}
 		});
-		
+
 		objectiveButton.setIcon(verseIcon);
 		objectiveButton.setContentAreaFilled(false);
 		objectiveButton.setBorder(null);
-		
+
 		turnoJogadorLabel = new JLabel("");
 		turnoJogadorLabel.setForeground(new Color(255, 255, 0));
 		turnoJogadorLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
 		turnoJogadorLabel.setBounds(719, 220, 507, 68);
-		playerMenuPanel1.add(turnoJogadorLabel);;
-		
-		
+		playerMenuPanel1.add(turnoJogadorLabel);
+		;
+
 		menuButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(playerMenuPanel1.isVisible()){
+				if (playerMenuPanel1.isVisible()) {
 					playerMenuPanel1.setVisible(false);
 					playerMenuPanel2.setVisible(false);
-					}
-				else{
-					currentPlayerTerritoryCardsImages = gameState.getCurrentPlayerTerritoryCardsImages();
+				} else {
+					currentPlayerTerritoryCardsImages = gameState
+							.getCurrentPlayerTerritoryCardsImages();
 					playerMenuPanel1.setVisible(true);
 					playerMenuPanel2.setVisible(true);
-					}
-				turnoJogadorLabel.setText("<html>Turno: "+gameState.getCurrentRound()+ "<br>Jogador: "+gameState.getCurrentPlayerName()+"("+gameState.getCurrentPlayerRace()+")</html>");
-				planetasGalaxiasLabel.setText("Planetas: "+gameState.currentPlayerNumberOfOwnedPlanets());
+				}
+				turnoJogadorLabel.setText("<html>Turno: "
+						+ gameState.getCurrentRound() + "<br>Jogador: "
+						+ gameState.getCurrentPlayerName() + "("
+						+ gameState.getCurrentPlayerRace() + ")</html>");
+				planetasGalaxiasLabel.setText("Planetas: "
+						+ gameState.currentPlayerNumberOfOwnedPlanets());
 			}
 		});
-		
-		
-		
+
 		territoryCardsButton.setBounds(353, 0, 356, 320);
 		playerMenuPanel1.add(territoryCardsButton);
 		verseTerritoryIcon = new ImageIcon(verseTerritoryCardImage);
 		territoryCardsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Image territoryCardImage = currentPlayerTerritoryCardsImages[territoryCardCounter];
-				territoryCardImage = territoryCardImage.getScaledInstance(356, 320, java.awt.Image.SCALE_SMOOTH);
-				ImageIcon territoryIcon = new ImageIcon(territoryCardImage);
-				territoryCardsButton.setIcon(territoryIcon);
-				if(territoryCardCounter>=currentPlayerTerritoryCardsImages.length-1){
-					territoryCardsButton.setIcon(verseTerritoryIcon);
-					territoryCardCounter = 0;
-				}else
-					territoryCardCounter++;
-				
+				if (territoryCardImage == null) {
+
+				} else {
+					territoryCardImage = territoryCardImage.getScaledInstance(
+							356, 320, java.awt.Image.SCALE_SMOOTH);
+					ImageIcon territoryIcon = new ImageIcon(territoryCardImage);
+					territoryCardsButton.setIcon(territoryIcon);
+					if (territoryCardCounter >= currentPlayerTerritoryCardsImages.length - 1) {
+						territoryCardsButton.setIcon(verseTerritoryIcon);
+						territoryCardCounter = 0;
+					} else
+						territoryCardCounter++;
+
+				}
 			}
 		});
 		territoryCardsButton.setIcon(verseTerritoryIcon);
 		territoryCardsButton.setContentAreaFilled(false);
 		territoryCardsButton.setBorder(null);
-		
+
 		planetasGalaxiasLabel = new JLabel("");
 		planetasGalaxiasLabel.setForeground(Color.YELLOW);
 		planetasGalaxiasLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
@@ -170,16 +178,16 @@ public class MainScreen {
 		diceLabel.setForeground(Color.RED);
 		diceLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
 		diceLabel.setBounds(1090, 175, 250, 145);
-		
+
 		playerMenuPanel1.add(diceLabel);
-		
+
 		playerMenuPanel2.setBounds(951, 0, 399, 412);
 		panel.add(playerMenuPanel2);
 		playerMenuPanel2.setLayout(null);
 		playerMenuPanel2.setBorder(null);
 		playerMenuPanel2.setVisible(false);
 		playerMenuPanel2.setOpaque(false);
-		
+
 		JButton tabela1Button = new JButton("Tabela 1");
 		tabela1Button.setForeground(new Color(255, 255, 255));
 		tabela1Button.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -190,21 +198,21 @@ public class MainScreen {
 		});
 		tabela1Button.setBounds(255, 178, 134, 67);
 		playerMenuPanel2.add(tabela1Button);
-		
+
 		JButton tabela2Button = new JButton("Tabela 2");
 		tabela2Button.setForeground(new Color(255, 255, 255));
 		tabela2Button.setFont(new Font("Tahoma", Font.BOLD, 15));
 		tabela2Button.setBackground(new Color(100, 149, 237));
 		tabela2Button.setBounds(255, 256, 134, 67);
 		playerMenuPanel2.add(tabela2Button);
-		
+
 		JButton ajudaButton = new JButton("Ajuda");
 		ajudaButton.setFont(new Font("Tahoma", Font.BOLD, 15));
 		ajudaButton.setForeground(new Color(255, 255, 255));
 		ajudaButton.setBackground(new Color(165, 42, 42));
 		ajudaButton.setBounds(255, 334, 134, 67);
 		playerMenuPanel2.add(ajudaButton);
-		
+
 	}
 
 	public JFrame getFrame() {
