@@ -1,6 +1,6 @@
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class GameState implements GameStateInputPort {
@@ -21,6 +21,7 @@ public class GameState implements GameStateInputPort {
 
 	public void initializePlayers() {
 		players = playerRepository.getAllPlayers();
+		Collections.reverse(players);
 		currentPlayer = players.get(currentPlayerPositionInList);
 		numberOfDistributionUnits = currentPlayer.getTerritories().size() / 2;
 	}
@@ -146,6 +147,7 @@ public class GameState implements GameStateInputPort {
 	public BufferedImage getCardVerseImage() {
 		return currentPlayer.getObjectiveCard().getBackImage();
 	}
+<<<<<<< HEAD
 
 	public List<BufferedImage> getCurrentPlayerTerritoryCardsImages() {
 		List<BufferedImage> images = new ArrayList<BufferedImage>();
@@ -160,6 +162,28 @@ public class GameState implements GameStateInputPort {
 	public BufferedImage getTerritoryCardVerseImage() {
 		TerritoryCard tc = (TerritoryCard) currentPlayer.getTerritoryCards()
 				.toArray()[0];
+=======
+	
+	public BufferedImage[] getCurrentPlayerTerritoryCardsImages(){
+		BufferedImage[] images = null;
+		Object[] territoryCards = currentPlayer.getTerritoryCards().toArray();
+		images = new BufferedImage[territoryCards.length];
+		for (int i = 0; i < territoryCards.length; i++) {
+			TerritoryCard tc = (TerritoryCard)territoryCards[i];
+			if(tc==null){
+				
+			}else
+				images[i] = tc.getFrontImage();
+		}
+		
+		
+		
+		return images;
+	}
+	
+	public BufferedImage getTerritoryCardVerseImage(){
+		TerritoryCard tc = (TerritoryCard)currentPlayer.getTerritoryCards().toArray()[1];
+>>>>>>> d5cc535ede49403ab617d64188d582741c343533
 		return tc.getBackImage();
 	}
 
@@ -180,7 +204,7 @@ public class GameState implements GameStateInputPort {
 	public String getCurrentPlayerRace() {
 		return currentPlayer.getRace().toString();
 	}
-
+	
 	@Override
 	public int getUnitsToDistribute() {
 		return numberOfDistributionUnits;
@@ -197,8 +221,14 @@ public class GameState implements GameStateInputPort {
 			return true;
 		return false;
 	}
+<<<<<<< HEAD
 
 	public void setTroopsDistribution(TroopsDistribution troopsDistribution) {
 		this.troopsDistribution = troopsDistribution;
+=======
+	
+	public int currentPlayerNumberOfOwnedPlanets(){
+		return currentPlayer.getTerritories().size();
+>>>>>>> d5cc535ede49403ab617d64188d582741c343533
 	}
 }

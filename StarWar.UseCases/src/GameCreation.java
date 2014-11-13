@@ -15,7 +15,7 @@ public class GameCreation implements GameCreationInputPort
 		this.planetRepository = planetRepository;
 		this.objectiveCardRepository = objectiveCardRepository;
 		this.territoryCardRepository = territoryCardRepository;
-		this.playerRepository.restartRepository();
+		//this.playerRepository.restartRepository();
 		this.outputPort = outputPort;
 	}
 	
