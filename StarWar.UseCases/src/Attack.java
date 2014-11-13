@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 public class Attack implements AttackInputPort {
+=======
+public class Attack implements AttackInputPort 
+{
+>>>>>>> 59348093216ebcbf2cec8796cca87b9c6437f319
 	IPlanetRepository planetRepository;
 	IPlayerRepository playerRepository;
 
@@ -88,6 +93,8 @@ public class Attack implements AttackInputPort {
 
 		int[] attackerDice = War.rollDice(numberOfPieces);
 		int[] defenderDice;
+		int attackerCount = 0;
+		int defenderCount = 0;
 		/*
 		 * Rolagem de dados: 1. Nao importa a quantidade de pecas do atacante
 		 * ele só pode atacar usando 3 por vez 2. Nao importa a quantidade de
@@ -121,12 +128,20 @@ public class Attack implements AttackInputPort {
 				}
 			}
 			if (maiorAttacker > maiorDefender) {
+<<<<<<< HEAD
 				playerRepository.removePlayerPiece(defender.getName(),
 						defenderPlanetName, numberOfPieces);
 			} else if (maiorAttacker <= maiorDefender && maiorAttacker != 0
 					&& maiorDefender != 0) {
 				playerRepository.removePlayerPiece(attacker.getName(),
 						attackerPlanetName, numberOfPieces);
+=======
+				attackerCount++;
+				playerRepository.removePlayerPiece(defender.getName(), defenderPlanetName, 1);
+			} else if (maiorAttacker <= maiorDefender && maiorAttacker != 0 && maiorDefender != 0) {
+				defenderCount++;
+				playerRepository.removePlayerPiece(attacker.getName(), attackerPlanetName, 1);
+>>>>>>> 59348093216ebcbf2cec8796cca87b9c6437f319
 			} else
 				break;
 
@@ -134,6 +149,9 @@ public class Attack implements AttackInputPort {
 			attackerDice[maiorIndiceA] = 0;
 			defenderDice[maiorIndiceD] = 0;
 		}
+		
+		if (attackerCount > defenderCount)
+			War.territoryWon = true;
 	}
 
 	private int quantityBYPlanetName(Set<Piece> pieces, String planetName) {

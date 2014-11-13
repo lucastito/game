@@ -62,7 +62,11 @@ while (iCanConquer == false){
 	}
 
 	public static void pickUpCard() {
+<<<<<<< HEAD
 		CardsAchievement.giveTerritoryCard(player);
+=======
+		 CardsAchievement.giveTerritoryCard(player);
+>>>>>>> 59348093216ebcbf2cec8796cca87b9c6437f319
 	}
 
 	public static void setPlayer(Player ai) {
