@@ -44,7 +44,7 @@ public class GameCreation implements GameCreationInputPort
 		else
 			return -1;
 			
-		Player player = new Player(convertedRace, playerDto.getName());
+		Player player = new Player(convertedRace, playerDto.getName(), playerDto.isAI());
 		playerRepository.addPlayer(player);
 		this.playerRepository.addPlayer(player);		
 		return 0;
