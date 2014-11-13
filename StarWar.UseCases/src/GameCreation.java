@@ -58,8 +58,8 @@ public class GameCreation implements GameCreationInputPort
 	public void setUpPlayersTerritoriesAndTerritoriesCards(){
 		DistributeTerritoryCard.distributeTerritories(playerRepository, planetRepository);
 		
-		for (Player player : playerRepository.getAllPlayers()) 
-			DistributeTerritoryCard.distributTerritoryCards(player, territoryCardRepository);
+//		for (Player player : playerRepository.getAllPlayers()) 
+//			DistributeTerritoryCard.distributTerritoryCards(player, territoryCardRepository);
 		
 		outputPort.show();
 	}	

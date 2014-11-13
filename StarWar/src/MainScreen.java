@@ -66,10 +66,14 @@ public class MainScreen {
 		verseCardImage = verseCardImage.getScaledInstance(356, 320,
 				java.awt.Image.SCALE_SMOOTH);
 
+		
 		Image verseTerritoryCardImage = gameState.getTerritoryCardVerseImage();
-		verseTerritoryCardImage = verseTerritoryCardImage.getScaledInstance(
+		if(verseTerritoryCardImage!=null){
+			verseTerritoryCardImage = verseTerritoryCardImage.getScaledInstance(
 				356, 320, java.awt.Image.SCALE_SMOOTH);
-
+			playerMenuPanel1.add(territoryCardsButton);
+			verseTerritoryIcon = new ImageIcon(verseTerritoryCardImage);
+		}
 		JPanel panel = new JPanel() {
 			public void paintComponent(Graphics g) {
 				Image img = Toolkit.getDefaultToolkit().getImage(
@@ -145,8 +149,8 @@ public class MainScreen {
 		});
 
 		territoryCardsButton.setBounds(353, 0, 356, 320);
-		playerMenuPanel1.add(territoryCardsButton);
-		verseTerritoryIcon = new ImageIcon(verseTerritoryCardImage);
+		
+
 		territoryCardsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Image territoryCardImage = currentPlayerTerritoryCardsImages[territoryCardCounter];
@@ -184,8 +188,9 @@ public class MainScreen {
 		JLabel qntCartasTerritorioLabel = new JLabel();
 		qntCartasTerritorioLabel.setForeground(new Color(255, 255, 255));
 		qntCartasTerritorioLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-		qntCartasTerritorioLabel.setText(""+gameState
-				.getCurrentPlayerTerritoryCardsImages().length);
+		if(gameState.getCurrentPlayerTerritoryCardsImages()!= null)
+			qntCartasTerritorioLabel.setText(""+gameState.getCurrentPlayerTerritoryCardsImages().length);
+		
 		qntCartasTerritorioLabel.setBounds(595, 281, 46, 14);
 		playerMenuPanel1.add(qntCartasTerritorioLabel);
 
@@ -195,24 +200,6 @@ public class MainScreen {
 		playerMenuPanel2.setBorder(null);
 		playerMenuPanel2.setVisible(false);
 		playerMenuPanel2.setOpaque(false);
-
-		JButton tabela1Button = new JButton("Tabela 1");
-		tabela1Button.setForeground(new Color(255, 255, 255));
-		tabela1Button.setFont(new Font("Tahoma", Font.BOLD, 15));
-		tabela1Button.setBackground(new Color(46, 139, 87));
-		tabela1Button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		tabela1Button.setBounds(255, 178, 134, 67);
-		playerMenuPanel2.add(tabela1Button);
-
-		JButton tabela2Button = new JButton("Tabela 2");
-		tabela2Button.setForeground(new Color(255, 255, 255));
-		tabela2Button.setFont(new Font("Tahoma", Font.BOLD, 15));
-		tabela2Button.setBackground(new Color(100, 149, 237));
-		tabela2Button.setBounds(255, 256, 134, 67);
-		playerMenuPanel2.add(tabela2Button);
 
 		JButton ajudaButton = new JButton("Ajuda");
 		ajudaButton.setFont(new Font("Tahoma", Font.BOLD, 15));
