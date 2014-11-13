@@ -8,16 +8,18 @@ public class ObjectiveCard {
 	private short id;
 	private String name;
 	private Planet[] planetsToConquer;
+	private Planet[] planetsToDefend;
 	private short planetsToChoose;
 	private BufferedImage frontImage;
 	private BufferedImage backImage;
 
 	public ObjectiveCard(short id, String name, Planet[] planetsToConquer,
-			short planetsToChoose, String pathOfTheBackgroundImage,
-			String versePathOfImage) {
+			Planet[] planetsToDefend, short planetsToChoose,
+			String pathOfTheBackgroundImage, String versePathOfImage) {
 		this.id = id;
 		this.name = name;
 		this.planetsToConquer = planetsToConquer;
+		this.planetsToDefend = planetsToDefend;
 		this.planetsToChoose = planetsToChoose;
 		try {
 			this.frontImage = ImageIO
@@ -42,6 +44,10 @@ public class ObjectiveCard {
 	}
 
 	public Planet[] getPlanetsToConquer() {
+		return planetsToConquer;
+	}
+
+	public Planet[] getPlanetsToDefend() {
 		return planetsToConquer;
 	}
 

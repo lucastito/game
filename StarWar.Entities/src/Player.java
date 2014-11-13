@@ -8,9 +8,11 @@ public class Player {
 	private Set<TerritoryCard> territoryCards;
 	private PlayerRace race;
 	private ObjectiveCard objectiveCard;
+	private boolean isAI;
 
-	public Player(PlayerRace race, String name) {
+	public Player(PlayerRace race, String name, boolean isAI) {
 		this.race = race;
+		this.isAI = isAI;
 		this.name = name;
 		pieces = new HashSet<Piece>();
 		territories = new HashSet<Planet>();
@@ -67,6 +69,10 @@ public class Player {
 
 	public void setTerritoryCards(Set<TerritoryCard> territoryCards) {
 		this.territoryCards = territoryCards;
+	}
+
+	public boolean getIsAI() {
+		return isAI;
 	}
 
 }

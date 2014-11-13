@@ -36,7 +36,7 @@ public class GameStateTests
 	public void GetAllPieces_MustReturnAllPieceDTOs() 
 	{
 		PlayerRepository playerRepository = new PlayerRepository();
-		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
+		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo", false));
 		playerRepository.addPlayerPiece("Leo", "Trandosha", 1);
 		playerRepository.addPlayerPiece("Leo", "Coruscant", 1);
 		GameState gameState = new GameState();
@@ -49,7 +49,7 @@ public class GameStateTests
 	public void GetAllPieces_MustReturnFilledPieceDTOs() 
 	{
 		PlayerRepository playerRepository = new PlayerRepository();
-		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
+		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo", false));
 		Piece clone = new Piece();
 		clone.setId((short) 1);
 		clone.setImagePath("123");
@@ -77,8 +77,8 @@ public class GameStateTests
 	public void NextStep_ModifiesCurrentStep() 
 	{
 		PlayerRepository playerRepository = new PlayerRepository();
-		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
-		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
+		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo", false));
+		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas", false));
 		playerRepository.addPlayerPiece("Leo", "Trandosha", 1);
 		playerRepository.addPlayerPiece("Lucas", "Trandosha", 1);
 		GameState gameState = new GameState();
@@ -100,8 +100,8 @@ public class GameStateTests
 	public void CurrentPlayerName_InFirstTurn_ReturnsCurrentPlayerName() 
 	{
 		PlayerRepository playerRepository = new PlayerRepository();
-		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
-		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
+		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo", false));
+		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas", false));
 		GameState gameState = new GameState();
 		gameState.setPlayerRepository(playerRepository);
 		String name = gameState.currentPlayerName();
@@ -112,8 +112,8 @@ public class GameStateTests
 	public void CurrentPlayerName_InSecondTurn_ReturnsCurrentPlayerName() 
 	{
 		PlayerRepository playerRepository = new PlayerRepository();
-		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
-		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
+		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo", false));
+		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas", false));
 		playerRepository.addPlayerPiece("Leo", "Trandosha", 1);
 		playerRepository.addPlayerPiece("Lucas", "Trandosha", 1);
 		GameState gameState = new GameState();
@@ -131,8 +131,8 @@ public class GameStateTests
 	public void CurrentROund_ReturnsCurrentRound() 
 	{
 		PlayerRepository playerRepository = new PlayerRepository();
-		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
-		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
+		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo", false));
+		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas", false));
 		playerRepository.addPlayerPiece("Leo", "Trandosha", 1);
 		playerRepository.addPlayerPiece("Lucas", "Trandosha", 1);
 		
@@ -156,8 +156,8 @@ public class GameStateTests
 	public void IsPieceFromCurrentPlayer_WhenCurrentPlayerIsTheOwner_ReturnTrue() 
 	{
 		PlayerRepository playerRepository = new PlayerRepository();
-		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
-		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
+		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo", false));
+		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas", false));
 		playerRepository.addPlayerPiece("Lucas", "Trandosha", 1);
 		
 		GameState gameState = new GameState();
@@ -171,8 +171,8 @@ public class GameStateTests
 	public void IsPieceFromCurrentPlayer_WhenCurrentPlayerIsNotTheOwner_ReturnFalse() 
 	{
 		PlayerRepository playerRepository = new PlayerRepository();
-		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
-		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
+		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo", false));
+		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas", false));
 		playerRepository.addPlayerPiece("Leo", "Trandosha", 1);
 		GameState gameState = new GameState();
 		gameState.setPlayerRepository(playerRepository);
@@ -184,8 +184,8 @@ public class GameStateTests
 	public void IsAttackPhase_WhenCurrentPhaseIsAttackPhase_ReturnsTrue() 
 	{
 		PlayerRepository playerRepository = new PlayerRepository();
-		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
-		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
+		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo", false));
+		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas", false));
 		playerRepository.addPlayerPiece("Leo", "Trandosha", 1);
 		playerRepository.addPlayerPiece("Lucas", "Trandosha", 1);
 		GameState gameState = new GameState();
@@ -206,8 +206,8 @@ public class GameStateTests
 	public void IsRedeployPhase_WhenCurrentPhaseIsRedeployPhase_ReturnsTrue() 
 	{
 		PlayerRepository playerRepository = new PlayerRepository();
-		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo"));
-		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas"));
+		playerRepository.addPlayer(new Player(PlayerRace.CLONE, "Leo", false));
+		playerRepository.addPlayer(new Player(PlayerRace.DROIDE, "Lucas", false));
 		playerRepository.addPlayerPiece("Leo", "Trandosha", 1);
 		playerRepository.addPlayerPiece("Lucas", "Trandosha", 1);
 		GameState gameState = new GameState();

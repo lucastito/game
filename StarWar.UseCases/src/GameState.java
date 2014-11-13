@@ -3,9 +3,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
-public class GameState implements GameStateInputPort
-{
+public class GameState implements GameStateInputPort {
 	IPlanetRepository planetRepository;
 	IPlayerRepository playerRepository;
 	private List<Player> players;
@@ -14,203 +12,193 @@ public class GameState implements GameStateInputPort
 	private Player currentPlayer;
 	private int currentPlayerPositionInList = 0;
 	int numberOfDistributionUnits;
-	
-	public GameState()
-	{		
+	private TroopsDistribution troopsDistribution;
+
+	public GameState() {
 		playerStep = new PlayerStep();
-		currentRound++;			
+		currentRound++;
 	}
-	
-	public void initializePlayers()
-	{
+
+	public void initializePlayers() {
 		players = playerRepository.getAllPlayers();
 		currentPlayer = players.get(currentPlayerPositionInList);
 		numberOfDistributionUnits = currentPlayer.getTerritories().size() / 2;
 	}
 
-	public List<TerritoryDTO> getAllPlanets() 
-	{
+	public List<TerritoryDTO> getAllPlanets() {
 		List<TerritoryDTO> territories = new ArrayList<TerritoryDTO>();
-		for(Planet planet : planetRepository.getPlanets().values())
-		{
+		for (Planet planet : planetRepository.getPlanets().values()) {
 			TerritoryDTO territory = Mapper.mapTerritoryDTO(planet);
 			territories.add(territory);
 		}
 		return territories;
 	}
-	
-	public List<PieceDTO> getAllPieces() 
-	{
+
+	public List<PieceDTO> getAllPieces() {
 		List<PieceDTO> pieces = new ArrayList<PieceDTO>();
-		for(Piece piece : playerRepository.getAllPieces())
-		{
+		for (Piece piece : playerRepository.getAllPieces()) {
 			PieceDTO pieceDTO = Mapper.mapPieceDTO(piece);
 			pieces.add(pieceDTO);
 		}
 		return pieces;
 	}
-	
-	public boolean nextPlayerStep()
-	{
+
+	public boolean nextPlayerStep() {
 		int allPiecesCount = playerRepository.getAllPieces().size();
 		if (allPiecesCount <= 0)
 			return false;
-		if (playerStep.getCurrentPhase() == PlayerStep.END_OF_TURN)
-		{
-			//troca o jogador
+		if (playerStep.getCurrentPhase() == PlayerStep.END_OF_TURN) {
+			// troca o jogador
 			if (currentPlayerPositionInList + 1 < players.size())
 				currentPlayerPositionInList++;
-			else
-			{
+			else {
 				currentPlayerPositionInList = 0;
-				currentRound++;				
+				currentRound++;
 			}
-			int pieceCount = playerRepository.getPlayerByName(players.get(currentPlayerPositionInList).getName()).getPieces().size();
+			int pieceCount = playerRepository
+					.getPlayerByName(
+							players.get(currentPlayerPositionInList).getName())
+					.getPieces().size();
 			if (pieceCount >= allPiecesCount)
 				return false;
-			if(pieceCount > 0)	
-			{
+			if (pieceCount > 0) {
 				currentPlayer = players.get(currentPlayerPositionInList);
 				playerStep = new PlayerStep();
-				numberOfDistributionUnits = currentPlayer.getTerritories().size() / 2;
-			}
-			else
-				if (currentPlayerPositionInList + 1 < players.size())
-					currentPlayerPositionInList++;
-				else
-				{
-					currentPlayerPositionInList = 0;
+				numberOfDistributionUnits = currentPlayer.getTerritories()
+						.size() / 2;
+				if (currentPlayer.getIsAI() == true) {
+					AI.setPlayer(currentPlayer);
+					AI.deploy(planetRepository, troopsDistribution,
+							numberOfDistributionUnits);
+					AI.attack();
+					AI.redeploy();
+					AI.pickUpCard();
 				}
-				nextPlayerStep();
-		}
-		else
-		{
-			//troca de fase
+			} else if (currentPlayerPositionInList + 1 < players.size())
+				currentPlayerPositionInList++;
+			else {
+				currentPlayerPositionInList = 0;
+			}
+			nextPlayerStep();
+		} else {
+			// troca de fase
 			playerStep.nextStep();
 		}
 		return true;
 	}
-	
-	private boolean isFirstRound() 
-	{		
+
+	private boolean isFirstRound() {
 		return currentRound == 0;
 	}
 
-	public String currentPlayerName()
-	{
+	public String currentPlayerName() {
 		return currentPlayer.getName();
 	}
-	
-	public Player getCurrentPlayer()
-	{
+
+	public Player getCurrentPlayer() {
 		return currentPlayer;
 	}
-	
-	public int currentPlayerStep()
-	{
+
+	public int currentPlayerStep() {
 		return playerStep.getCurrentPhase();
 	}
-	
+
 	@Override
-	public boolean isPieceFromCurrentPlayer(int pieceId) 
-	{
-		for(Piece piece : currentPlayer.getPieces())
-		{
+	public boolean isPieceFromCurrentPlayer(int pieceId) {
+		for (Piece piece : currentPlayer.getPieces()) {
 			if (pieceId == piece.getId())
 				return true;
 		}
-		
+
 		return false;
 	}
 
 	@Override
-	public boolean isRedeployPhase() 
-	{
+	public boolean isRedeployPhase() {
 		if (playerStep.getCurrentPhase() == PlayerStep.REDEPLOY_ARMY_PHASE)
 			return true;
 		return false;
 	}
 
 	@Override
-	public boolean isAttackPhase() 
-	{
+	public boolean isAttackPhase() {
 		if (playerStep.getCurrentPhase() == PlayerStep.ATTACK_ENEMIES_PHASE)
 			return true;
 		return false;
 	}
-	
-	public void setPlanetRepository(IPlanetRepository planetRepository)
-	{
+
+	public void setPlanetRepository(IPlanetRepository planetRepository) {
 		this.planetRepository = planetRepository;
 	}
-	
-	public void setPlayerRepository(IPlayerRepository playerRepository)
-	{
-		this.playerRepository = playerRepository;	
+
+	public void setPlayerRepository(IPlayerRepository playerRepository) {
+		this.playerRepository = playerRepository;
 	}
 
-	public int getCurrentRound() 
-	{
+	public int getCurrentRound() {
 		return currentRound;
 	}
-	
-	public BufferedImage getCurrentPlayerObjectiveCardImage(){
+
+	public BufferedImage getCurrentPlayerObjectiveCardImage() {
 		return currentPlayer.getObjectiveCard().getFrontImage();
 	}
-	
-	public BufferedImage getCardVerseImage(){
+
+	public BufferedImage getCardVerseImage() {
 		return currentPlayer.getObjectiveCard().getBackImage();
 	}
-	
-	public List<BufferedImage> getCurrentPlayerTerritoryCardsImages(){
+
+	public List<BufferedImage> getCurrentPlayerTerritoryCardsImages() {
 		List<BufferedImage> images = new ArrayList<BufferedImage>();
-		while(currentPlayer.getTerritoryCards().iterator().hasNext()){
-			images.add(currentPlayer.getTerritoryCards().iterator().next().getFrontImage());
+		while (currentPlayer.getTerritoryCards().iterator().hasNext()) {
+			images.add(currentPlayer.getTerritoryCards().iterator().next()
+					.getFrontImage());
 		}
-		
+
 		return images;
 	}
-	
-	public BufferedImage getTerritoryCardVerseImage(){
-		TerritoryCard tc = (TerritoryCard)currentPlayer.getTerritoryCards().toArray()[0];
+
+	public BufferedImage getTerritoryCardVerseImage() {
+		TerritoryCard tc = (TerritoryCard) currentPlayer.getTerritoryCards()
+				.toArray()[0];
 		return tc.getBackImage();
 	}
-	
-	public void finishTurn(){
+
+	public void finishTurn() {
 		playerStep = new PlayerStep();
 		currentRound++;
-		if(currentPlayerPositionInList >= players.size() - 1)
+		if (currentPlayerPositionInList >= players.size() - 1)
 			currentPlayerPositionInList = 0;
 		else
 			currentPlayerPositionInList++;
 		currentPlayer = players.get(currentPlayerPositionInList);
 	}
-	
-	public String getCurrentPlayerName(){
+
+	public String getCurrentPlayerName() {
 		return currentPlayer.getName();
 	}
-	
-	public String getCurrentPlayerRace(){
+
+	public String getCurrentPlayerRace() {
 		return currentPlayer.getRace().toString();
 	}
 
 	@Override
-	public int getUnitsToDistribute() 
-	{
+	public int getUnitsToDistribute() {
 		return numberOfDistributionUnits;
 	}
 
 	@Override
-	public void removeUnitsToDistribute(int numberOfPieces) 
-	{
+	public void removeUnitsToDistribute(int numberOfPieces) {
 		numberOfDistributionUnits = numberOfDistributionUnits - numberOfPieces;
 	}
 
 	@Override
-	public boolean isDistributionPhase() 
-	{
+	public boolean isDistributionPhase() {
 		if (playerStep.getCurrentPhase() == PlayerStep.RECEIVE_ARMY_PHASE)
 			return true;
 		return false;
+	}
+
+	public void setTroopsDistribution(TroopsDistribution troopsDistribution) {
+		this.troopsDistribution = troopsDistribution;
 	}
 }
