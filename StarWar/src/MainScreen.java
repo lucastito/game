@@ -26,6 +26,8 @@ public class MainScreen {
 	private GameStateInputPort gameState;
 	private GameCreationInputPort gameCreation;
 	private JPanel playerMenuPanel1 = new JPanel();
+	private JPanel playerMenuPanel2 = new JPanel();
+	BufferedImage[] currentPlayerTerritoryCardsImages = null;
 	private JLabel planetasGalaxiasLabel;
 	private JLabel turnoJogadorLabel;
 	JButton objectiveButton = new JButton("");
@@ -63,21 +65,9 @@ public class MainScreen {
 		
 		
 		Image verseCardImage = gameState.getCardVerseImage();
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		verseCardImage = verseCardImage.getScaledInstance(356, 320, java.awt.Image.SCALE_SMOOTH);
 		
 		Image verseTerritoryCardImage = gameState.getTerritoryCardVerseImage();
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		verseTerritoryCardImage = verseTerritoryCardImage.getScaledInstance(356, 320, java.awt.Image.SCALE_SMOOTH);
 		
 		
@@ -135,10 +125,15 @@ public class MainScreen {
 		
 		menuButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(playerMenuPanel1.isVisible())
+				if(playerMenuPanel1.isVisible()){
 					playerMenuPanel1.setVisible(false);
-				else
+					playerMenuPanel2.setVisible(false);
+					}
+				else{
+					currentPlayerTerritoryCardsImages = gameState.getCurrentPlayerTerritoryCardsImages();
 					playerMenuPanel1.setVisible(true);
+					playerMenuPanel2.setVisible(true);
+					}
 				turnoJogadorLabel.setText("<html>Turno: "+gameState.getCurrentRound()+ "<br>Jogador: "+gameState.getCurrentPlayerName()+"("+gameState.getCurrentPlayerRace()+")</html>");
 				planetasGalaxiasLabel.setText("Planetas: "+gameState.currentPlayerNumberOfOwnedPlanets());
 			}
@@ -151,9 +146,6 @@ public class MainScreen {
 		verseTerritoryIcon = new ImageIcon(verseTerritoryCardImage);
 		territoryCardsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
-				BufferedImage[] currentPlayerTerritoryCardsImages = gameState.getCurrentPlayerTerritoryCardsImages();
 				Image territoryCardImage = currentPlayerTerritoryCardsImages[territoryCardCounter];
 				territoryCardImage = territoryCardImage.getScaledInstance(356, 320, java.awt.Image.SCALE_SMOOTH);
 				ImageIcon territoryIcon = new ImageIcon(territoryCardImage);
@@ -180,6 +172,38 @@ public class MainScreen {
 		diceLabel.setBounds(1090, 175, 250, 145);
 		
 		playerMenuPanel1.add(diceLabel);
+		
+		playerMenuPanel2.setBounds(951, 0, 399, 412);
+		panel.add(playerMenuPanel2);
+		playerMenuPanel2.setLayout(null);
+		playerMenuPanel2.setBorder(null);
+		playerMenuPanel2.setVisible(false);
+		playerMenuPanel2.setOpaque(false);
+		
+		JButton tabela1Button = new JButton("Tabela 1");
+		tabela1Button.setForeground(new Color(255, 255, 255));
+		tabela1Button.setFont(new Font("Tahoma", Font.BOLD, 15));
+		tabela1Button.setBackground(new Color(46, 139, 87));
+		tabela1Button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		tabela1Button.setBounds(255, 178, 134, 67);
+		playerMenuPanel2.add(tabela1Button);
+		
+		JButton tabela2Button = new JButton("Tabela 2");
+		tabela2Button.setForeground(new Color(255, 255, 255));
+		tabela2Button.setFont(new Font("Tahoma", Font.BOLD, 15));
+		tabela2Button.setBackground(new Color(100, 149, 237));
+		tabela2Button.setBounds(255, 256, 134, 67);
+		playerMenuPanel2.add(tabela2Button);
+		
+		JButton ajudaButton = new JButton("Ajuda");
+		ajudaButton.setFont(new Font("Tahoma", Font.BOLD, 15));
+		ajudaButton.setForeground(new Color(255, 255, 255));
+		ajudaButton.setBackground(new Color(165, 42, 42));
+		ajudaButton.setBounds(255, 334, 134, 67);
+		playerMenuPanel2.add(ajudaButton);
 		
 	}
 

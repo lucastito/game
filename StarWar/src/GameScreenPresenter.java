@@ -83,8 +83,8 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 		        frame.validate();
 		        frame.setLocationRelativeTo(null);
 		        frame.setVisible(true);
-		        //MainScreen window = new MainScreen(gameState, gameCreation);// Estou fazendo os menus em outra janela para teste depois vou passar para essa tela (Daniel)
-				//window.getFrame().setVisible(true);
+		        MainScreen window = new MainScreen(gameState, gameCreation);// Estou fazendo os menus em outra janela para teste depois vou passar para essa tela (Daniel)
+				window.getFrame().setVisible(true);
 		    }
     	});
 	}
