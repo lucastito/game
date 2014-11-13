@@ -40,8 +40,21 @@ public class AI {
 		}
 	}
 
-	public static void attack() {
-
+	public static void attack(IPlanetRepository planetRepository, Attack attack) {
+		boolean iCanConquer = false;
+		Planet[] planetsToConquer = player.getObjectiveCard()
+				.getPlanetsToConquer();
+		HashSet<Planet> nearbyPlanets = new HashSet<Planet>();
+		for (int i = 0; i < planetsToConquer.length; i++) {
+			List<Border> list = planetsToConquer[i].getBorders();
+			for (int j = 0; j < list.size(); j++) {
+				nearbyPlanets.add(planetRepository.getPlanetByName(list.get(j)
+						.getNeighborPlanetName()));
+			}
+		}
+while (iCanConquer == false){
+	
+}
 	}
 
 	public static void redeploy() {
@@ -49,7 +62,7 @@ public class AI {
 	}
 
 	public static void pickUpCard() {
-		> CardsAchievement.giveTerritoryCard(player);
+		CardsAchievement.giveTerritoryCard(player);
 	}
 
 	public static void setPlayer(Player ai) {

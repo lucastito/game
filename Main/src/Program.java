@@ -13,7 +13,7 @@ public class Program {
 		gameState.setPlanetRepository(planetRepository);
 		gameState.setTroopsDistribution(troopsDistribution);
 		gameState.setPlayerRepository(playerRepository);
-
+		gameState.setAttack(attack);
 		GameCreation gameCreation = new GameCreation(playerRepository,
 				new ObjectiveCardRepository(planetRepository),
 				planetRepository, new TerritoryCardRepository(), presenter);

@@ -1,3 +1,7 @@
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 public class Attack implements AttackInputPort {
 	IPlanetRepository planetRepository;
 	IPlayerRepository playerRepository;
@@ -27,7 +31,8 @@ public class Attack implements AttackInputPort {
 	 * Attack: Planeta atacante, Planeta defensor, e lista de peças que vao
 	 * atacar no max 3 peças podem atacar
 	 */
-	public void attack(String attackerPlanetName, String defenderPlanetName, int numberOfPieces) {
+	public void attack(String attackerPlanetName, String defenderPlanetName,
+			int numberOfPieces) {
 		Planet attackerPlanet = planetRepository
 				.getPlanetByName(attackerPlanetName);
 		if (attackerPlanet == null) {
@@ -52,7 +57,13 @@ public class Attack implements AttackInputPort {
 			return;
 		}
 
-		int remainingAttackerPieces = attacker.getPieces().size() - numberOfPieces;
+		int attackerPieces = quantityBYPlanetName(attacker.getPieces(),
+				attackerPlanet.getName());
+
+		int defenderPieces = quantityBYPlanetName(defender.getPieces(),
+				defenderPlanetName);
+
+		int remainingAttackerPieces = attackerPieces - numberOfPieces;
 
 		if (attacker.getName() == defender.getName()) {
 			return;
@@ -71,7 +82,7 @@ public class Attack implements AttackInputPort {
 			return;
 		}
 
-		if (defender.getPieces().size() < 1) {
+		if (defenderPieces < 1) {
 			return;
 		}
 
@@ -82,15 +93,15 @@ public class Attack implements AttackInputPort {
 		 * ele só pode atacar usando 3 por vez 2. Nao importa a quantidade de
 		 * peças do defensor ele só pode defender usando 3 por vez
 		 */
-		if (defender.getPieces().size() >= 3)
+		if (defenderPieces >= 3)
 			defenderDice = War.rollDice(3);
 		else
-			defenderDice = War.rollDice(defender.getPieces().size());
+			defenderDice = War.rollDice(defenderPieces);
 
 		int counter = 0;
 		while ((counter <= attackerDice.length || counter <= defenderDice.length)
-				|| attacker.getPieces().size() > 0
-				|| defender.getPieces().size() > 0) {
+				|| attackerPieces > 0
+				|| defenderPieces > 0) {
 
 			int maiorAttacker = attackerDice[0];
 			int maiorIndiceA = 0;
@@ -110,10 +121,12 @@ public class Attack implements AttackInputPort {
 				}
 			}
 			if (maiorAttacker > maiorDefender) {
-				playerRepository.removePlayerPiece(defender.getName(), defenderPlanetName, numberOfPieces);
+				playerRepository.removePlayerPiece(defender.getName(),
+						defenderPlanetName, numberOfPieces);
 			} else if (maiorAttacker <= maiorDefender && maiorAttacker != 0
 					&& maiorDefender != 0) {
-				playerRepository.removePlayerPiece(attacker.getName(), attackerPlanetName, numberOfPieces);
+				playerRepository.removePlayerPiece(attacker.getName(),
+						attackerPlanetName, numberOfPieces);
 			} else
 				break;
 
@@ -121,5 +134,19 @@ public class Attack implements AttackInputPort {
 			attackerDice[maiorIndiceA] = 0;
 			defenderDice[maiorIndiceD] = 0;
 		}
+	}
+
+	private int quantityBYPlanetName(Set<Piece> pieces, String planetName) {
+		int quantityByPlanet = 0;
+
+		Iterator<Piece> piecesIterator = pieces.iterator();
+
+		while (piecesIterator.hasNext()) {
+			if (piecesIterator.next().getTerritoryName()
+					.equalsIgnoreCase(planetName)) {
+				quantityByPlanet++;
+			}
+		}
+		return quantityByPlanet;
 	}
 }
