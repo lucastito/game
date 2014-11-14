@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -85,8 +86,10 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 		menuScreenPanel = new MenuScreen(this.gameState);
 		gameState.initializePlayers();
 		
-    	EventQueue.invokeLater(new Runnable(){
-	    	public void run(){ 		    	
+		EventQueue.invokeLater(new Runnable(){
+	    	public void run(){
+				
+    		   
 		        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		        frame.setTitle("StarWar");
 		        frame.setSize(1366, 768);
@@ -120,6 +123,7 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 				panel2.setLayout(null);
 				panel2.setVisible(true);
 				panel2.setOpaque(false);
+				
 				JButton menuButton = new JButton("MENU");
 				menuButton.setBounds(320, 696, 91, 23);
 				panel2.add(menuButton);
@@ -135,6 +139,7 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 
 				objectiveButton.setBounds(0, 0, 356, 320);
 				playerMenuPanel1.add(objectiveButton);
+				objectiveButton.requestFocus();
 				verseIcon = new ImageIcon(verseCardImage);
 				objectiveButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
@@ -245,20 +250,25 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 			    
 			    
 			    frame.add(panel);
-			    
+			   
 		        frame.repaint();
 		        frame.validate();
 		        frame.setLocationRelativeTo(null);
 		        frame.setVisible(true);
+		        
 		        //MainScreen window = new MainScreen(gameState, gameCreation);// Estou fazendo os menus em outra janela para teste depois vou passar para essa tela (Daniel)
 				//window.getFrame().setVisible(true);
 		        
 		        
-		       
-		    }
-    	});
+		        frame.setComponentZOrder(panel2, 0);
+		        frame.repaint();
+		        frame.revalidate();
+		        
+	    	}
+		    
+   
     	
-    	
+	     	});
     	 
     	
     	
@@ -512,8 +522,28 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 			armyCountLabels = new ArrayList<JLabel>();
 			armyCountLabels.add(armyCountLabel);
 			frame.add(armyCountLabel);
+			
+//			JButton armyCountLabel = new JButton("");
+//			//armyCountLabel.setContentAreaFilled(false);
+//			armyCountLabel.setBorder(null);
+//			armyCountLabel.setBounds(territory.getxAxisCoordinate() + territory.getWidth()/2, territory.getyAxisCoordinate() + territory.getHeight()/2, 50, 50);
+//			armyCountLabel.setToolTipText(""+armyCount);
+//			frame.add(armyCountLabel);
+//			armyCountLabel.addActionListener(new ActionListener() {
+//				public void actionPerformed(ActionEvent arg0) {
+//					if (gameState.isDistributionPhase())
+//	        		{
+//	        			int numberOfPiecesToDistribute = gameState.getUnitsToDistribute();
+//	        			if(numberOfPiecesToDistribute > 0)
+//	        			{
+//	        				troopsDistributionInputPort.distributeTroops(1, selectedTerritory.getOwnerName(), selectedTerritory.getName());
+//	        			}		
+//	        		}
+//				}});
+			
 	    }
-		frame.repaint();
 	}
+	
+
 }
 

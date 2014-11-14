@@ -51,8 +51,9 @@ public class CharacterSelectScreen {
 		gameCreation.addPlayerToCurrentGame(player1);
 		gameCreation.addPlayerToCurrentGame(player2);
 		gameCreation.setUpPlayersObjective();
+		//gameState.initializePlayers();
 		gameCreation.setUpPlayersTerritoriesAndTerritoriesCards();
-		gameState.initializePlayers();
+		
 		frame.dispose();		
 	}
 	
