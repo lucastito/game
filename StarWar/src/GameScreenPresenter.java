@@ -3,9 +3,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -258,10 +256,6 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 		    }
     	});
     	
-    	
-    	 
-    	
-    	
 	}
 
 	protected void showTerritories() 
@@ -457,7 +451,7 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 		        			break;
 		        		}
 		        	} 
-					
+					System.out.println(gameState.isAttackPhase());
 					if (targetTerritory != null)
 					{
 						if (gameState.isRedeployPhase() && targetTerritory.getOwnerName().equals(gameState.currentPlayerName()))
@@ -469,7 +463,8 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 						}
 						if (gameState.isAttackPhase() && !targetTerritory.getOwnerName().equals(gameState.currentPlayerName()))
 						{
-							attackInputPort.attack(selectedTerritory.getName(), targetTerritory.getName(), numberOfPieces);
+							attackInputPort.attack(selectedTerritory.getName(), targetTerritory.getName());
+							System.out.println(" DEVIA ESTAR FUNFANDO");
 							selectedTerritory = null;
 							selectedTerritoryLabel.setVisible(false);
 							return;

@@ -4,11 +4,13 @@ import java.util.Set;
 
 public class Attack implements AttackInputPort 
 {
+	GamePresenterOutputPort gamePresenter;
 	IPlanetRepository planetRepository;
 	IPlayerRepository playerRepository;
 
-	public Attack(IPlanetRepository planetRepository,
+	public Attack(GamePresenterOutputPort gamePresenter, IPlanetRepository planetRepository,
 			IPlayerRepository playerRepository) {
+		this.gamePresenter = gamePresenter;
 		this.planetRepository = planetRepository;
 		this.playerRepository = playerRepository;
 	}
@@ -32,28 +34,39 @@ public class Attack implements AttackInputPort
 	 * Attack: Planeta atacante, Planeta defensor, e lista de peças que vao
 	 * atacar no max 3 peças podem atacar
 	 */
-	public void attack(String attackerPlanetName, String defenderPlanetName,
-			int numberOfPieces) {
+	public void attack(String attackerPlanetName, String defenderPlanetName) {
 		Planet attackerPlanet = planetRepository
 				.getPlanetByName(attackerPlanetName);
+		
+		System.out.println(1);
+		
 		if (attackerPlanet == null) {
 			return;
 		}
 
 		Planet defenderPlanet = planetRepository
 				.getPlanetByName(defenderPlanetName);
+
+		System.out.println(2);
+		
 		if (defenderPlanet == null) {
 			return;
 		}
 
 		Player attacker = playerRepository.getPlayerByName(attackerPlanet
 				.getOwnerName());
+		
+		System.out.println(3);
+		
 		if (attacker == null) {
 			return;
 		}
 
 		Player defender = playerRepository.getPlayerByName(defenderPlanet
 				.getOwnerName());
+		
+		System.out.println(4);
+		
 		if (defender == null) {
 			return;
 		}
@@ -64,28 +77,53 @@ public class Attack implements AttackInputPort
 		int defenderPieces = quantityBYPlanetName(defender.getPieces(),
 				defenderPlanetName);
 
+		int numberOfPieces;
+		
+		
+		
+		if (attackerPieces > 3)
+		{
+			numberOfPieces = 3;
+		}
+		else
+		{
+			numberOfPieces = attackerPieces - 1;
+		}
+		
 		int remainingAttackerPieces = attackerPieces - numberOfPieces;
-
+		
+		System.out.println(5);
+		
 		if (attacker.getName() == defender.getName()) {
 			return;
 		}
+		
+		System.out.println(6);
 
 		if (numberOfPieces < 1 || numberOfPieces > 3) {
 			return;
 		}
+		
+		System.out.println(7);
 
 		if (remainingAttackerPieces < 1) {
 			return;
 		}
 
+		System.out.println(8);
+		
 		if (!planetRepository.areNeighbors(attackerPlanetName,
 				defenderPlanetName)) {
 			return;
 		}
+		
+		System.out.println(9);
 
 		if (defenderPieces < 1) {
 			return;
 		}
+		
+		System.out.println(10);
 
 		int[] attackerDice = War.rollDice(numberOfPieces);
 		int[] defenderDice;
@@ -106,39 +144,43 @@ public class Attack implements AttackInputPort
 				|| attackerPieces > 0
 				|| defenderPieces > 0) {
 
-			int maiorAttacker = attackerDice[0];
-			int maiorIndiceA = 0;
+			int bestAttacker = attackerDice[0];
+			int gratesteAttackerIndex = 0;
 			for (int i = 0; i < attackerDice.length; i++) {
-				if (attackerDice[i] >= maiorAttacker) {
-					maiorAttacker = attackerDice[i];
-					maiorIndiceA = i;
+				if (attackerDice[i] >= bestAttacker) {
+					bestAttacker = attackerDice[i];
+					gratesteAttackerIndex = i;
 				}
 			}
 
-			int maiorDefender = defenderDice[0];
-			int maiorIndiceD = 0;
+			int bestDefender = defenderDice[0];
+			int greatestDefenseIndex = 0;
 			for (int i = 0; i < defenderDice.length; i++) {
-				if (defenderDice[i] >= maiorDefender) {
-					maiorDefender = defenderDice[i];
-					maiorIndiceD = i;
+				if (defenderDice[i] >= bestDefender) {
+					bestDefender = defenderDice[i];
+					greatestDefenseIndex = i;
 				}
 			}
-			if (maiorAttacker > maiorDefender) {
+			System.out.println(bestAttacker);
+			System.out.println(bestDefender);
+			if (bestAttacker > bestDefender) {
 				attackerCount++;
 				playerRepository.removePlayerPiece(defender.getName(), defenderPlanetName, 1);
-			} else if (maiorAttacker <= maiorDefender && maiorAttacker != 0 && maiorDefender != 0) {
+			} else if (bestAttacker <= bestDefender && bestAttacker != 0 && bestDefender != 0) {
 				defenderCount++;
 				playerRepository.removePlayerPiece(attacker.getName(), attackerPlanetName, 1);
 			} else
 				break;
 
 			counter++;
-			attackerDice[maiorIndiceA] = 0;
-			defenderDice[maiorIndiceD] = 0;
+			attackerDice[gratesteAttackerIndex] = 0;
+			defenderDice[greatestDefenseIndex] = 0;
 		}
 		
 		if (attackerCount > defenderCount)
 			War.territoryWon = true;
+		
+		gamePresenter.show();
 	}
 
 	private int quantityBYPlanetName(Set<Piece> pieces, String planetName) {
