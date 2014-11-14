@@ -19,7 +19,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import model.Piece;
 import model.Territory;
@@ -58,7 +57,7 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 	ImageIcon verseIcon = new ImageIcon();
 	ImageIcon verseTerritoryIcon = new ImageIcon();
 	int territoryCardCounter = 0;
-	private JLabel diceLabel = new JLabel(
+	private final JLabel diceLabel = new JLabel(
 			"<html>\r\n<br>\r\nDADOS<br><br>\r\n\r\nAtaque: 6, 6, 6<br>\r\nDefesa: 6, 6, 6<br>\r\n</html>");
 	
 	
@@ -106,17 +105,12 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 		        frame.setTitle("StarWar");
 		        frame.setSize(1366, 768);
 		        
-		        
-		        
 		        panel.setLayout(new BorderLayout());
 		        
 		        menuScreenPanel.setLayout(new BoxLayout(menuScreenPanel, BoxLayout.Y_AXIS));
 		        
 		        panel.add(gameScreenPanel);
 		        panel.add(menuScreenPanel, BorderLayout.SOUTH);
-		        
-		        JScrollPane p = new JScrollPane(panel);
-		        frame.add(p);
 		        
 		        showArmyCount();
 		        showPieces();
@@ -538,27 +532,6 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 			frame.add(armyCountLabel);
 	    }
 	    frame.repaint();
-	}
-	
-	public void printDices(int[] attacker, int[] defender){
-		if(attacker.length == 3 && defender.length == 3)
-			diceLabel.setText("<html>\r\n<br>\r\nDADOS<br><br>\r\n\r\nAtaque: "+attacker[0]+", "+attacker[1]+", "+attacker[2]+"<br>\r\nDefesa: "+defender[0]+", "+defender[1]+", "+defender[2]+"<br>\r\n</html>");
-		else if(attacker.length == 3 && defender.length == 2)
-			diceLabel.setText("<html>\r\n<br>\r\nDADOS<br><br>\r\n\r\nAtaque: "+attacker[0]+", "+attacker[1]+", "+attacker[2]+"<br>\r\nDefesa: "+defender[0]+", "+defender[1]+", 0<br>\r\n</html>");
-		else if(attacker.length == 3 && defender.length == 1)
-			diceLabel.setText("<html>\r\n<br>\r\nDADOS<br><br>\r\n\r\nAtaque: "+attacker[0]+", "+attacker[1]+", "+attacker[2]+"<br>\r\nDefesa: "+defender[0]+", 0, 0 <br>\r\n</html>");
-		else if(attacker.length == 2 && defender.length == 3)
-			diceLabel.setText("<html>\r\n<br>\r\nDADOS<br><br>\r\n\r\nAtaque: "+attacker[0]+", "+attacker[1]+", 0<br>\r\nDefesa: "+defender[0]+", "+defender[1]+", "+defender[2]+"<br>\r\n</html>");
-		else if(attacker.length == 2 && defender.length == 2)
-			diceLabel.setText("<html>\r\n<br>\r\nDADOS<br><br>\r\n\r\nAtaque: "+attacker[0]+", "+attacker[1]+", 0<br>\r\nDefesa: "+defender[0]+", "+defender[1]+", 0<br>\r\n</html>");
-		else if(attacker.length == 2 && defender.length == 1)
-			diceLabel.setText("<html>\r\n<br>\r\nDADOS<br><br>\r\n\r\nAtaque: "+attacker[0]+", "+attacker[1]+", 0<br>\r\nDefesa: "+defender[0]+", 0, 0<br>\r\n</html>");
-		else if(attacker.length == 1 && defender.length == 3)
-			diceLabel.setText("<html>\r\n<br>\r\nDADOS<br><br>\r\n\r\nAtaque: "+attacker[0]+", 0, 0<br>\r\nDefesa: "+defender[0]+", "+defender[1]+", "+defender[2]+"<br>\r\n</html>");
-		else if(attacker.length == 1 && defender.length == 2)
-			diceLabel.setText("<html>\r\n<br>\r\nDADOS<br><br>\r\n\r\nAtaque: "+attacker[0]+", 0, 0<br>\r\nDefesa: "+defender[0]+", "+defender[1]+", 0<br>\r\n</html>");
-		else if(attacker.length == 1 && defender.length == 1)
-			diceLabel.setText("<html>\r\n<br>\r\nDADOS<br><br>\r\n\r\nAtaque: "+attacker[0]+", 0, 0<br>\r\nDefesa: "+defender[0]+", 0, 0<br>\r\n</html>");
 	}
 	
 

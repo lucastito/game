@@ -116,8 +116,6 @@ public class Attack implements AttackInputPort
 		else
 			defenderDice = War.rollDice(defenderPieces);
 
-		
-		gamePresenter.printDices(attackerDice, defenderDice);
 		int counter = 0;
 		while ((counter <= attackerDice.length || counter <= defenderDice.length)
 				|| attackerPieces > 0
