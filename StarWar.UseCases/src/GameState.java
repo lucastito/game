@@ -67,17 +67,6 @@ public class GameState implements GameStateInputPort {
 			if (pieceCount > 0) {
 				currentPlayer = players.get(currentPlayerPositionInList);
 				playerStep = new PlayerStep();
-<<<<<<< HEAD
-				numberOfDistributionUnits = currentPlayer.getTerritories()
-						.size() / 2;
-				Set<TerritoryCard> territoryCards = currentPlayer
-						.getTerritoryCards();
-				if (territoryCards != null) {
-					for (TerritoryCard card : currentPlayer.getTerritoryCards()) {
-						for (Planet planet : currentPlayer.getTerritories())
-							if (card.getName().toLowerCase()
-									.equals(planet.getName().toLowerCase())) {
-=======
 				numberOfDistributionUnits = currentPlayer.getTerritories().size() / 2;
 				Set<TerritoryCard> territoryCards = currentPlayer.getTerritoryCards();
 				if (territoryCards != null)
@@ -87,16 +76,11 @@ public class GameState implements GameStateInputPort {
 						for (Planet planet : currentPlayer.getTerritories())
 							if (card.getName().toLowerCase().equals(planet.getName().toLowerCase()))
 							{
->>>>>>> 59348093216ebcbf2cec8796cca87b9c6437f319
 								numberOfDistributionUnits += 2;
 							}
 					}
 				}
-<<<<<<< HEAD
 
-=======
-				
->>>>>>> 59348093216ebcbf2cec8796cca87b9c6437f319
 				if (currentPlayer.getIsAI() == true) {
 					AI.setPlayer(currentPlayer);
 					AI.deploy(planetRepository, troopsDistribution,
@@ -106,20 +90,11 @@ public class GameState implements GameStateInputPort {
 					playerStep.nextStep();
 					AI.redeploy();
 					AI.pickUpCard();
-<<<<<<< HEAD
 					playerStep.nextStep();
 					playerStep.nextStep();
 				} else if (currentPlayerPositionInList + 1 < players.size())
 					currentPlayerPositionInList++;
 				else {
-=======
-			}
-			else
-				if (currentPlayerPositionInList + 1 < players.size())
-					currentPlayerPositionInList++;
-				else
-				{
->>>>>>> 59348093216ebcbf2cec8796cca87b9c6437f319
 					currentPlayerPositionInList = 0;
 				}
 			} else if (currentPlayerPositionInList + 1 < players.size())
@@ -194,13 +169,8 @@ public class GameState implements GameStateInputPort {
 	public BufferedImage getCardVerseImage() {
 		return currentPlayer.getObjectiveCard().getBackImage();
 	}
-<<<<<<< HEAD
 
-	public BufferedImage[] getCurrentPlayerTerritoryCardsImages() {
-=======
-	
 	public BufferedImage[] getCurrentPlayerTerritoryCardsImages(){
->>>>>>> 59348093216ebcbf2cec8796cca87b9c6437f319
 		BufferedImage[] images = null;
 		Object[] territoryCards = currentPlayer.getTerritoryCards().toArray();
 		images = new BufferedImage[territoryCards.length];
@@ -214,16 +184,9 @@ public class GameState implements GameStateInputPort {
 
 		return images;
 	}
-<<<<<<< HEAD
-
-	public BufferedImage getTerritoryCardVerseImage() {
-		TerritoryCard tc = (TerritoryCard) currentPlayer.getTerritoryCards()
-				.toArray()[1];
-=======
 	
 	public BufferedImage getTerritoryCardVerseImage(){
 		TerritoryCard tc = (TerritoryCard)currentPlayer.getTerritoryCards().toArray()[1];
->>>>>>> 59348093216ebcbf2cec8796cca87b9c6437f319
 		return tc.getBackImage();
 	}
 
@@ -265,7 +228,6 @@ public class GameState implements GameStateInputPort {
 	public void setTroopsDistribution(TroopsDistribution troopsDistribution) {
 		this.troopsDistribution = troopsDistribution;
 	}
-<<<<<<< HEAD
 
 	public int currentPlayerNumberOfOwnedPlanets() {
 		return currentPlayer.getTerritories().size();
@@ -273,9 +235,5 @@ public class GameState implements GameStateInputPort {
 
 	public void setAttack(Attack attack) {
 		this.attack = attack;
-=======
-	public int currentPlayerNumberOfOwnedPlanets(){
-		return currentPlayer.getTerritories().size();
->>>>>>> 59348093216ebcbf2cec8796cca87b9c6437f319
 	}
 }

@@ -1,13 +1,9 @@
-<<<<<<< HEAD
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-public class Attack implements AttackInputPort {
-=======
 public class Attack implements AttackInputPort 
 {
->>>>>>> 59348093216ebcbf2cec8796cca87b9c6437f319
 	IPlanetRepository planetRepository;
 	IPlayerRepository playerRepository;
 
@@ -128,20 +124,11 @@ public class Attack implements AttackInputPort
 				}
 			}
 			if (maiorAttacker > maiorDefender) {
-<<<<<<< HEAD
-				playerRepository.removePlayerPiece(defender.getName(),
-						defenderPlanetName, numberOfPieces);
-			} else if (maiorAttacker <= maiorDefender && maiorAttacker != 0
-					&& maiorDefender != 0) {
-				playerRepository.removePlayerPiece(attacker.getName(),
-						attackerPlanetName, numberOfPieces);
-=======
 				attackerCount++;
 				playerRepository.removePlayerPiece(defender.getName(), defenderPlanetName, 1);
 			} else if (maiorAttacker <= maiorDefender && maiorAttacker != 0 && maiorDefender != 0) {
 				defenderCount++;
 				playerRepository.removePlayerPiece(attacker.getName(), attackerPlanetName, 1);
->>>>>>> 59348093216ebcbf2cec8796cca87b9c6437f319
 			} else
 				break;
 
