@@ -1,5 +1,4 @@
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 public class Attack implements AttackInputPort 
@@ -34,41 +33,33 @@ public class Attack implements AttackInputPort
 	 * Attack: Planeta atacante, Planeta defensor, e lista de peças que vao
 	 * atacar no max 3 peças podem atacar
 	 */
-	public void attack(String attackerPlanetName, String defenderPlanetName) {
+	public boolean attack(String attackerPlanetName, String defenderPlanetName) {
 		Planet attackerPlanet = planetRepository
 				.getPlanetByName(attackerPlanetName);
 		
-		System.out.println(1);
-		
 		if (attackerPlanet == null) {
-			return;
+			return false;
 		}
 
 		Planet defenderPlanet = planetRepository
 				.getPlanetByName(defenderPlanetName);
 
-		System.out.println(2);
-		
 		if (defenderPlanet == null) {
-			return;
+			return false;
 		}
 
 		Player attacker = playerRepository.getPlayerByName(attackerPlanet
 				.getOwnerName());
 		
-		System.out.println(3);
-		
 		if (attacker == null) {
-			return;
+			return false;
 		}
 
 		Player defender = playerRepository.getPlayerByName(defenderPlanet
 				.getOwnerName());
 		
-		System.out.println(4);
-		
 		if (defender == null) {
-			return;
+			return false;
 		}
 
 		int attackerPieces = quantityBYPlanetName(attacker.getPieces(),
@@ -92,43 +83,29 @@ public class Attack implements AttackInputPort
 		
 		int remainingAttackerPieces = attackerPieces - numberOfPieces;
 		
-		System.out.println(5);
-		
 		if (attacker.getName() == defender.getName()) {
-			return;
+			return false;
 		}
-		
-		System.out.println(6);
 
 		if (numberOfPieces < 1 || numberOfPieces > 3) {
-			return;
+			return false;
 		}
 		
-		System.out.println(7);
-
 		if (remainingAttackerPieces < 1) {
-			return;
+			return false;
 		}
 
-		System.out.println(8);
-		
 		if (!planetRepository.areNeighbors(attackerPlanetName,
 				defenderPlanetName)) {
-			return;
+			return false;
 		}
 		
-		System.out.println(9);
-
 		if (defenderPieces < 1) {
-			return;
+			return false;
 		}
 		
-		System.out.println(10);
-
 		int[] attackerDice = War.rollDice(numberOfPieces);
 		int[] defenderDice;
-		int attackerCount = 0;
-		int defenderCount = 0;
 		/*
 		 * Rolagem de dados: 1. Nao importa a quantidade de pecas do atacante
 		 * ele só pode atacar usando 3 por vez 2. Nao importa a quantidade de
@@ -161,29 +138,43 @@ public class Attack implements AttackInputPort
 					greatestDefenseIndex = i;
 				}
 			}
-			System.out.println(bestAttacker);
-			System.out.println(bestDefender);
-			if (bestAttacker > bestDefender) {
-				attackerCount++;
-				playerRepository.removePlayerPiece(defender.getName(), defenderPlanetName, 1);
-			} else if (bestAttacker <= bestDefender && bestAttacker != 0 && bestDefender != 0) {
-				defenderCount++;
-				playerRepository.removePlayerPiece(attacker.getName(), attackerPlanetName, 1);
-			} else
-				break;
+			if (defenderPieces != 0 || attackerPieces != 1)
+			{
+				if (bestAttacker > bestDefender) {
+					playerRepository.removePlayerPiece(defender.getName(), defenderPlanetName, 1);
+					defenderPieces--;
+				} else if (bestAttacker <= bestDefender && bestAttacker != 0 && bestDefender != 0) {
+					playerRepository.removePlayerPiece(attacker.getName(), attackerPlanetName, 1);
+					attackerPieces--;
+					numberOfPieces--;
+				} else
+					break;
 
+			}
+			
 			counter++;
 			attackerDice[gratesteAttackerIndex] = 0;
 			defenderDice[greatestDefenseIndex] = 0;
 		}
 		
-		if (attackerCount > defenderCount)
-			War.territoryWon = true;
+		War war = War.getInstance();
+		
+		if(defenderPieces <= 0)
+		{
+			defenderPieces = 0;
+			war.setTerritoryWon(true);
+			playerRepository.addPlayerTerritory(attacker.getName(), defenderPlanetName, numberOfPieces);
+			playerRepository.removePlayerPiece(attacker.getName(), attackerPlanetName, numberOfPieces);
+			playerRepository.revomePlayerTerritory(defender.getName(), defenderPlanetName, defenderPieces);
+			gamePresenter.show();
+			return true;
+		}
 		
 		gamePresenter.show();
+		return false;
 	}
 
-	private int quantityBYPlanetName(Set<Piece> pieces, String planetName) {
+	public int quantityBYPlanetName(Set<Piece> pieces, String planetName) {
 		int quantityByPlanet = 0;
 
 		Iterator<Piece> piecesIterator = pieces.iterator();

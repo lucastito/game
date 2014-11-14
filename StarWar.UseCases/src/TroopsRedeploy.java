@@ -26,7 +26,7 @@ public class TroopsRedeploy implements TroopsRedeployInputPort
 		return territories;		
 	}
 
-	public void redeployUnits(String sourceTerritory, String targetTerritory, int numberOfPieces) 
+	public void redeployUnits(String sourceTerritory, String targetTerritory) 
 	{
 		Planet targetPlanet = planetRepository.getPlanetByName(targetTerritory);
 		if (!isValidTerritoryToRedeploy(sourceTerritory, targetPlanet.getName(), targetPlanet.getOwnerName()))
@@ -36,8 +36,8 @@ public class TroopsRedeploy implements TroopsRedeployInputPort
 		}
 		
 		
-		playerRepository.addPlayerPiece(targetPlanet.getOwnerName(), targetTerritory, numberOfPieces);
-		playerRepository.removePlayerPiece(targetPlanet.getOwnerName(), targetTerritory, numberOfPieces);
+		playerRepository.addPlayerPiece(targetPlanet.getOwnerName(), targetTerritory, 1);
+		playerRepository.removePlayerPiece(targetPlanet.getOwnerName(), sourceTerritory, 1);
 		troopsRedeployOutputPort.show();
 	}
 	

@@ -2,7 +2,8 @@ import java.util.Set;
 
 public class War {
 	private static War instance;
-	public static boolean territoryWon = false;
+	private boolean territoryWon;
+
 	private Set<TerritoryCard> territoryCards;
 
 	public static War getInstance() {
@@ -25,6 +26,14 @@ public class War {
 
 	public void setTerritoryCards(Set<TerritoryCard> territoryCards) {
 		this.territoryCards = territoryCards;
+	}
+	
+	public boolean isTerritoryWon() {
+		return territoryWon;
+	}
+
+	public void setTerritoryWon(boolean territoryWon) {
+		this.territoryWon = territoryWon;
 	}
 
 }

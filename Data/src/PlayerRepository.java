@@ -100,10 +100,35 @@ public class PlayerRepository implements IPlayerRepository {
 		while (numberOfPieces > 0 && pieceIterator.hasNext()) {
 			Piece piece = pieceIterator.next();
 			if (piece.getTerritoryName().equalsIgnoreCase(planetName)) {
-				player.getPieces().remove(piece);
+				pieceIterator.remove();
 				numberOfPieces--;
 			}
 
+		}
+	}
+	
+	@Override
+	public void addPlayerTerritory(String playerName, String planetName,
+			int numberOfPiecesToRedeploy) {
+		Player player = getPlayerByName(playerName);
+		Planet territory = planetRepository.getPlanetByName(planetName);
+		player.getTerritories().add(territory);
+		
+		if (numberOfPiecesToRedeploy <= 3 && numberOfPiecesToRedeploy >= 1)
+		{
+			for (int i = 0; i < numberOfPiecesToRedeploy; i++) {
+				addPlayerPiece(playerName, planetName, numberOfPiecesToRedeploy);
+			}
+		}
+	}
+
+	@Override
+	public void revomePlayerTerritory(String playerName, String planetName, int numberOfUnitsRemaining) {
+		Player player = getPlayerByName(playerName);
+		Planet territory = planetRepository.getPlanetByName(planetName);
+		if (numberOfUnitsRemaining == 0)
+		{
+			player.getTerritories().remove(territory);
 		}
 	}
 

@@ -86,7 +86,7 @@ public class GameState implements GameStateInputPort {
 					AI.deploy(planetRepository, troopsDistribution,
 							numberOfDistributionUnits);
 					playerStep.nextStep();
-					AI.attack(planetRepository, attack);
+					AI.attack(planetRepository, attack, playerRepository);
 					playerStep.nextStep();
 					AI.redeploy();
 					AI.pickUpCard();

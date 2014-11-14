@@ -1,12 +1,9 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -47,6 +44,8 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 	private JLabel selectedTerritoryLabel;
 	private JLabel redeployTerritoriesLabel;
 	
+	JLabel armyCountLabel;
+	boolean firstRun;
 	
 	
 	private JPanel playerMenuPanel1 = new JPanel();
@@ -70,7 +69,8 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 		panel = new JPanel();
 		pieceLabels = new ArrayList<Piece>();
 		territoryLabels = new ArrayList<Territory>();
-		armyCountLabels = new ArrayList<JLabel>();
+		
+		firstRun = true;
 	}
 	
 	public GameScreenPresenter(GameCreationInputPort gameCreation) 
@@ -90,7 +90,18 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 		EventQueue.invokeLater(new Runnable(){
 	    	public void run(){
 				
-    		   
+	    		if (firstRun)
+	    		{
+		    		armyCountLabels = new ArrayList<JLabel>();
+		    		
+		    		
+		    		for (int i = 1; i <= gameState.getAllPlanets().size(); i++)
+		    		{
+		    			armyCountLabels.add(armyCountLabel = new JLabel());
+		    		}
+		    		firstRun = false;
+	    		}
+	    		
 		        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		        frame.setTitle("StarWar");
 		        frame.setSize(1366, 768);
@@ -474,12 +485,11 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 		        			break;
 		        		}
 		        	} 
-					System.out.println(gameState.isAttackPhase());
 					if (targetTerritory != null)
 					{
 						if (gameState.isRedeployPhase() && targetTerritory.getOwnerName().equals(gameState.currentPlayerName()))
 						{
-							troopsRedeployInputPort.redeployUnits(selectedTerritory.getName(), targetTerritory.getName(), numberOfPieces);
+							troopsRedeployInputPort.redeployUnits(selectedTerritory.getName(), targetTerritory.getName());
 							selectedTerritory = null;
 							selectedTerritoryLabel.setVisible(false);
 							return;
@@ -487,7 +497,6 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 						if (gameState.isAttackPhase() && !targetTerritory.getOwnerName().equals(gameState.currentPlayerName()))
 						{
 							attackInputPort.attack(selectedTerritory.getName(), targetTerritory.getName());
-							System.out.println(" DEVIA ESTAR FUNFANDO");
 							selectedTerritory = null;
 							selectedTerritoryLabel.setVisible(false);
 							return;
@@ -523,12 +532,11 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 					armyCount++;
 				}
 			}
-			JLabel armyCountLabel = new JLabel("" + armyCount);
+			JLabel armyCountLabel = armyCountLabels.get(territory.getId()-1);
+			armyCountLabel.setText("" + armyCount);
 			armyCountLabel.setBounds(territory.getxAxisCoordinate() + territory.getWidth()/2, territory.getyAxisCoordinate() + territory.getHeight()/2, 20, 20);
 			armyCountLabel.setForeground(new Color(255, 215, 0));
 			armyCountLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			armyCountLabels = new ArrayList<JLabel>();
-			armyCountLabels.add(armyCountLabel);
 			frame.add(armyCountLabel);
 	    }
 	    frame.repaint();
