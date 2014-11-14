@@ -56,7 +56,7 @@ public class AI {
 		while (entryIterator.hasNext()) {
 			Entry<Planet, Integer> entry = entryIterator.next();
 			maximusValueTemporary = entry.getValue();
-			if (maximusValueTemporary.compareTo(maximusValue) > 1) {
+			if (maximusValueTemporary.compareTo(maximusValue) > 0) {
 				maximusValue = maximusValueTemporary;
 				planetKey = entry.getKey();
 			}
@@ -81,7 +81,7 @@ public class AI {
 			boolean conquer = false;
 			while (attack.quantityBYPlanetName(player.getPieces(),
 					planetKey.getName()) > 1
-					|| !conquer) 
+					&& !conquer) 
 			{
 					attack.attack(planetKey.getName(), nearbyPlanets.get(0)
 							.getName());
@@ -105,16 +105,21 @@ public class AI {
 		Map<Planet, Integer> myPlanetsAndMyUnits = new HashMap<Planet, Integer>();
 		Iterator<Planet> planetIterator = player.getTerritories().iterator();
 		Set<Piece> pieces = player.getPieces();
-		Iterator<Piece> pieceIterator = pieces.iterator();
-
-		while (pieceIterator.hasNext()) {
+		Iterator<Piece> pieceIterator;
+		int quantityPieces;
+		
+		while (planetIterator.hasNext())
+		{
 			Planet planet = planetIterator.next();
-			int quantityPieces = 0;
-			for (int i = 0; i < pieces.size(); i++) {
+			pieceIterator = pieces.iterator();
+			quantityPieces = 0;
+			while (pieceIterator.hasNext())
+			{
 				Piece piece = pieceIterator.next();
-				if (piece.getTerritoryName().equalsIgnoreCase(planet.getName())) {
+				if(piece.getTerritoryName().equalsIgnoreCase(planet.getName()))
+				{
 					quantityPieces++;
-					pieces.remove(piece);
+					pieceIterator.remove();
 				}
 			}
 			myPlanetsAndMyUnits.put(planet, quantityPieces);

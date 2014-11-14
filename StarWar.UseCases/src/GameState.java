@@ -91,18 +91,13 @@ public class GameState implements GameStateInputPort {
 					AI.redeploy();
 					AI.pickUpCard();
 					playerStep.nextStep();
-					playerStep.nextStep();
-				} else if (currentPlayerPositionInList + 1 < players.size())
-					currentPlayerPositionInList++;
-				else {
-					currentPlayerPositionInList = 0;
+					nextPlayerStep();
 				}
-			} else if (currentPlayerPositionInList + 1 < players.size())
-				currentPlayerPositionInList++;
-			else {
-				currentPlayerPositionInList = 0;
+			} else
+			{
+				nextPlayerStep();
 			}
-			nextPlayerStep();
+			
 		} else {
 			// troca de fase
 			playerStep.nextStep();
