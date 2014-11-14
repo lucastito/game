@@ -47,9 +47,6 @@ public class AI {
 
 	public static void attack(IPlanetRepository planetRepository,
 			Attack attack, IPlayerRepository playerRepository) {
-		boolean iCanConquer = false;
-		Planet[] planetsToConquer = player.getObjectiveCard()
-				.getPlanetsToConquer();
 		Map<Planet, Integer> piecesByPlanet = myPlanetsAndMyUnits();
 		Iterator<Map.Entry<Planet, Integer>> entryIterator = piecesByPlanet
 				.entrySet().iterator();
@@ -84,20 +81,10 @@ public class AI {
 			boolean conquer = false;
 			while (attack.quantityBYPlanetName(player.getPieces(),
 					planetKey.getName()) > 1
-					|| !conquer) {
-				if (attack.quantityBYPlanetName(player.getPieces(),
-						planetKey.getName()) > 3) {
+					|| !conquer) 
+			{
 					attack.attack(planetKey.getName(), nearbyPlanets.get(0)
-							.getName(), 3);
-				} else if (attack.quantityBYPlanetName(player.getPieces(),
-						planetKey.getName()) == 3) {
-					attack.attack(planetKey.getName(), nearbyPlanets.get(0)
-							.getName(), 2);
-				} else if (attack.quantityBYPlanetName(player.getPieces(),
-						planetKey.getName()) == 2) {
-					attack.attack(planetKey.getName(), nearbyPlanets.get(0)
-							.getName(), 1);
-				}
+							.getName());
 			}
 		}
 	}
