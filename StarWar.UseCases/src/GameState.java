@@ -245,4 +245,7 @@ public class GameState implements GameStateInputPort {
 	public void setAttack(Attack attack) {
 		this.attack = attack;
 	}
+
+	
+	
 }
