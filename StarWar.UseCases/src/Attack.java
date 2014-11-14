@@ -141,7 +141,7 @@ public class Attack implements AttackInputPort
 			War.territoryWon = true;
 	}
 
-	private int quantityBYPlanetName(Set<Piece> pieces, String planetName) {
+	public int quantityBYPlanetName(Set<Piece> pieces, String planetName) {
 		int quantityByPlanet = 0;
 
 		Iterator<Piece> piecesIterator = pieces.iterator();

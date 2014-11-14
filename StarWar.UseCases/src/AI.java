@@ -1,6 +1,11 @@
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 public class AI {
 	private static Player player;
@@ -40,21 +45,61 @@ public class AI {
 		}
 	}
 
-	public static void attack(IPlanetRepository planetRepository, Attack attack) {
+	public static void attack(IPlanetRepository planetRepository,
+			Attack attack, IPlayerRepository playerRepository) {
 		boolean iCanConquer = false;
 		Planet[] planetsToConquer = player.getObjectiveCard()
 				.getPlanetsToConquer();
-		HashSet<Planet> nearbyPlanets = new HashSet<Planet>();
-		for (int i = 0; i < planetsToConquer.length; i++) {
-			List<Border> list = planetsToConquer[i].getBorders();
-			for (int j = 0; j < list.size(); j++) {
-				nearbyPlanets.add(planetRepository.getPlanetByName(list.get(j)
-						.getNeighborPlanetName()));
+		Map<Planet, Integer> piecesByPlanet = myPlanetsAndMyUnits();
+		Iterator<Map.Entry<Planet, Integer>> entryIterator = piecesByPlanet
+				.entrySet().iterator();
+		Integer maximusValue = 0;
+		Planet planetKey = null;
+		Integer maximusValueTemporary;
+		while (entryIterator.hasNext()) {
+			Entry<Planet, Integer> entry = entryIterator.next();
+			maximusValueTemporary = entry.getValue();
+			if (maximusValueTemporary.compareTo(maximusValue) > 1) {
+				maximusValue = maximusValueTemporary;
+				planetKey = entry.getKey();
 			}
 		}
-while (iCanConquer == false){
-	
-}
+		List<Planet> nearbyPlanets = new ArrayList<Planet>();
+		List<Border> list = planetKey.getBorders();
+		for (int j = 0; j < list.size(); j++) {
+			nearbyPlanets.add(planetRepository.getPlanetByName(list.get(j)
+					.getNeighborPlanetName()));
+		}
+		for (int k = 0; k < nearbyPlanets.size(); k++) {
+			Planet p = nearbyPlanets.get(k);
+			if (!p.getOwnerName().equalsIgnoreCase(player.getName())
+					&& maximusValue.compareTo(attack
+							.quantityBYPlanetName(playerRepository
+									.getAllPlayers().get(1).getPieces(),
+									p.getName())) < 0) {
+				nearbyPlanets.remove(p);
+			}
+		}
+		if (!nearbyPlanets.isEmpty()) {
+			boolean conquer = false;
+			while (attack.quantityBYPlanetName(player.getPieces(),
+					planetKey.getName()) > 1
+					|| !conquer) {
+				if (attack.quantityBYPlanetName(player.getPieces(),
+						planetKey.getName()) > 3) {
+					attack.attack(planetKey.getName(), nearbyPlanets.get(0)
+							.getName(), 3);
+				} else if (attack.quantityBYPlanetName(player.getPieces(),
+						planetKey.getName()) == 3) {
+					attack.attack(planetKey.getName(), nearbyPlanets.get(0)
+							.getName(), 2);
+				} else if (attack.quantityBYPlanetName(player.getPieces(),
+						planetKey.getName()) == 2) {
+					attack.attack(planetKey.getName(), nearbyPlanets.get(0)
+							.getName(), 1);
+				}
+			}
+		}
 	}
 
 	public static void redeploy() {
@@ -67,5 +112,26 @@ while (iCanConquer == false){
 
 	public static void setPlayer(Player ai) {
 		player = ai;
+	}
+
+	private static Map<Planet, Integer> myPlanetsAndMyUnits() {
+		Map<Planet, Integer> myPlanetsAndMyUnits = new HashMap<Planet, Integer>();
+		Iterator<Planet> planetIterator = player.getTerritories().iterator();
+		Set<Piece> pieces = player.getPieces();
+		Iterator<Piece> pieceIterator = pieces.iterator();
+
+		while (pieceIterator.hasNext()) {
+			Planet planet = planetIterator.next();
+			int quantityPieces = 0;
+			for (int i = 0; i < pieces.size(); i++) {
+				Piece piece = pieceIterator.next();
+				if (piece.getTerritoryName().equalsIgnoreCase(planet.getName())) {
+					quantityPieces++;
+					pieces.remove(piece);
+				}
+			}
+			myPlanetsAndMyUnits.put(planet, quantityPieces);
+		}
+		return myPlanetsAndMyUnits;
 	}
 }
