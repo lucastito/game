@@ -43,7 +43,6 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 	List<JLabel> armyCountLabels;
 	private GameCreationInputPort gameCreation;
 	private JLabel selectedTerritoryLabel;
-	private JLabel redeployTerritoriesLabel;
 	
 	JLabel armyCountLabel;
 	boolean firstRun;
@@ -257,6 +256,14 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 				playerMenuPanel2.setBorder(null);
 				playerMenuPanel2.setVisible(false);
 				playerMenuPanel2.setOpaque(false);
+
+				JButton ajudaButton = new JButton("Ajuda");
+				ajudaButton.setFont(new Font("Tahoma", Font.BOLD, 15));
+				ajudaButton.setForeground(new Color(255, 255, 255));
+				ajudaButton.setBackground(new Color(165, 42, 42));
+				ajudaButton.setBounds(255, 334, 134, 67);
+				playerMenuPanel2.add(ajudaButton);
+			    
 			    
 			    frame.add(panel);
 			   
@@ -300,19 +307,11 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 			territoryLabel.addMouseListener(listener);
 			territoryLabels.add(territoryLabel);			
 
-			
 			selectedTerritoryLabel = new JLabel("*");
-			
 			selectedTerritoryLabel.setForeground(new Color(255, 215, 0));
 			selectedTerritoryLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 			selectedTerritoryLabel.setVisible(false);
-			
-			redeployTerritoriesLabel = new JLabel("#");
-			redeployTerritoriesLabel.setForeground(new Color(255, 0, 215));
-			redeployTerritoriesLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-			redeployTerritoriesLabel.setVisible(false);
 			frame.add(selectedTerritoryLabel);
-			frame.add(redeployTerritoriesLabel);
 			frame.add(territoryLabel);
 	    }
 		frame.repaint();
@@ -453,13 +452,6 @@ public class GameScreenPresenter implements GamePresenterOutputPort
         			selectedTerritory = candidateTerritory;
         			selectedTerritoryLabel.setBounds(selectedTerritory.getX() + selectedTerritory.getWidth()/2, selectedTerritory.getY(), 20, 20);
         			selectedTerritoryLabel.setVisible(true);
-        			
-//        			List<Territory> possibleRedeploy = planetarySystemController.getTerritoriesToRedeploy(selectedTerritory.getName(), 0);
-//        			for (int i = 0; i < possibleRedeploy.size(); i++) {
-//        				JLabel labelRedeploy = redeployTerritoriesLabel;
-//        				labelRedeploy.setBounds(possibleRedeploy.get(i).getX() + possibleRedeploy.get(i).getWidth()/2, possibleRedeploy.get(i).getY(), 20, 20);
-//        				labelRedeploy.setVisible(true);
-//					}
         		}
         		return;
         	}
