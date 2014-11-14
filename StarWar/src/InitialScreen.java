@@ -167,45 +167,8 @@ public class InitialScreen {
 		btnSobre.setForeground(Color.WHITE);
 		btnSobre.setBackground(new Color(210, 105, 30));
 		btnSobre.setFont(new Font("Tahoma", Font.PLAIN, 37));
-		btnSobre.setBounds(576, 565, 210, 83);
+		btnSobre.setBounds(576, 274, 210, 83);
 		mainPanel.add(btnSobre);
-		
-		JButton btnConfiguracoes = new JButton("Configura\u00E7\u00F5es");
-		btnConfiguracoes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				aboutPanel.setVisible(false);
-				mainPanel.setVisible(false);
-				helpPanel.setVisible(false);
-				configurationPanel.setVisible(true);
-			}
-		});
-		btnConfiguracoes.setForeground(Color.WHITE);
-		btnConfiguracoes.setBackground(new Color(189, 183, 107));
-		btnConfiguracoes.setFont(new Font("Tahoma", Font.PLAIN, 37));
-		btnConfiguracoes.setBounds(541, 366, 275, 83);
-		mainPanel.add(btnConfiguracoes);
-		
-		JButton button = new JButton("Abrir Jogo");
-		button.setForeground(Color.WHITE);
-		button.setFont(new Font("Tahoma", Font.PLAIN, 37));
-		button.setBackground(new Color(95, 158, 160));
-		button.setBounds(576, 263, 210, 83);
-		mainPanel.add(button);
-		
-		JButton btnAjuda = new JButton("Ajuda");
-		btnAjuda.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				aboutPanel.setVisible(false);
-				mainPanel.setVisible(false);
-				helpPanel.setVisible(true);
-				configurationPanel.setVisible(false);
-			}
-		});
-		btnAjuda.setForeground(Color.WHITE);
-		btnAjuda.setFont(new Font("Tahoma", Font.PLAIN, 37));
-		btnAjuda.setBackground(new Color(165, 42, 42));
-		btnAjuda.setBounds(576, 471, 210, 83);
-		mainPanel.add(btnAjuda);
 		
 		JLabel lblConfiguracoes = new JLabel("CONFIGURA\u00C7\u00D5ES");
 		lblConfiguracoes.setForeground(Color.YELLOW);

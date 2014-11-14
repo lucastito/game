@@ -80,7 +80,7 @@ public class GameState implements GameStateInputPort {
 							}
 					}
 				}
-
+				
 				if (currentPlayer.getIsAI() == true) {
 					AI.setPlayer(currentPlayer);
 					AI.deploy(planetRepository, troopsDistribution,
