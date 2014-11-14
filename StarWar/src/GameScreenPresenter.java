@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -85,8 +86,10 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 		menuScreenPanel = new MenuScreen(this.gameState);
 		gameState.initializePlayers();
 		
-    	EventQueue.invokeLater(new Runnable(){
-	    	public void run(){ 		    	
+		EventQueue.invokeLater(new Runnable(){
+	    	public void run(){
+				
+    		   
 		        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		        frame.setTitle("StarWar");
 		        frame.setSize(1366, 768);
@@ -120,6 +123,7 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 				panel2.setLayout(null);
 				panel2.setVisible(true);
 				panel2.setOpaque(false);
+				
 				JButton menuButton = new JButton("MENU");
 				menuButton.setBounds(320, 696, 91, 23);
 				panel2.add(menuButton);
@@ -245,20 +249,25 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 			    
 			    
 			    frame.add(panel);
-			    
+			   
 		        frame.repaint();
 		        frame.validate();
 		        frame.setLocationRelativeTo(null);
 		        frame.setVisible(true);
+		        
 		        //MainScreen window = new MainScreen(gameState, gameCreation);// Estou fazendo os menus em outra janela para teste depois vou passar para essa tela (Daniel)
 				//window.getFrame().setVisible(true);
 		        
 		        
-		       
-		    }
-    	});
+		        frame.setComponentZOrder(panel2, 0);
+		        frame.repaint();
+		        frame.revalidate();
+		        
+	    	}
+		    
+   
     	
-    	
+	     	});
     	 
     	
     	
@@ -457,19 +466,18 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 		        			break;
 		        		}
 		        	} 
-					
 					if (targetTerritory != null)
 					{
 						if (gameState.isRedeployPhase() && targetTerritory.getOwnerName().equals(gameState.currentPlayerName()))
 						{
-							troopsRedeployInputPort.redeployUnits(selectedTerritory.getName(), targetTerritory.getName(), numberOfPieces);
+							troopsRedeployInputPort.redeployUnits(selectedTerritory.getName(), targetTerritory.getName());
 							selectedTerritory = null;
 							selectedTerritoryLabel.setVisible(false);
 							return;
 						}
 						if (gameState.isAttackPhase() && !targetTerritory.getOwnerName().equals(gameState.currentPlayerName()))
 						{
-							attackInputPort.attack(selectedTerritory.getName(), targetTerritory.getName(), numberOfPieces);
+							attackInputPort.attack(selectedTerritory.getName(), targetTerritory.getName());
 							selectedTerritory = null;
 							selectedTerritoryLabel.setVisible(false);
 							return;
@@ -513,7 +521,9 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 			armyCountLabels.add(armyCountLabel);
 			frame.add(armyCountLabel);
 	    }
-		frame.repaint();
+	    frame.repaint();
 	}
+	
+
 }
 
