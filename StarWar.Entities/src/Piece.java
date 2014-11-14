@@ -1,6 +1,6 @@
 public class Piece 
 {
-	private int id;
+	private int id = 0;
 	private short xAxisCoordinate;
 	private short yAxisCoordinate;
 	private String imagePath;

@@ -35,9 +35,9 @@ public class TroopsRedeploy implements TroopsRedeployInputPort
 			return;
 		}
 		
-		playerRepository.removePlayerPiece(targetPlanet.getOwnerName(), targetTerritory, numberOfPieces);
+		
 		playerRepository.addPlayerPiece(targetPlanet.getOwnerName(), targetTerritory, numberOfPieces);
-
+		playerRepository.removePlayerPiece(targetPlanet.getOwnerName(), targetTerritory, numberOfPieces);
 		troopsRedeployOutputPort.show();
 	}
 	

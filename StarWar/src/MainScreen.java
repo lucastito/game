@@ -86,7 +86,7 @@ public class MainScreen {
 		panel.setLayout(null);
 
 		JButton menuButton = new JButton("MENU");
-		menuButton.setBounds(246, 696, 91, 23);
+		menuButton.setBounds(320, 696, 91, 23);
 		panel.add(menuButton);
 		menuButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		menuButton.setBackground(new Color(160, 82, 45));

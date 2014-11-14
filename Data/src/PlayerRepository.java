@@ -101,12 +101,16 @@ public class PlayerRepository implements IPlayerRepository
 	
 	public void removePlayerPiece(String playerName, String planetName, int numberOfPieces)
 	{
-		//Player player = getPlayerByName(playerName);
-		//for (int i = 0 ; i < player.getPieces().size(); i++)
-		//{
-		////	if (player.getPieces().)
-		//	player.getPieces().remove(player.get);
-		//}	
+		int numberOfRemovedPieces = 0;
+		Player player = getPlayerByName(playerName);
+		player.getPieces();
+		while(player.getPieces().iterator().hasNext() && numberOfPieces > numberOfRemovedPieces ){
+			Piece piece = player.getPieces().iterator().next();
+			if(piece.getTerritoryName().equals(planetName)){
+					player.getPieces().remove(piece);
+					numberOfRemovedPieces++;
+			}
+		}
 	}
 	
 	public void restartRepository(){
