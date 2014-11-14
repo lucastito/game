@@ -37,8 +37,6 @@ public class Attack implements AttackInputPort
 		Planet attackerPlanet = planetRepository
 				.getPlanetByName(attackerPlanetName);
 		
-		System.out.println(1);
-		
 		if (attackerPlanet == null) {
 			return false;
 		}
@@ -46,8 +44,6 @@ public class Attack implements AttackInputPort
 		Planet defenderPlanet = planetRepository
 				.getPlanetByName(defenderPlanetName);
 
-		System.out.println(2);
-		
 		if (defenderPlanet == null) {
 			return false;
 		}
@@ -55,16 +51,12 @@ public class Attack implements AttackInputPort
 		Player attacker = playerRepository.getPlayerByName(attackerPlanet
 				.getOwnerName());
 		
-		System.out.println(3);
-		
 		if (attacker == null) {
 			return false;
 		}
 
 		Player defender = playerRepository.getPlayerByName(defenderPlanet
 				.getOwnerName());
-		
-		System.out.println(4);
 		
 		if (defender == null) {
 			return false;
@@ -91,39 +83,27 @@ public class Attack implements AttackInputPort
 		
 		int remainingAttackerPieces = attackerPieces - numberOfPieces;
 		
-		System.out.println(5);
-		
 		if (attacker.getName() == defender.getName()) {
 			return false;
 		}
-		
-		System.out.println(6);
 
 		if (numberOfPieces < 1 || numberOfPieces > 3) {
 			return false;
 		}
 		
-		System.out.println(7);
-
 		if (remainingAttackerPieces < 1) {
 			return false;
 		}
 
-		System.out.println(8);
-		
 		if (!planetRepository.areNeighbors(attackerPlanetName,
 				defenderPlanetName)) {
 			return false;
 		}
 		
-		System.out.println(9);
-
 		if (defenderPieces < 1) {
 			return false;
 		}
 		
-		System.out.println(10);
-
 		int[] attackerDice = War.rollDice(numberOfPieces);
 		int[] defenderDice;
 		/*
@@ -158,25 +138,25 @@ public class Attack implements AttackInputPort
 					greatestDefenseIndex = i;
 				}
 			}
-			System.out.println("attacker: " + bestAttacker);
-			System.out.println("defender: " + bestDefender);
-			if (bestAttacker > bestDefender) {
-				playerRepository.removePlayerPiece(defender.getName(), defenderPlanetName, 1);
-				defenderPieces--;
-			} else if (bestAttacker <= bestDefender && bestAttacker != 0 && bestDefender != 0) {
-				playerRepository.removePlayerPiece(attacker.getName(), attackerPlanetName, 1);
-				attackerPieces--;
-				numberOfPieces--;
-			} else
-				break;
+			if (defenderPieces != 0 || attackerPieces != 1)
+			{
+				if (bestAttacker > bestDefender) {
+					playerRepository.removePlayerPiece(defender.getName(), defenderPlanetName, 1);
+					defenderPieces--;
+				} else if (bestAttacker <= bestDefender && bestAttacker != 0 && bestDefender != 0) {
+					playerRepository.removePlayerPiece(attacker.getName(), attackerPlanetName, 1);
+					attackerPieces--;
+					numberOfPieces--;
+				} else
+					break;
 
+			}
+			
 			counter++;
 			attackerDice[gratesteAttackerIndex] = 0;
 			defenderDice[greatestDefenseIndex] = 0;
 		}
 		
-		System.out.println(11);
-		System.out.println("defenderPieces: " + defenderPieces);
 		War war = War.getInstance();
 		
 		if(defenderPieces <= 0)
@@ -186,7 +166,6 @@ public class Attack implements AttackInputPort
 			playerRepository.addPlayerTerritory(attacker.getName(), defenderPlanetName, numberOfPieces);
 			playerRepository.removePlayerPiece(attacker.getName(), attackerPlanetName, numberOfPieces);
 			playerRepository.revomePlayerTerritory(defender.getName(), defenderPlanetName, defenderPieces);
-			System.out.println(12);
 			gamePresenter.show();
 			return true;
 		}

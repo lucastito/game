@@ -466,12 +466,11 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 		        			break;
 		        		}
 		        	} 
-					System.out.println(gameState.isAttackPhase());
 					if (targetTerritory != null)
 					{
 						if (gameState.isRedeployPhase() && targetTerritory.getOwnerName().equals(gameState.currentPlayerName()))
 						{
-							troopsRedeployInputPort.redeployUnits(selectedTerritory.getName(), targetTerritory.getName(), numberOfPieces);
+							troopsRedeployInputPort.redeployUnits(selectedTerritory.getName(), targetTerritory.getName());
 							selectedTerritory = null;
 							selectedTerritoryLabel.setVisible(false);
 							return;
@@ -479,7 +478,6 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 						if (gameState.isAttackPhase() && !targetTerritory.getOwnerName().equals(gameState.currentPlayerName()))
 						{
 							attackInputPort.attack(selectedTerritory.getName(), targetTerritory.getName());
-							System.out.println(" DEVIA ESTAR FUNFANDO");
 							selectedTerritory = null;
 							selectedTerritoryLabel.setVisible(false);
 							return;
