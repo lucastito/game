@@ -139,7 +139,6 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 
 				objectiveButton.setBounds(0, 0, 356, 320);
 				playerMenuPanel1.add(objectiveButton);
-				objectiveButton.requestFocus();
 				verseIcon = new ImageIcon(verseCardImage);
 				objectiveButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
@@ -467,7 +466,7 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 		        			break;
 		        		}
 		        	} 
-					
+					System.out.println(gameState.isAttackPhase());
 					if (targetTerritory != null)
 					{
 						if (gameState.isRedeployPhase() && targetTerritory.getOwnerName().equals(gameState.currentPlayerName()))
@@ -479,7 +478,8 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 						}
 						if (gameState.isAttackPhase() && !targetTerritory.getOwnerName().equals(gameState.currentPlayerName()))
 						{
-							attackInputPort.attack(selectedTerritory.getName(), targetTerritory.getName(), numberOfPieces);
+							attackInputPort.attack(selectedTerritory.getName(), targetTerritory.getName());
+							System.out.println(" DEVIA ESTAR FUNFANDO");
 							selectedTerritory = null;
 							selectedTerritoryLabel.setVisible(false);
 							return;
@@ -522,26 +522,8 @@ public class GameScreenPresenter implements GamePresenterOutputPort
 			armyCountLabels = new ArrayList<JLabel>();
 			armyCountLabels.add(armyCountLabel);
 			frame.add(armyCountLabel);
-			
-//			JButton armyCountLabel = new JButton("");
-//			//armyCountLabel.setContentAreaFilled(false);
-//			armyCountLabel.setBorder(null);
-//			armyCountLabel.setBounds(territory.getxAxisCoordinate() + territory.getWidth()/2, territory.getyAxisCoordinate() + territory.getHeight()/2, 50, 50);
-//			armyCountLabel.setToolTipText(""+armyCount);
-//			frame.add(armyCountLabel);
-//			armyCountLabel.addActionListener(new ActionListener() {
-//				public void actionPerformed(ActionEvent arg0) {
-//					if (gameState.isDistributionPhase())
-//	        		{
-//	        			int numberOfPiecesToDistribute = gameState.getUnitsToDistribute();
-//	        			if(numberOfPiecesToDistribute > 0)
-//	        			{
-//	        				troopsDistributionInputPort.distributeTroops(1, selectedTerritory.getOwnerName(), selectedTerritory.getName());
-//	        			}		
-//	        		}
-//				}});
-			
 	    }
+	    frame.repaint();
 	}
 	
 

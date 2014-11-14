@@ -5,9 +5,12 @@ public class Program {
 		PlayerRepository playerRepository = new PlayerRepository();
 		playerRepository.setPlanetRepository(planetRepository);
 
-		Attack attack = new Attack(planetRepository, playerRepository);
+		
 		GameState gameState = new GameState();
 		GameScreenPresenter presenter = new GameScreenPresenter();
+		
+		Attack attack = new Attack(presenter, planetRepository, playerRepository);
+		
 		TroopsDistribution troopsDistribution = new TroopsDistribution(
 				presenter, planetRepository, playerRepository, gameState);
 		gameState.setPlanetRepository(planetRepository);
@@ -18,6 +21,8 @@ public class Program {
 				new ObjectiveCardRepository(planetRepository),
 				planetRepository, new TerritoryCardRepository(), presenter);
 
+		
+		
 		TroopsRedeploy troopsRedeploy = new TroopsRedeploy(presenter,
 				planetRepository, playerRepository);
 		presenter.setAttackInputPort(attack);
